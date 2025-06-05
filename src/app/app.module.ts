@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './authentication/http-interceptors/auth-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -14,7 +17,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommentsComponent } from './posts/components/comments/comments.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PagesComponent } from './pages/pages.component';
 import { NavbarPagesComponent } from './pages/navbar-pages/navbar-pages.component';
@@ -24,6 +26,8 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { ScholarshipsMobilityComponent } from './pages/scholarships-mobility/scholarships-mobility.component';
 import { MembershipsComponent } from './pages/memberships/memberships.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { CommentsModule } from "./comments/comments.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +45,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AuthenticationModule,
     CommonModule,
@@ -48,9 +53,17 @@ import { ReportsComponent } from './pages/reports/reports.component';
     HttpClientModule,
     FontAwesomeModule,
     NgbModule,
-    PdfViewerModule
+    PdfViewerModule,
+    CommentsModule,
+    BrowserAnimationsModule
 ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
