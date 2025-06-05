@@ -179,7 +179,7 @@ export class CreatePostComponent {
               const isImage = media.type.includes('image');
               const baseMedia = {
                 number: index + 1,
-                type: isImage ? 'image' : 'video',
+                type: media.type.includes('image') ? 'image' : 'video', // Asignar 'image' o 'video',
                 name: media.name,
                 path: media.urlResource
               };
@@ -243,6 +243,7 @@ export class CreatePostComponent {
           error: (error) => {
             this.hideLoading();
             console.log('Error al crear el post con contenido media (imagenes y/o videos)', error)
+            window.location.reload()
           }
         })
 

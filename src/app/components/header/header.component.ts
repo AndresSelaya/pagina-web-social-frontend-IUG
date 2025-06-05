@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Institution } from '../../posts/models/institution';
 import { PostService } from '../../posts/services/post.service';
+import { Router } from '@angular/router';
 import { Follower } from '../../posts/models/follower';
 import { environment } from '../../../environments/environment';
 
@@ -15,14 +16,19 @@ export class HeaderComponent {
 
   
   institution!: Institution
-  totalFollowers!: number;
+  totalFollowers: number = 127;
 
-  constructor(private postService: PostService){
+  isPostsRoute = false;
+
+  constructor(private postService: PostService, private router: Router){
   }
 
   ngOnInit() {
     this.getInstitutionData(this.uuidIntitutionDric);
     this.getNumberFollowers(this.uuidIntitutionDric);
+    this.router.events.subscribe(() => {
+      this.isPostsRoute = this.router.url === '/posts';
+    });
   }
 
   getInstitutionData(uuid: string) {
@@ -48,4 +54,9 @@ export class HeaderComponent {
     });
   }
 
+  reloadPosts() {
+  this.router.navigate(['/posts']).then(() => {
+    window.location.reload();
+  });
+}
 }
