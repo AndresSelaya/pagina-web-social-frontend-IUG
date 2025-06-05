@@ -16,59 +16,26 @@ export class NavbarComponent {
   authenticated: boolean = false;
   institution!: Institution
   isMenuOpen = false;
-  user: any
+  user!: UserDetail
   counterModeratedComments: number = 0;
 
   @ViewChild('moderateCommentModal') modalElement!: ElementRef;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private postService: PostService,
     private commentService: CommentService
-  ){
-    this.authenticated = authService.isAuthenticated()
-  }
-
-  ngOnInit() {
-    /*
-    const uuid = "93j203b4-f63b-4c4a-be05-eae84cef0c0c";
-    this.postService.getInstitution(uuid).subscribe({
-
-  user!: UserDetail;
-
-  constructor(private authService: AuthService,
-    private postService: PostService
   ){}
   
-  ngOnInit(){
+  ngOnInit() {
     this.authenticated = this.authService.isAuthenticated();
-    const intitutionUUID = `${environment.INSTITUTION_ID}`;
-    this.postService.getInstitution(intitutionUUID).subscribe({
-      next:(institutionData)=>{
-        this.institution = institutionData
-      },
-      error: (error)=>{
-        console.log(error)
-      }
-    });
-    if(this.authenticated){
-      this.postService.getUser().subscribe({
-        next: (infoUser: UserDetail) => {
-          this.user = infoUser;
-        },
-        error: (error) => {
-          console.log('Error al obtener al user',error)
-        }
-      })
-    }
-    */
-
     this.getInstitution();
     this.getUser();
     this.totalModeratedComments();
   }
 
   getInstitution() {
-    const uuid = "93j203b4-f63b-4c4a-be05-eae84cef0c0c";
+    const uuid = `${environment.INSTITUTION_ID}`;;
     this.postService.getInstitution(uuid).subscribe({
       next: (institutionData) => {
         this.institution = institutionData;
