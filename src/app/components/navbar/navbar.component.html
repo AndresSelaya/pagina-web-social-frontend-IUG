@@ -2,9 +2,6 @@
   <a class="navbar-brand">
     <img src="assets/iug-logor.svg" alt="Logo" class="logo">
   </a>
-
-  <img src="../../../assets/logo-umss-horizontal.jpg" alt="Logo UMSS" class="logo">
-
   <div class="avatar-user">
   
     @if (counterModeratedComments > 0) {
@@ -21,10 +18,7 @@
         <img src="assets/user-icon.png" alt="" (click)="toggleMenu()" class="logo user-image">
       }
     } @else {
-      <img src="assets/user-icon-1.png" alt="" (mouseenter)="toggleMenu()" class="logo user-image">
-      <div class="d-flex align-items-center h-100" style="cursor: pointer;" (mouseenter)="toggleMenu()">
-        <p class="fs-5 fw-normal">Iniciar sesión</p>
-      </div>
+      <img src="assets/user-icon-1.png" alt="" (click)="toggleMenu()" class="logo user-image">
     }
 
   </div>

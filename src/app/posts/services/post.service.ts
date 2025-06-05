@@ -27,8 +27,6 @@ export class PostService {
   private readonly FACEBOOK_PAGE_ACCESS_TOKEN = `${environment.FACEBOOK_PAGE_ACCESS_TOKEN}`;
 
   private reqHeader = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.authService.getToken() }) };
-  private page = 0;
-  private size = 5;
 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -57,22 +55,18 @@ export class PostService {
     return this.http.get<Post>(`${this.ROOT_URL}/posts/${postUuid}`);
   }
 
-    // Método para obtener los posts
-    getPosts(): Observable<Post[]>{
-      const getPosts = 'posts'
-      const token = this.authService.getToken();
-      const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : undefined;
-      return this.http.get<Post[]>(`${this.ROOT_URL}/${getPosts}`, { headers });
-    }
+  // Método para obtener los posts
+  getPosts(): Observable<Post[]>{
+    const getPosts = 'posts'
+    const token = this.authService.getToken();
+    const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : undefined;
+    return this.http.get<Post[]>(`${this.ROOT_URL}/${getPosts}`, { headers });
+  }
 
   //Metodo para obtener posts paginados
   getPagedPosts(pageNumber : number): Observable<Post[]>{
     const urlPagedPosts = `${this.ROOT_URL}/posts/paged?page=${pageNumber}&size=5`;
     return this.http.get<Post[]>(urlPagedPosts);
-  }
-  // Avanzar a la siguiente pagina de los posts
-  nextPage(): void {
-    this.page++;  // Avanzar a la siguiente página
   }
 
   //Método para crear un post
@@ -107,11 +101,10 @@ export class PostService {
   }
 
   //Método para subir documentos a facebook
-   publishDocumentToFacebook(formData: FormData, description: string, linkDoc: string): Observable<FbUploadedMedia> {
-        const resource = 'feed';
-        //linkDoc = 'http://imagenes.fcyt.umss.edu.bo/Calendario%20academico-2025.pdf';
-        return this.http.post<FbUploadedMedia>(`${this.GRAPH_API_URL}/${this.FACEBOOK_PAGE_ID}/${resource}?message=${description}&link=${linkDoc}&access_token=${this.FACEBOOK_PAGE_ACCESS_TOKEN}`, formData);
-    }
+  publishDocumentToFacebook(formData: FormData, description: string, linkDoc: string): Observable<FbUploadedMedia> {
+    const resource = 'feed';
+    return this.http.post<FbUploadedMedia>(`${this.GRAPH_API_URL}/${this.FACEBOOK_PAGE_ID}/${resource}?message=${description}&link=${linkDoc}&access_token=${this.FACEBOOK_PAGE_ACCESS_TOKEN}`, formData);
+  }
 
   //Método para subir media (imagenes y videos)
   uploadMedia(formData: FormData): Observable<UploadedMedia[]> {
@@ -246,24 +239,21 @@ export class PostService {
 
 
 
-addReply(commentUuid: string, replyData: any): Observable<any> {
-  const token = localStorage.getItem('token'); // 🔥 Obtiene el token del almacenamiento local
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`  // 🔥 Incluye el token en el encabezado
-  };
+  addReply(commentUuid: string, replyData: any): Observable<any> {
+    const token = localStorage.getItem('token'); 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`  
+    };
 
-  return this.http.post<any>(
-    `${this.ROOT_URL}/comments/${commentUuid}/replies`, 
-    replyData, 
-    { headers: headers }
-  );
-}
+    return this.http.post<any>(
+      `${this.ROOT_URL}/comments/${commentUuid}/replies`, 
+      replyData, 
+      { headers: headers }
+    );
+  }
 
-getRepliesByCommentUuid(commentUuid: string): Observable<any[]> {
-  return this.http.get<any[]>(`${this.ROOT_URL}/comments/${commentUuid}/replies`);
-}
-
-
-  
+  getRepliesByCommentUuid(commentUuid: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.ROOT_URL}/comments/${commentUuid}/replies`);
+  }  
 }
