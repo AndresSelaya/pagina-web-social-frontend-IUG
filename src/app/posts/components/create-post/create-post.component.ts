@@ -161,7 +161,7 @@ export class CreatePostComponent {
     const post: CreatePost = {
       institution_id: this.institution.uuid,
       date: moment().format('YYYY-MM-DDTHH:mm:ss.SSS'),
-      comment_config_id: this.selectedCommentConfig,
+      comment_config_id: this.selectedCommentConfig || "875d7d7f-7a1c-4b77-ab63-77a9f76759d0",
       content: {
         text: valueFormPost.contentPost.trim(),
         media: []

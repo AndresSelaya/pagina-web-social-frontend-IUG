@@ -26,10 +26,10 @@ export class ViewAllPostsComponent implements OnInit {
   ngOnInit(){
     this.authenticated = this.authService.isAuthenticated();
     // Obtener una cantidad de posts
-    this.postService.getPagedPosts(this.pageCounter).subscribe({
+    this.postService.getPosts().subscribe({
       next:(data: Post[])=>{
-        this.posts = data;
-        this.postService.getPagedPosts(this.pageCounter++); // Avanza a la siguiente página
+        this.posts = data.reverse();
+        // this.postService.getPagedPosts(this.pageCounter++); // Avanza a la siguiente página
       },
       error:(error) => {
         console.error('Error al obtener los posts paginados', error);

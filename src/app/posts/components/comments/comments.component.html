@@ -1,6 +1,6 @@
 <!-- Modal ver detalle de Post -->
 <div class="modal-header text-center">
-  <h4 class="modal-title w-100">Publicación de {{ postAuthor }}</h4>
+  <h4 class="modal-title w-100">{{ 'OPTIONS.POSTS' | translate }}: {{ 'HOME.NAME_COMPANY' | translate }}</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismissAll('Cross click')"></button>
 </div>
 
@@ -9,9 +9,9 @@
     <!-- Información del autor -->
     <div class="d-flex flex-column">
       <div class="d-flex flex-row justify-content-start" *ngIf="institution">
-        <img [src]="institution.logo_url" [alt]="'Foto de perfil'" class="img-profile" />
+        <img [src]="'assets/iug-logor.svg'" [alt]="'Foto de perfil'" class="img-profile" />
         <div class="info-user">
-          <h2>{{ institution.name }}</h2>
+          <h2>{{ 'HOME.NAME_COMPANY' | translate }}</h2>
           <p>{{ calculateTimePost() }}</p>
         </div>
       </div>
