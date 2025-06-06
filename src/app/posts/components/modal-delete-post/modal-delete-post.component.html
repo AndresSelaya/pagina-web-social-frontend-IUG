@@ -3,15 +3,15 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold">¿Eliminar la publicación?</h5>
+          <h5 class="modal-title fw-bold">{{ 'CONFIRM_DELETE_POST.TITLE' | translate }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>¿Esta seguro que desea eliminar la publicación de forma permanente?</p>
+          <p>{{ 'CONFIRM_DELETE_POST.CONFIRMATION' | translate }}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn fw-semibold btn-cancel text-primary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary fw-semibold btn-delete" data-bs-dismiss="modal" (click)="deletePost()">Eliminar</button>
+          <button type="button" class="btn fw-semibold btn-cancel text-primary" data-bs-dismiss="modal">{{ 'COMMON.BUTTONS.CANCEL' | translate }}</button>
+          <button type="button" class="btn btn-primary fw-semibold btn-delete" data-bs-dismiss="modal" (click)="deletePost()">{{ 'COMMON.BUTTONS.DELETE' | translate }}</button>
         </div>
       </div>
     </div>

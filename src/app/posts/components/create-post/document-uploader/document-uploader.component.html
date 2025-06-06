@@ -2,9 +2,9 @@
 <div class="area-media-doc" *ngIf="showAreaDoc()">
   <button type="button" class="btn-close m-0" aria-label="Close" (click)="closeCleanPreviewDoc()"></button>
   <div class="back-doc d-flex flex-column px-3 py-3" *ngIf="!showPreviewDoc">
-    <span>Subir un archivo</span>
-    <p>Los archivos deben ocupar un máximo de 100MB</p>
-    <button type="button" class="btn" (click)="openInputFileDoc()">Elegir archivo</button>
+    <span>{{ 'CREATE_POST.UPLOAD_FILE' | translate }}</span>
+    <p>{{ 'CREATE_POST.LIMIT_FILE' | translate }}</p>
+    <button type="button" class="btn" (click)="openInputFileDoc()">{{ 'CREATE_POST.CHOOSE_FILE' | translate }}</button>
   </div>
 
   <!-- Preview archivo -->

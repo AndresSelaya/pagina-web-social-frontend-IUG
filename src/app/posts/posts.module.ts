@@ -33,6 +33,7 @@ import { CommentItemComponent } from './components/comments/comment-item/comment
 import { ReplyListComponent } from './components/comments/reply-list/reply-list.component';
 import { ReplyItemComponent } from './components/comments/reply-item/reply-item.component';
 import { CommentInputComponent } from './components/comments/comment-input/comment-input.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CommentInputComponent } from './components/comments/comment-input/comme
     NgbCarouselModule,
     PdfViewerModule,
     OverlayPanelModule,
+    TranslatePipe
   ],
   exports: [
     ViewAllPostsComponent,

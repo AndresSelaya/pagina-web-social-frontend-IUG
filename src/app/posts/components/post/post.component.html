@@ -5,7 +5,7 @@
 		<div class="data-user">
 			<img [src]="'assets/iug-logor.svg'" [alt]="'Foto de perfil'" class="img-profile" />
 			<div class="info-user">
-				<h2>GRUPO DE USUARIOS DE INFORMIX</h2>
+				<h2>{{ 'HOME.NAME_COMPANY' | translate }}</h2>
 				<p>{{ calculateTimePost() }}</p>
 			</div>
 		</div>
@@ -110,7 +110,7 @@
 				*ngIf="myReaction.class == 'thumbs-up' || myReaction.class == 'red-heart' || myReaction.class == 'default'"></i>
 			<img src="../../../../assets/{{myReaction.class}}.png" class="{{myReaction.class}}"
 				*ngIf="myReaction.class == 'crying-face' || myReaction.class == 'angry-face'">
-			<span class="ms-1">{{ myReaction.name }}</span>
+			<span class="ms-1">{{ myReaction.name | translate }}</span>
 			<!-- Opciones de reaccion  -->
 			<div class="option-reactions">
 				<i class="fa-solid fa-thumbs-up" (click)="clickReaction(post.uuid, 'thumbs-up', $event)"></i>
@@ -125,13 +125,11 @@
 		<button type="button" class="btn icon-btn" id="btn-comment" [hidden]="!authenticated"
 			[disabled]="!authenticated" (click)="openViewPostComments(post)">
 			<i class="bi bi-chat-left-text"></i>
-			Comentar</button>
-		<!-- Boton de Compartir -->
+			{{ 'POSTS.COMMENT' | translate }}</button>
+
 		<button type="button" class="btn icon-btn" id="btn-share" [hidden]="!authenticated">
 			<i class="fa-solid fa-share"></i>
-			Compartir</button>
+			{{ 'POSTS.SHARE' | translate }}</button>
 	</div>
 
-
-	<!-- Boton de Comentar -->
 </div>

@@ -69,7 +69,7 @@
   .dropdown-menu {
     position: absolute;
     top: 80px;
-    right: 2%;
+    right: 13%;
     display: flex;
     flex-direction: column;
     border: none;
@@ -87,6 +87,15 @@
     }
   }
 
+  .button-lang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    img {
+      border-radius: 3px;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {

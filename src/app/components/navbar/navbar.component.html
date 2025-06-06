@@ -4,12 +4,12 @@
   </a>
   <div class="avatar-user">
   
-    @if (counterModeratedComments > 0) {
+    <!-- @if (counterModeratedComments > 0) {
     <div class="icon-up-number" (click)="showModeratedComments()">
       <img src="../../../assets/moderate-messages.png" alt="Ícono mensajes para moderar" class="logo-small">
       <span class="number-up">{{ counterModeratedComments }}</span>
     </div>
-    }
+    } -->
 
     @if (authenticated && user) {
       @if(user.photo_profile_path){
@@ -21,17 +21,37 @@
       <img src="assets/user-icon-1.png" alt="" (click)="toggleMenu()" class="logo user-image">
     }
 
+    <button
+      pButton
+      type="button"
+      class="p-button-text button-lang"
+      style="width: 60px; height: 40px; border-radius: 4px;"
+      [raised]="true" severity="secondary"
+      (click)="op.toggle($event)"
+    ><img [src]="'assets/'+selectedLanguage+'.svg'" [alt]="selectedLanguage+'.svg'" width="25px"> {{ selectedLanguage | uppercase }}</button>
+    <p-overlayPanel #op [appendTo]="'body'">
+      <div class="flag-option" (click)="changeLanguage('de'); op.hide()">
+        <img src="assets/de.svg" alt="gb.svg" width="25px"> Deutsch
+      </div>
+      <div class="flag-option" (click)="changeLanguage('en'); op.hide()">
+        <img src="assets/en.svg" alt="gb.svg" width="25px"> English
+      </div>
+      <div class="flag-option" (click)="changeLanguage('es'); op.hide()">
+        <img src="assets/es.svg" alt="gb.svg" width="25px"> Spanish
+      </div>
+    </p-overlayPanel>
   </div>
+
 
   @if (isMenuOpen) {
   <div class="dropdown-menu">
     <ng-container *ngIf="authenticated">
-      <a class="dropdown-item">Ver perfil</a>
-      <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
+      <a class="dropdown-item">{{ 'POPUP_USER.PROFILE' | translate }}</a>
+      <a class="dropdown-item" (click)="logout()">{{ 'POPUP_USER.LOGOUT' | translate }}</a>
     </ng-container>
     <ng-container *ngIf="!authenticated">
-      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
-      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal">Registrarse</a>
+      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">{{ 'POPUP_USER.SIGN_IN' | translate }}</a>
+      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registerModal">{{ 'POPUP_USER.SIGN_UP' | translate }}</a>
     </ng-container>
   </div>
   }

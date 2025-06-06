@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ToastModule } from 'primeng/toast';
+import { TranslatePipe } from '@ngx-translate/core';
 @NgModule({
   declarations: [LoginComponent, ChangePasswordComponent, CreateAccountComponent, RegisterComponent],
   imports: [
@@ -21,7 +22,8 @@ import { ToastModule } from 'primeng/toast';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    TranslatePipe
   ],
   exports: [LoginComponent, CreateAccountComponent, RegisterComponent],
   providers: [

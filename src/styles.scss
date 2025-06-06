@@ -74,3 +74,20 @@ div.p-toast.p-component {
 	}
 
 }
+
+.flag-option {
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+.flag-option:hover {
+	background-color: #f0f0f0;
+}
+
+.flag-option img {
+	margin-right: 8px;
+	border-radius: 3px;
+}

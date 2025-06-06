@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './authentication/http-interceptors/auth-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,14 @@ import { ScholarshipsMobilityComponent } from './pages/scholarships-mobility/sch
 import { MembershipsComponent } from './pages/memberships/memberships.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { CommentsModule } from "./comments/comments.module";
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
+import { TranslateModule, TranslateLoader, TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -55,7 +63,19 @@ import { CommentsModule } from "./comments/comments.module";
     NgbModule,
     PdfViewerModule,
     CommentsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    OverlayPanelModule,
+    ButtonModule,
+    TranslatePipe,
+    TranslateDirective,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'de',
+    }),
 ],
   providers: [
     // {
