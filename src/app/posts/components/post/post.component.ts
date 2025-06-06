@@ -35,7 +35,7 @@ export class PostComponent {
   myReaction = {
     class: 'default',
     emoji: 'fa-regular fa-thumbs-up',
-    name: 'Me gusta'
+    name: 'POSTS.LIKE'
   };
   emoji_type_id = {
     thumbs_up: "3f696a78-c73f-475c-80a6-f5a858648af1",
@@ -173,7 +173,7 @@ export class PostComponent {
       this.myReaction = {
         class: 'thumbs-up',
         emoji: 'fa-solid fa-thumbs-up',
-        name: 'Me gusta'
+        name: 'POSTS.LIKE'
       }
       this.incrementTotalReactions()
     } else {
@@ -189,7 +189,7 @@ export class PostComponent {
       this.myReaction = {
         class: 'default',
         emoji: 'fa-regular fa-thumbs-up',
-        name: 'Me gusta'
+        name: 'POSTS.LIKE'
       };
       this.totalReactions.update(valor => valor - 1);
       this.reactionChanged.emit(); // Emitir evento de cambio de reacción
@@ -238,25 +238,25 @@ export class PostComponent {
         this.myReaction = {
           class: reaccionUser,
           emoji: 'fa-solid fa-thumbs-up',
-          name: 'Me gusta'
+          name: 'POSTS.LIKE'
         };
       } else if (reaccionUser === 'red-heart') {
         this.myReaction = {
           class: reaccionUser,
           emoji: 'fa-solid fa-heart',
-          name: 'Me encanta'
+          name: 'POSTS.LOVE'
         };
       } else if (reaccionUser === 'crying-face') {
         this.myReaction = {
           class: reaccionUser,
           emoji: '',
-          name: 'Me entristece'
+          name: 'POSTS.SAD'
         };
       } else if (reaccionUser === 'angry-face') {
         this.myReaction = {
           class: reaccionUser,
           emoji: '',
-          name: 'Me enfada'
+          name: 'POSTS.ANGRY'
         };
       }
     } else {
@@ -271,7 +271,7 @@ export class PostComponent {
       this.myReaction = {
         class: typeReaction,
         emoji: 'fa-solid fa-thumbs-up',
-        name: 'Me gusta'
+        name: 'POSTS.LIKE'
       }
       this.incrementTotalReactions()
       this.react(postUuid, this.emoji_type_id.thumbs_up)
@@ -279,7 +279,7 @@ export class PostComponent {
       this.myReaction = {
         class: typeReaction,
         emoji: 'fa-solid fa-heart',
-        name: 'Me encanta'
+        name: 'POSTS.LOVE'
       }
       this.incrementTotalReactions()
       this.react(postUuid, this.emoji_type_id.red_heart)
@@ -287,7 +287,7 @@ export class PostComponent {
       this.myReaction = {
         class: typeReaction,
         emoji: '',
-        name: 'Me entristece'
+        name: 'POSTS.SAD'
       }
       this.incrementTotalReactions()
       this.react(postUuid, this.emoji_type_id.crying_face)
@@ -295,7 +295,7 @@ export class PostComponent {
       this.myReaction = {
         class: typeReaction,
         emoji: '',
-        name: 'Me enfada'
+        name: 'POSTS.ANGRY'
       }
       this.incrementTotalReactions()
       this.react(postUuid, this.emoji_type_id.angry_face)

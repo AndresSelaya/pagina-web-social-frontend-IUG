@@ -3,26 +3,26 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
-        <h4 class="h4 text-center fw-semibold">Inicio de Sesión</h4>
+        <h4 class="h4 text-center fw-semibold">{{ 'POPUP_USER.SIGN_IN' | translate }}</h4>
         <!-- Formulario login -->
         <div class="container">
           <form [formGroup]="loginForm" (ngSubmit)="login()" class="needs-validation" novalidate>
             <div class="mb-3 mt-3">
-              <label for="email" class="form-label">Correo Electrónico</label>
+              <label for="email" class="form-label">{{ 'SIGN_IN_FORM.EMAIL' | translate }}</label>
               <input type="email" class="form-control" [ngClass]="{'is-invalid': hasErrors('username', 'required') || hasErrors('username', 'email') || !correctCredentials}" id="emailLG" formControlName="username" />
               <div class="invalid-feedback" *ngIf="hasErrors('username', 'required')">
-                Correo requerido
+                {{ 'COMMON.ERRORS.EMAIL_REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="hasErrors('username', 'email')">
-                Correo inválido
+                {{ 'COMMON.ERRORS.INVALID_EMAIL' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="!correctCredentials">
-                Correo o contraseña incorrectos
+                {{ 'COMMON.ERRORS.INVALID_EMAIL_PASSWORD' | translate }}
               </div>
               <div *ngIf="!hasErrors('username', 'required') && !hasErrors('username', 'email') && correctCredentials" style="min-height: 25px;"></div>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
+              <label for="password" class="form-label">{{ 'SIGN_IN_FORM.PASSWORD' | translate }}</label>
               <div class="input-password">
                 <input [type]="inputType" class="form-control"
                   [ngClass]="{ 'is-invalid': hasErrors('password', 'required') || !correctCredentials }" id="passwordLG"
@@ -37,19 +37,19 @@
                       <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
                     </svg>
                   </div>
-                  <div class="invalid-feedback" *ngIf="hasErrors('password', 'required')">Contraseña requerida</div>
+                  <div class="invalid-feedback" *ngIf="hasErrors('password', 'required')">{{ 'COMMON.ERRORS.PASSWORD_REQUIRED' | translate }}</div>
                   <div class="invalid-feedback" *ngIf="!correctCredentials">
-                    Correo o contraseña incorrectos
+                    {{ 'COMMON.ERRORS.INVALID_EMAIL_PASSWORD' | translate }}
                   </div>
                   <div *ngIf="!hasErrors('password', 'required') && correctCredentials" style="min-height: 25px;"></div>
               </div>
             </div>
             <div class="botones d-grid gap-md-5 gap-3 d-md-flex justify-content-md-center">
               <button type="submit" (click)="login()" class="btn btn-primary w-50 boton">
-                Entrar
+                {{ 'COMMON.BUTTONS.ENTER' | translate }}
               </button>
               <button type="button" class="btn btn-primary w-50 boton" data-bs-dismiss="modal" (click)="loginReset()">
-                Cancelar
+                {{ 'COMMON.BUTTONS.CANCEL' | translate }}
               </button>
             </div>
           </form>

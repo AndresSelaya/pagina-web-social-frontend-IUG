@@ -1,7 +1,7 @@
 <div class="video-gallery">
-  <h2 class="gallery-title">Videos</h2>
+  <h2 class="gallery-title">{{ 'OPTIONS.VIDEOS' | translate }}</h2>
   <div *ngIf="isLoading" class="loading-message">
-    Cargando videos...
+    {{ 'COMMON.LABELS.LOADING_VIDEOS' | translate }}...
   </div>
   <div class="gallery-container" *ngIf="!isLoading && videos.length > 0">
     @for (video of videos; track video.url) {
@@ -9,6 +9,6 @@
     }
   </div>
   <div class="no-videos" *ngIf="!isLoading && videos.length === 0">
-    No hay Videos.
+    {{ 'COMMON.LABELS.NO_VIDEOS' | translate }}
   </div>
 </div>

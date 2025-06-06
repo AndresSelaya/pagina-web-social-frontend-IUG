@@ -54,9 +54,4 @@ export class HeaderComponent {
     });
   }
 
-  reloadPosts() {
-  this.router.navigate(['/posts']).then(() => {
-    window.location.reload();
-  });
-}
 }

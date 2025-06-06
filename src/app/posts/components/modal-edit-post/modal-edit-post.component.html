@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header p-2">
-          <h5 class="modal-title fw-bold" id="modalNewPost">Editar publicación</h5>
+          <h5 class="modal-title fw-bold" id="modalNewPost">{{ 'EDIT_POST.TITLE' | translate }}</h5>
           <button type="button" class="btn-close m-0" (click)="openModalConfirmExitEdit(postToEdit.uuid)" aria-label="Close"></button>
         </div>
         <div class="modal-body user-post-container">
@@ -11,14 +11,14 @@
             @if (institution) {
             <!--<ng-container *ngIf="institution">-->
               <img
-                [src]="institution.logo_url"
+                [src]="'assets/iug-logor.svg'"
                 [alt]="'Foto de perfil'"
                 class="img-profile"
               />
               <div>
-                <p class="fw-bold fs-6">{{ institution.name }}</p>
+                <p class="fw-bold fs-6">{{ 'HOME.NAME_COMPANY' | translate }}</p>
                 <select id="option-comment" *ngIf="commentConfig" [(ngModel)]="selectedCommentConfig">
-                  <option *ngFor="let config of commentConfig" [value]="config.uuid">{{config.name}}</option>
+                  <option *ngFor="let config of commentConfig" [value]="config.uuid">{{translateOptionsComment(config.name) | translate}}</option>
                 </select>
               </div>
             <!--</ng-container>-->
@@ -38,13 +38,13 @@
   
             <!-- Añadir a la publicacion -->
             <div class="add-media d-flex flex-row align-items-center justify-content-between">
-              <p class="fw-semibold">Añadir a tu publicación</p>
+              <p class="fw-semibold">{{ 'CREATE_POST.ADD_POST' | translate }}</p>
               <div class="add-post d-flex ">
                 <span class="d-flex align-items-center" [ngClass]="{'disabled': disableLoadImage()}" (click)="!disableLoadImage() && showAreaMedia()"><i class="bi bi-image fs-5"></i></span>
                 <span class="d-flex align-items-center" [ngClass]="{'disabled': disableLoadDoc()}" (click)="!disableLoadDoc() && showAreaDoc()"><i class="bi bi-file-earmark-text-fill fs-5"></i></span>
               </div>
             </div>
-            <button type="button" class="btn btn-primary fw-semibold" [disabled]="disabledSaveButton()" data-bs-dismiss="modal" (click)="updatePost()">Guardar</button>
+            <button type="button" class="btn btn-primary fw-semibold" [disabled]="disabledSaveButton()" data-bs-dismiss="modal" (click)="updatePost()">{{ 'COMMON.BUTTONS.SAVE' | translate }}</button>
           </form>
         </div>
       </div>
@@ -56,15 +56,15 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header p-2">
-        <h5 class="modal-title fw-bold" id="modalConfirmExitPost">Cambios sin guardar</h5>
+        <h5 class="modal-title fw-bold" id="modalConfirmExitPost">{{ 'EDIT_POST.CHANGE_NOT_SAVED' | translate }}</h5>
         <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿Estás seguro de que quieres cerrar? Se perderán los cambios.
+        {{ 'EDIT_POST.CONFIRMATION' | translate }}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">Seguir editando</button>
-        <button type="button" class="btn btn-primary fw-semibold" data-bs-dismiss="modal" (click)="closeResetModalEdit(postToEdit.uuid)">Cerrar sin guardar</button>
+        <button type="button" class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">{{ 'COMMON.BUTTONS.CONTINUE_EDIT' | translate }}</button>
+        <button type="button" class="btn btn-primary fw-semibold" data-bs-dismiss="modal" (click)="closeResetModalEdit(postToEdit.uuid)">{{ 'COMMON.BUTTONS.CLOSE_WITHOUT_SAVE' | translate }}</button>
       </div>
     </div>
   </div>

@@ -6,11 +6,13 @@ import { CommentService } from '../../comments/services/comment.service';
 import { Modal } from 'bootstrap';
 import { environment } from '../../../environments/environment';
 import { UserDetail } from '../../posts/models/user-detail';
+import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  providers: [TranslatePipe, TranslateDirective]
 })
 export class NavbarComponent {
   authenticated: boolean = false;
@@ -18,16 +20,23 @@ export class NavbarComponent {
   isMenuOpen = false;
   user!: UserDetail
   counterModeratedComments: number = 0;
+  public selectedLanguage: string = '';
 
   @ViewChild('moderateCommentModal') modalElement!: ElementRef;
 
   constructor(
     private authService: AuthService,
     private postService: PostService,
-    private commentService: CommentService
-  ){}
+    private commentService: CommentService,
+    private translate: TranslateService
+  ){
+    this.translate.addLangs(['de', 'es', 'en']);
+    this.translate.setDefaultLang('de');
+    this.translate.use('de');
+  }
   
   ngOnInit() {
+    this.selectedLanguage = 'de';
     this.authenticated = this.authService.isAuthenticated();
     this.getInstitution();
     this.getUser();
@@ -82,4 +91,8 @@ export class NavbarComponent {
     modal.show();
   }
 
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+    this.selectedLanguage = lang;
+  }
 }

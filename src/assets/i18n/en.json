@@ -1,0 +1,150 @@
+{
+  "POPUP_USER": {
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout",
+    "SIGN_IN": "Sign in",
+    "SIGN_UP": "Sign up"
+  },
+  "COMMON": {
+    "LABELS": {
+      "LOADING": "Loading",
+      "LOADING_PHOTOS": "Loading photos",
+      "LOADING_VIDEOS": "Loading videos",
+      "NO_PHOTOS": "No photos available",
+      "NO_VIDEOS": "No videos available",
+      "SEE_MORE": "See more"
+    },
+    "BUTTONS": {
+      "ENTER": "Enter",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete",
+      "SAVE": "Save",
+      "CONTINUE_EDIT": "Continue editing",
+      "CLOSE_WITHOUT_SAVE": "Discard changes"
+    },
+    "ERRORS": {
+      "EMAIL_REQUIRED": "Email required",
+      "PASSWORD_REQUIRED": "Password required",
+      "INVALID_EMAIL": "Invalid email",
+      "INVALID_EMAIL_PASSWORD": "Invalid email or password",
+      "NAME_REQUIRED": "Name required",
+      "LASTNAME_REQUIRED": "Last name required",
+      "CONFIRM_PASSWORD_REQUIRED": "Password confirmation required",
+      "PASSWORD_NOT_MATCH": "Passwords do not match"
+    }
+  },
+  "SIGN_IN_FORM": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password"
+  },
+  "SIGN_UP_FORM": {
+    "NAME": "Name",
+    "LASTNAME": "Last name",
+    "CONFIRM_PASSWORD": "Confirm password"
+  },
+  "HOME": {
+    "WELLCOME": "WELCOME TO THE INFORMIX USER GROUP",
+    "TEXT": "The INFORMIX USER GROUP is an independent association dedicated to bringing together everyone who works with Informix. The goal is to actively share experiences, solve problems together, and offer constructive criticism within a strong community.",
+    "NAME_COMPANY": "INFORMIX USER GROUP",
+    "FOLLOWERS": "followers"
+  },
+  "OPTIONS": {
+    "POSTS": "Posts",
+    "INFORMATION": "Information",
+    "PHOTOS": "Photos",
+    "VIDEOS": "Videos"
+  },
+  "DETAIL_COMPANY": {
+    "DETAIL": "Detail",
+    "INFO": "Independent association dedicated to bringing together everyone who works with Informix.",
+    "ADDRESS_1": "Beerentaltrift 95",
+    "ADDRESS_2": "21077 Hamburg",
+    "ADDRESS_3": "Germany"
+  },
+  "POSTS": {
+    "LIKE": "Like",
+    "LOVE": "Love",
+    "SAD": "Sad",
+    "ANGRY": "Angry",
+    "COMMENT": "Comentar",
+    "SHARE": "Share",
+    "EDIT_POST": "Edit post",
+    "DELETE_POST": "Delete post"
+  },
+  "CREATE_POST": {
+    "INPUT_CREATE_A_POST": "Create a post",
+    "TITLE_MODAL": "Create post",
+    "NETWORK_SHARE": "Social networks to share",
+    "ADD_POST": "Add to your post",
+    "POST": "Publish",
+
+    "PLACEHOLDER_QUESTION": "What's on your mind?",
+    "ADD_PHOTOS_VIDEOS": "Add photos/videos",
+    "OPTION_DRAG_DROP": "Use the drag and drop option",
+    "UPLOAD_FILE": "Upload a file",
+    "LIMIT_FILE": "Files must be 100MB maximum",
+    "CHOOSE_FILE": "Choose file"
+  },
+  "CONFIRM_DELETE_POST": {
+    "TITLE": "Delete the post?",
+    "CONFIRMATION": "Are you sure you want to permanently delete the post?"
+  },
+  "EDIT_POST": {
+    "TITLE": "Edit post",
+    "CHANGE_NOT_SAVED": "Unsaved changes",
+    "CONFIRMATION": "Are you sure you want to close? Changes will be lost"
+  },
+  "OPTIONS_COMMENT": {
+    "ALL_COMMENT": "Everyone can comment",
+    "NOBODY_COMMENT": "No one can comment",
+    "MODERATOR_COMMENT": "Moderated comments"
+  },
+  "NAVBAR_PAGES": {
+    "PRESENTATION": "Presentation",
+    "SERVICES": "Services"
+  },
+  "PRESENTATION": {
+    "ABOUT_US": "About Us",
+    "TEXT_1": "The INFORMIX USER GROUP is a registered association.",
+    "TEXT_2": "This association's mission is to bring together everyone who works with Informix software. Informix Software GmbH was the tenth-largest software manufacturer in the world and was acquired by IBM in 2001.",
+    "TEXT_3": "The goal of the IUG is to actively exchange experiences, solve problems together, and encourage constructive criticism within a strong community. To achieve this, the IUG naturally needs active members, as many can make a difference.",
+    "TEXT_4": "Our goals",
+    "TEXT_5": "We, the INFORMIX USER GROUP, consider one of our most important tasks to be protecting the interests of our members and representing them to Informix. To this end, we hold regular meetings with Informix management to improve collaboration through constructive criticism and suggestions.",
+    "TEXT_6": "Are you familiar with INFORMIX software? Are you also familiar with the INFORMIX USER GROUP?",
+    "TEXT_7": "Then it’s high time to get to know us.",
+    "TEXT_8": "Informix User Group eV",
+    "TEXT_9": "Membership",
+    "TEXT_10": "To help you understand why becoming a member of the INFORMIX USER GROUP is worthwhile, here's a",
+    "TEXT_11": " sampling ",
+    "TEXT_12": "of the services we're happy to provide! Become a member!",
+    "TEXT_13": "Registration details: Please complete the",
+    "TEXT_14": " application form ",
+    "TEXT_15": "and send it to the IUG. Upon confirmation of your full membership, you will receive a valid membership number.",
+    "TEXT_16": "If you have any further questions, please call, write us a letter, or simply send us an email. We would be happy to provide further information. We look forward to partnering with you.",
+    "TEXT_17": "Organization",
+    "TEXT_18": "The IUG Board and Advisory Board form the heart of our community.",
+    "TEXT_19": "The Informix User Group (IUG) is a community dedicated to advancing Informix technology. Our Board of Directors and Advisory Board guide the organization and organizes events, workshops, and trainings for our members.",
+    "TEXT_20": "As a member, you'll gain access to a network of professionals, exclusive resources, and important Informix information. We invite anyone interested in Informix to join our growing community.",
+    "TEXT_21": "The Board",
+    "TEXT_22": "Chairman",
+    "TEXT_23": "Deputy Chairman",
+    "TEXT_24": "The Advisory Board",
+    "TEXT_25": "Advisory Board"
+  },
+  "SERVICES": {
+    "TEXT_1": "The Informix User Group (IUG) eV stands for the dissemination and deepening of Informix technologies among its members.",
+    "TEXT_2": "With regular workshops, technical seminars, and regular get-togethers, the IUG promotes the exchange of knowledge and experiences within its community. These events, complemented by financial benefits for training courses and conferences, strengthen the professional expertise of its members. By providing access to specialized information resources and representing its members' interests, the IUG contributes significantly to the professional development and success of its members.",
+    "TEXT_3": "Workshops",
+    "TEXT_4": "Informix users meet across Germany, discuss current topics and share experiences.",
+    "TEXT_5": "Technical workshops",
+    "TEXT_6": "Regular meetings in Germany are aimed at practitioners who want to gain and apply technical experience.",
+    "TEXT_7": "Regular meetings",
+    "TEXT_8": "Before the workshops, regular meetings take place, providing members with a pleasant setting for exchange.",
+    "TEXT_9": "Training",
+    "TEXT_10": "Members can receive up to three training vouchers annually and redeem them with IBM, resulting in significant savings.",
+    "TEXT_11": "World User Conference",
+    "TEXT_12": "Annual conference in the USA with an international program and networking opportunities, including a member discount.",
+    "TEXT_13": "Website access",
+    "TEXT_14": "Members have access to comprehensive information about Informix on the IUG website and can use the International IUG website."
+  }
+}

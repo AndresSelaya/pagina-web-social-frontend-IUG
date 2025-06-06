@@ -3,8 +3,8 @@
   <button type="button" class="btn-close m-0" aria-label="Close" (click)="closeCleanPreviewMedia()"></button>
   <div *ngIf="!showPreviewMedia" class="back-media d-flex flex-column align-items-center justify-content-center" (click)="openInputFileMedia()" (drop)="changeInputMedia($event)" (dragover)="onDragOver($event)">
     <i class="bi bi-plus-square-dotted fs-4"></i>
-    <h5 class="mb-0">Añadir fotos/vídeos</h5>
-    <label class="text-secondary" for="input-file-img-vid">o usa la opción de arrastrar y soltar</label>
+    <h5 class="mb-0">{{ 'CREATE_POST.ADD_PHOTOS_VIDEOS' | translate }}</h5>
+    <label class="text-secondary" for="input-file-img-vid">{{ 'CREATE_POST.OPTION_DRAG_DROP' | translate }}</label>
   </div>
 
   <!-- Preview de imagenes videos elegidos -->

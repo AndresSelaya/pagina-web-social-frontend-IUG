@@ -1,6 +1,6 @@
 <textarea 
 id="text-area" 
-placeholder="¿Qué estás pensando?" 
+[placeholder]="'CREATE_POST.PLACEHOLDER_QUESTION' | translate" 
 rows="4" 
 (input)="onTextChange($event)" 
 [(ngModel)]="contentText"

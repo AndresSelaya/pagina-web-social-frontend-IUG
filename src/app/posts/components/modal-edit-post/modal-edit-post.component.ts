@@ -144,6 +144,17 @@ export class ModalEditPostComponent {
     }
   }
 
+  translateOptionsComment(option: string):string {
+    let res = '';
+    if(option === 'Todos pueden comentar')
+      res = 'OPTIONS_COMMENT.ALL_COMMENT';
+    else if(option === 'Nadie puede comentar')
+      res = 'OPTIONS_COMMENT.NOBODY_COMMENT' 
+    else if(option === 'Comentarios con moderador')
+      res = 'OPTIONS_COMMENT.MODERATOR_COMMENT'
+    return res;
+  }
+
   //Cerrar modal sin guardar cambios
   closeResetModalEdit(id: string){
     const modalElement = document.getElementById('edit-'+id);

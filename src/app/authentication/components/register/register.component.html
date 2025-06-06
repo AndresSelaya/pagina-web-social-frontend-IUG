@@ -4,7 +4,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title fw-semibold" id="registerModalLabel">Registro de Usuario</h5>
+        <h5 class="modal-title fw-semibold" id="registerModalLabel">{{ 'POPUP_USER.SIGN_UP' | translate }}</h5>
         <!-- Botón de Cierre "X" -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
       </div>
@@ -16,37 +16,37 @@
 
             <!-- Name-->
             <div class="mb-3">
-              <label for="name" class="form-label">Nombre</label>
+              <label for="name" class="form-label">{{ 'SIGN_UP_FORM.NAME' | translate }}</label>
               <input type="text" class="form-control" [ngClass]="{'is-invalid': hasErrors('name', 'required')}" id="name" formControlName="name" />
               <div class="invalid-feedback" *ngIf="hasErrors('name', 'required')">
-                Nombre requerido
+                {{ 'COMMON.ERRORS.NAME_REQUIRED' | translate }}
               </div>
             </div>
 
             <!-- Last Name -->
             <div class="mb-3">
-              <label for="lastName" class="form-label">Apellido</label>
+              <label for="lastName" class="form-label">{{ 'SIGN_UP_FORM.LASTNAME' | translate }}</label>
               <input type="text" class="form-control" [ngClass]="{'is-invalid': hasErrors('lastName', 'required')}" id="lastName" formControlName="lastName" />
               <div class="invalid-feedback" *ngIf="hasErrors('lastName', 'required')">
-                Apellido requerido
+                {{ 'COMMON.ERRORS.LASTNAME_REQUIRED' | translate }}
               </div>
             </div>
 
             <!-- Email -->
             <div class="mb-3 mt-3">
-              <label for="email" class="form-label">Correo Electrónico</label>
+              <label for="email" class="form-label">{{ 'SIGN_IN_FORM.EMAIL' | translate }}</label>
               <input type="email" class="form-control" [ngClass]="{'is-invalid': hasErrors('email', 'required') || hasErrors('email', 'email')}" id="emailRG" formControlName="email" />
               <div class="invalid-feedback" *ngIf="hasErrors('email', 'required')">
-                Correo requerido
+                {{ 'COMMON.ERRORS.EMAIL_REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="hasErrors('email', 'email')">
-                Correo inválido
+                {{ 'COMMON.ERRORS.INVALID_EMAIL' | translate }}
               </div>
             </div>
 
             <!-- Password -->
             <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
+              <label for="password" class="form-label">{{ 'SIGN_IN_FORM.PASSWORD' | translate }}</label>
               <div class="input-password">
                 <input [type]="inputType" class="form-control" [ngClass]="{ 'is-invalid': hasErrors('password', 'required') }" id="passwordRG" formControlName="password" />
                 <div class="eye" (click)="togglePasswordVisibility()" (keypress)="togglePasswordVisibility()">
@@ -59,29 +59,29 @@
                     <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
                   </svg>
                 </div>
-                <div class="invalid-feedback" *ngIf="hasErrors('password', 'required')">Contraseña requerida</div>
+                <div class="invalid-feedback" *ngIf="hasErrors('password', 'required')">{{ 'COMMON.ERRORS.PASSWORD_REQUIRED' | translate }}</div>
               </div>
             </div>
 
             <!-- Confirm Password -->
             <div class="mb-3">
-              <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+              <label for="confirmPassword" class="form-label">{{ 'SIGN_UP_FORM.CONFIRM_PASSWORD' | translate }}</label>
               <input [type]="inputType" class="form-control" [ngClass]="{ 'is-invalid': hasErrors('confirmPassword', 'required') || passwordMismatch }" id="confirmPassword" formControlName="repeat_password" />
               <div class="invalid-feedback" *ngIf="hasErrors('confirmPassword', 'required')">
-                Confirmación de contraseña requerida
+                {{ 'COMMON.ERRORS.CONFIRM_PASSWORD_REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="passwordMismatch">
-                Las contraseñas no coinciden
+                {{ 'COMMON.ERRORS.PASSWORD_NOT_MATCH' | translate }}
               </div>
             </div>
 
             <div class="d-grid gap-2">
               <p-toast/>
               <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
-                Registrarse
+                {{ 'POPUP_USER.SIGN_UP' | translate }}
               </button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">
-                Cancelar
+                {{ 'COMMON.BUTTONS.CANCEL' | translate }}
               </button>
             </div>
           </form>
@@ -93,6 +93,6 @@
 
 <div class="d-flex justify-content-center align-items-center bg-dark bg-opacity-50 position-fixed top-0 start-0 w-100 h-100" id="loadingBackdrop" style="z-index: 1080; display: none !important;">
   <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Cargando...</span>
+    <span class="visually-hidden">{{ 'COMMON.LABELS.LOADING' | translate }}...</span>
   </div>
 </div>

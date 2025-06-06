@@ -89,6 +89,17 @@ export class CreatePostComponent {
     }
   }
 
+  translateOptionsComment(option: string):string {
+    let res = '';
+    if(option === 'Todos pueden comentar')
+      res = 'OPTIONS_COMMENT.ALL_COMMENT';
+    else if(option === 'Nadie puede comentar')
+      res = 'OPTIONS_COMMENT.NOBODY_COMMENT' 
+    else if(option === 'Comentarios con moderador')
+      res = 'OPTIONS_COMMENT.MODERATOR_COMMENT'
+    return res;
+  }
+
   //Deshabilitar el boton de publicar si no hay texto
   getTextPost(text: string) {
     this.postForm.get('contentPost')?.setValue(text);
