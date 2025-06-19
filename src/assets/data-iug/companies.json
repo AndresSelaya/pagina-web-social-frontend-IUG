@@ -1,0 +1,66 @@
+[
+  {
+    "branche": "Software / Hardware",
+    "firma": "A-Z Implement GmbH",
+    "telefon": "+49 8161 5475-75",
+    "website": "https://www.azimplement.de",
+    "ort": "Freising",
+    "logo": "/assets/A-Z-Impsslement.jpg"
+  },
+  {
+    "branche": "Software / Hardware",
+    "firma": "Abrechnungszentrum Emmendingen",
+    "telefon": "+49 7641 9201-0",
+    "website": "https://www.arz-emmendingen.de",
+    "ort": "Emmendingen",
+    "logo": "/assets/abrechnungszentrum.jpeg"
+  },
+  {
+    "branche": "Software / Hardware",
+    "firma": "ADG Apotheken-Dienstleistungsgesellschaft mbH",
+    "telefon": "+49 621 8505-520",
+    "website": "https://www.adg.de",
+    "ort": "Mannheim",
+    "logo": "/assets/ADG-Logo.png"
+  },
+  {
+    "branche": "Versicherung",
+    "firma": "Barmenia Krankenversicherung AG",
+    "telefon": "+49 202 438-00",
+    "website": "https://www.barmenia.de",
+    "ort": "Wuppertal",
+    "logo": "/assets/barmenia-1.jpg"
+  },
+  {
+    "branche": "Software / Hardware",
+    "firma": "BQS Institut für Qualität & Patientensicherheit GmbH",
+    "telefon": "+49 40 254078-40",
+    "website": "https://www.bqs-hamburg.de",
+    "ort": "Hamburg",
+    "logo": "/assets/BQS-300x183.png"
+  },
+  {
+    "branche": "Behörde",
+    "firma": "Bundesortenamt",
+    "telefon": "+49 511 95665",
+    "website": "https://www.bundesortenamt.de",
+    "ort": "Hannover",
+    "logo": "/assets/address.png"
+  },
+  {
+    "branche": "Software / Hardware",
+    "firma": "Bytec Bodry Technology GmbH",
+    "telefon": "+49 7541 585-0",
+    "website": "https://www.bytec.de",
+    "ort": "Friedrichshafen",
+    "logo": "/assets/bytec_logo-300x300.jpg"
+  },
+  {
+    "branche": "Software / Hardware",
+    "firma": "CSS AG",
+    "telefon": "+49 661 9392-0",
+    "website": "https://www.css.de",
+    "ort": "Künzell",
+    "logo": "/assets/css2.jpg"
+  }
+]
