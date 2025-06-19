@@ -31,6 +31,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule, TranslateLoader, TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MembersComponent } from './pages/members/members.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectsComponent,
     ScholarshipsMobilityComponent,
     MembershipsComponent,
-    ReportsComponent
+    ReportsComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,
