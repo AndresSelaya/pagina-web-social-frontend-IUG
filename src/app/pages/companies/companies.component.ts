@@ -1,7 +1,5 @@
-// src/app/flash-cards/flash-cards.component.ts
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { company } from '../../posts/models/company';
-import { CommonModule } from '@angular/common';
 
 import { HttpClient } from '@angular/common/http';
 @Component({

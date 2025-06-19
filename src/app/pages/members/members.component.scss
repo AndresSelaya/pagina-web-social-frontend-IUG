@@ -1,0 +1,34 @@
+.members-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.member-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.member-card h3 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+.members-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
