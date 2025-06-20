@@ -1,0 +1,64 @@
+/* filepath: c:\Users\Iamfab\Desktop\pagina-web-social-frontend-IUG\src\app\pages\companies\companies.component.scss */
+.flash-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.flash-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 360px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-field {
+  margin-bottom: 10px;
+}
+
+.card-field strong {
+  display: block;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.card-field a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.card-field a:hover {
+  text-decoration: underline;
+}
+.companies-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}

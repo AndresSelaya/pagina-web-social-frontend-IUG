@@ -13,6 +13,8 @@ import { ScholarshipsMobilityComponent } from './pages/scholarships-mobility/sch
 import { MembershipsComponent } from './pages/memberships/memberships.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { authGuard } from './authentication/services/auth.guard';
+import { MembersComponent } from './pages/members/members.component';
+import { CompaniesComponent } from './pages/companies/companies.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,10 @@ const routes: Routes = [
           { path: 'becas-movilidad', component: ScholarshipsMobilityComponent },
           { path: 'membresias', component: MembershipsComponent },
           { path: 'informes-gestion', component: ReportsComponent },
-          { path: '**', redirectTo: 'presentacion', pathMatch: 'full' }
+            { path: 'members', component: MembersComponent },
+          { path: 'firmas', component: CompaniesComponent },
+          { path: '**', redirectTo: 'presentacion', pathMatch: 'full' },
+        
         ]
       },
       { path: 'informacion',

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Reinhold Reinhold",
+    "company": "Bytec Bodry Technology GmbH",
+    "avatar": "/assets/reinhold.jpg"
+  },
+  {
+    "name": "Dr. Julio Aspiazu",
+    "company": "pirAMide Informatik GmbH",
+    "avatar": "/assets/dr-julio.jpg"
+  },
+  {
+    "name": "Dietrich Krum",
+    "company": "Optica Billing Center Dr. Güldener GmbH",
+    "avatar": "/assets/die.jpg"
+  },
+  {
+    "name": "Malte Sukopp",
+    "company": "ISR Information Products AG",
+    "avatar": "/assets/malte.jpg"
+  },
+  {
+    "name": "Lars Beuchel",
+    "company": "ISR Information Products AG",
+    "avatar": "/assets/lars.jpg"
+  },
+  {
+    "name": "Michael Muders",
+    "company": "ISR Information Products AG",
+    "avatar": "/assets/michael.jpg"
+  },
+  {
+    "name": "Andreas Legner",
+    "company": "HCL Technologies Germany GmbH",
+    "avatar": "/assets/Andreas.jpg"
+  },
+  {
+    "name": "Nicole Fornaçon",
+    "company": "Actian, a division of HCLSoftware",
+    "avatar": "/assets/nicole.jpg"
+  },
+  {
+    "name": "Yusuf Özbilen",
+    "company": "Federal Police Headquarters",
+    "avatar": "/assets/yusuf.jpg"
+  },
+  {
+    "name": "Philipp Haber",
+    "company": "Optica Billing Center Dr. Güldener GmbH",
+    "avatar": "/assets/philipp.jpg"
+  }, 
+  {
+    "name": "Dirk Möller",
+    "company": "pirAMide Informatik GmbH",
+    "avatar": "/assets/dirk.jpg"
+  },
+  {
+    "name": "Fedor Schönhals",
+    "company": "it-schoenhals",
+    "avatar": "/assets/fed.jpg"
+  }
+]

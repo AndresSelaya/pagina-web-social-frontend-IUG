@@ -101,7 +101,10 @@
   },
   "NAVBAR_PAGES": {
     "PRESENTATION": "Presentation",
-    "SERVICES": "Services"
+    "SERVICES": "Services",
+    "MEMBERS": "Persons",
+    "MEMBER": "Members",
+    "FIRMAS": "Companies"
   },
   "PRESENTATION": {
     "ABOUT_US": "About Us",

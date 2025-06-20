@@ -1,0 +1,27 @@
+<h1 class="companies-title">{{ 'NAVBAR_PAGES.FIRMAS'| translate }}</h1>
+<div class="flash-cards-container">
+  <div *ngFor="let card of cards" class="flash-card">
+    <div class="card-header">
+      <img [src]="card.logo" alt="{{ card.firma }}" class="card-logo" />
+      <h2>{{ card.firma }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="card-field">
+        <strong>Branche</strong>
+        <span>{{ card.branche }}</span>
+      </div>
+      <div class="card-field">
+        <strong>Telefon</strong>
+        <span>{{ card.telefon }}</span>
+      </div>
+      <div class="card-field">
+        <strong>Website</strong>
+        <a [href]="card.website" target="_blank">{{ card.website }}</a>
+      </div>
+      <div class="card-field">
+        <strong>Ort</strong>
+        <span>{{ card.ort }}</span>
+      </div>
+    </div>
+  </div>
+</div>

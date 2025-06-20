@@ -1,0 +1,8 @@
+<h1 class="members-title">{{ 'NAVBAR_PAGES.MEMBER'| translate }}</h1>
+<div class="members-container">
+  <div class="member-card" *ngFor="let member of members">
+    <img [src]="member.avatar" alt="{{ member.name }}" class="member-avatar">
+    <h3>{{ member.name }}</h3>
+    <p>{{ member.company }}</p>
+  </div>
+</div>
