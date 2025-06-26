@@ -32,3 +32,16 @@
   margin-bottom: 20px;
   color: #333;
 }
+
+
+.member-photo {
+  margin-right: 16px;
+}
+
+.member-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}

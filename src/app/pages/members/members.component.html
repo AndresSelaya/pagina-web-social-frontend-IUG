@@ -1,8 +1,13 @@
-<h1 class="members-title">{{ 'NAVBAR_PAGES.MEMBER'| translate }}</h1>
+<h1 class="members-title">{{ 'NAVBAR_PAGES.MEMBER' | translate }}</h1>
+
 <div class="members-container">
-  <div class="member-card" *ngFor="let member of members">
-    <img [src]="member.avatar" alt="{{ member.name }}" class="member-avatar">
-    <h3>{{ member.name }}</h3>
-    <p>{{ member.company }}</p>
+  <div class="member-card" *ngFor="let address of addresses">
+     <div class="member-photo">
+      <img src="assets/yusuf.jpg" alt="Default Member Photo" class="member-image">
+    </div>
+    <h3>{{ address.name1 }}{{ address.name2 ? ' ' + address.name2 : '' }}</h3>
+    <p *ngIf="address.name3">{{ address.name3 }}</p>
+    <p>ID: {{ address.addressId }}</p>
+    <p *ngIf="companyName" class="company-name">{{ companyName }}</p>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Member } from '../../posts/models/member'; 
+import { AddressService, Address } from './service/address.service';
 
 @Component({
   selector: 'app-members',
@@ -8,13 +7,47 @@ import { Member } from '../../posts/models/member';
   styleUrls: ['./members.component.scss']
 })
 export class MembersComponent implements OnInit {
-  members: Member[] = [];
+  addresses: Address[] = [];
+  companyName: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private addressService: AddressService) {}
 
   ngOnInit(): void {
-    this.http.get<Member[]>('/assets/data-iug/members.json').subscribe(data => {
-      this.members = data;
+    // Obtener el nombre de la compañía
+    this.addressService.getCompanyName(4212).subscribe({
+      next: (companyName) => {
+        console.log('Company name:', companyName);
+        this.companyName = companyName;
+      },
+      error: (error) => {
+        console.error('Error fetching company name:', error);
+      }
+    });
+
+    // Obtener las direcciones por contact address
+    this.addressService.getAddressesByContactAddress(4212).subscribe({
+      next: (addresses) => {
+        console.log('Addresses:', addresses);
+        this.addresses = addresses;
+      },
+      error: (error) => {
+        console.error('Error fetching addresses:', error);
+      }
+    });
+  }
+
+  /**
+   * Método para cambiar entre diferentes consultas
+   * @param contactAddressId ID del contact address
+   */
+  loadAddressesByContactAddress(contactAddressId: number): void {
+    this.addressService.getAddressesByContactAddress(contactAddressId).subscribe({
+      next: (data) => {
+        this.addresses = data;
+      },
+      error: (error) => {
+        console.error('Error loading addresses:', error);
+      }
     });
   }
 }

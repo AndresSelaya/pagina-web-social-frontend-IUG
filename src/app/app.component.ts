@@ -12,10 +12,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void{
     this.primengConfig.ripple = true;
-    setInterval(() => {
+    /*setInterval(() => {
       this.authService.checkTokenExpiration();
-    }, 60000);
+    }, 60000);*/
 
-     this.authService.checkTokenExpiration();
+    // this.authService.checkTokenExpiration();
   }
 }
