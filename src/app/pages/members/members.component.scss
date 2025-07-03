@@ -67,6 +67,12 @@
 }
 
 .customer-selector {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 0 auto;
   background: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
@@ -76,31 +82,63 @@
 }
 
 .customer-selector label {
-  font-weight: 600;
-  margin-right: 15px;
+  font-weight: bold;
+  font-size: 14px;
   color: #333;
-  font-size: 16px;
+}
+
+.customer-selector input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 .customer-selector select {
-  padding: 10px 15px;
+  width: 100%;
+  padding: 10px;
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
   background: white;
   cursor: pointer;
-  min-width: 300px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
 }
 
-.customer-selector select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+.customer-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
-.customer-selector select:hover {
-  border-color: #007bff;
+.customer-options li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.customer-options li:last-child {
+  border-bottom: none;
+}
+
+.customer-options li:hover {
+  background: #f8f9fa;
+}
+
+.customer-options li.selected {
+  background: none;
+  color: inherit;
 }
 
 .info-message {
@@ -139,4 +177,54 @@
 
 .hidden {
   display: none;
+}
+
+::ng-deep .custom-listbox {
+  .p-listbox-list-wrapper {
+    display: none;
+  }
+  
+  &:focus-within .p-listbox-list-wrapper {
+    display: block;
+  }
+
+  .p-listbox {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+
+  .p-listbox-filter-container {
+    padding: 0.5rem;
+    
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      
+      &:focus {
+        outline: none;
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+      }
+    }
+  }
+
+  .p-listbox-list {
+    padding: 0;
+  }
+
+  .p-listbox-item {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: #f8f9fa;
+    }
+    
+    &.p-highlight {
+      background-color: #2196F3;
+      color: #ffffff;
+    }
+  }
 }

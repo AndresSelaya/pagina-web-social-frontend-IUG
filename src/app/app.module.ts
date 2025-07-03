@@ -34,6 +34,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { FormsModule } from '@angular/forms';
+import { ListboxModule } from 'primeng/listbox';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,7 +82,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'de',
     }),
-    FormsModule
+    FormsModule,
+    ListboxModule
 ],
   providers: [
     // {

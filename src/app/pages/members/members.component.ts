@@ -9,13 +9,15 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./members.component.scss']
 })
 export class MembersComponent implements OnInit, OnChanges {
-  @Input() idType: number = 3; // Recibir el idType desde companies
+  @Input() idType: number = 4; // Recibir el idType desde companies
   customerIds: number[] = [];
   customerInfos: CustomerInfo[] = [];
   addresses: AddressWithCustomerInfo[] = [];
   companyName: string = '';
   selectedCustomerId: number | null = null;
+  selectedCustomer: CustomerInfo | null = null;
   isLoading: boolean = false;
+  searchKeyword: string = '';
 
   constructor(
     private addressService: AddressService,
@@ -99,6 +101,24 @@ export class MembersComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Método llamado cuando se selecciona un customer haciendo clic en la lista
+   * @param customerId ID del customer seleccionado
+   */
+  onCustomerSelectedByClick(customerId: number | null | undefined): void {
+    if (customerId !== null && customerId !== undefined) {
+      const selectedCustomer = this.customerInfos.find(info => info.customerId === customerId);
+      if (selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
+        this.loadDataForCustomer(customerId);
+      }
+    } else {
+      this.selectedCustomer = null;
+      this.addresses = [];
+      this.companyName = '';
+    }
+  }
+
+  /**
    * Método para cambiar entre diferentes consultas
    * @param contactAddressId ID del contact address
    */
@@ -147,5 +167,13 @@ export class MembersComponent implements OnInit, OnChanges {
         this.companyName = '';
       }
     });
+  }
+
+  getFilteredCustomerInfos(): CustomerInfo[] {
+    if (!this.searchKeyword) {
+      return this.customerInfos;
+    }
+    const keyword = this.searchKeyword.toLowerCase();
+    return this.customerInfos.filter(customerInfo => customerInfo.name1.toLowerCase().includes(keyword));
   }
 }

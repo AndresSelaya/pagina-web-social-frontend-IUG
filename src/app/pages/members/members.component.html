@@ -2,13 +2,18 @@
 
 <!-- Selector de Customer (solo se muestra si hay customerInfos disponibles) -->
 <div class="customer-selector" *ngIf="customerInfos.length > 0">
-  <label for="customerSelect">Seleccionar Customer:</label>
-  <select id="customerSelect" (change)="onCustomerSelected($event)" [value]="selectedCustomerId || ''">
-    <option value="">-- Selecciona un Customer --</option>
-    <option *ngFor="let customerInfo of customerInfos" [value]="customerInfo.customerId">
-      {{ customerInfo.name1 }} (ID: {{ customerInfo.customerId }})
-    </option>
-  </select>
+  
+  <p-listbox 
+    [options]="customerInfos" 
+    [(ngModel)]="selectedCustomer" 
+    optionLabel="name1" 
+    [filter]="true" 
+    [listStyle]="{'max-height': '200px'}"
+    [filterPlaceHolder]="'Buscar customer...'"
+    class="w-full md:w-56"
+    (onChange)="onCustomerSelectedByClick(selectedCustomer?.customerId)"
+    [styleClass]="'custom-listbox'"
+></p-listbox>
 </div>
 
 <div class="members-container">
@@ -35,8 +40,7 @@
     <h3>{{ address.name1 }}{{ address.name2 ? ' ' + address.name2 : '' }}</h3>
     <p *ngIf="address.name3">{{ address.name3 }}</p>
     <p>Address ID: {{ address.addressId }}</p>
-    <p *ngIf="address.customerName" class="customer-name">Customer: {{ address.customerName }}</p>
+    <p *ngIf="address.customerName" class="customer-name"> {{ address.customerName }}</p>
     <p *ngIf="address.customerId" class="customer-id">Customer ID: {{ address.customerId }}</p>
-    <p *ngIf="companyName" class="company-name">Company: {{ companyName }}</p>
   </div>
 </div>
