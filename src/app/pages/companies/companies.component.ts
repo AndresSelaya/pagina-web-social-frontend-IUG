@@ -20,8 +20,15 @@ export class CompaniesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerTypes = this.customerTypeService.getCustomerTypes();
-    this.loadCustomersByTypeAndAddress(this.idType);
+    this.customerTypeService.getCustomerTypes().subscribe({
+      next: (types) => {
+        this.customerTypes = types;
+        this.loadCustomersByTypeAndAddress(this.idType);
+      },
+      error: (error) => {
+        console.error('Error fetching customer types:', error);
+      }
+    });
   }
 
   /**
