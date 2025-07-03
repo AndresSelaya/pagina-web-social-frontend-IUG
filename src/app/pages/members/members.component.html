@@ -8,11 +8,14 @@
     [(ngModel)]="selectedCustomer" 
     optionLabel="name1" 
     [filter]="true" 
-    [listStyle]="{'max-height': '200px'}"
-    [filterPlaceHolder]="'Buscar customer...'"
+    [listStyle]="{'max-height': '250px'}"
+    [filterPlaceHolder]="filterPlaceholder"
     class="w-full md:w-56"
     (onChange)="onCustomerSelectedByClick(selectedCustomer?.customerId)"
     [styleClass]="'custom-listbox'"
+    placeholder="Selecciona un customer"
+    [emptyMessage]="'No se encontraron resultados'"
+    [showToggleAll]="false"
 ></p-listbox>
 </div>
 

@@ -20,6 +20,7 @@ export class MembersComponent implements OnInit, OnDestroy {
   selectedCustomer: CustomerInfo | null = null;
   isLoading: boolean = false;
   searchKeyword: string = '';
+  filterPlaceholder: string = 'Buscar customer...';
 
   constructor(
     private addressService: AddressService,
@@ -113,17 +114,18 @@ export class MembersComponent implements OnInit, OnDestroy {
    * Método llamado cuando se selecciona un customer haciendo clic en la lista
    * @param customerId ID del customer seleccionado
    */
-  onCustomerSelectedByClick(customerId: number | null | undefined): void {
-    if (customerId !== null && customerId !== undefined) {
-      const selectedCustomer = this.customerInfos.find(info => info.customerId === customerId);
+  onCustomerSelectedByClick(customerId: number | undefined): void {
+    if (customerId) {
+      this.selectedCustomerId = customerId;
+      const selectedCustomer = this.customerInfos.find(c => c.customerId === customerId);
       if (selectedCustomer) {
-        this.selectedCustomer = selectedCustomer;
+        this.filterPlaceholder = `${selectedCustomer.name1}`;
         this.loadDataForCustomer(customerId);
       }
     } else {
-      this.selectedCustomer = null;
+      this.filterPlaceholder = 'Buscar customer...';
+      this.selectedCustomerId = null;
       this.addresses = [];
-      this.companyName = '';
     }
   }
 
