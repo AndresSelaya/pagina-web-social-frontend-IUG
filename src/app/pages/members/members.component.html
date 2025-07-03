@@ -1,13 +1,42 @@
 <h1 class="members-title">{{ 'NAVBAR_PAGES.MEMBER' | translate }}</h1>
 
+<!-- Selector de Customer (solo se muestra si hay customerInfos disponibles) -->
+<div class="customer-selector" *ngIf="customerInfos.length > 0">
+  <label for="customerSelect">Seleccionar Customer:</label>
+  <select id="customerSelect" (change)="onCustomerSelected($event)" [value]="selectedCustomerId || ''">
+    <option value="">-- Selecciona un Customer --</option>
+    <option *ngFor="let customerInfo of customerInfos" [value]="customerInfo.customerId">
+      {{ customerInfo.name1 }} (ID: {{ customerInfo.customerId }})
+    </option>
+  </select>
+</div>
+
 <div class="members-container">
-  <div class="member-card" *ngFor="let address of addresses">
+  <!-- Indicador de carga -->
+  <div class="loading-message" *ngIf="isLoading">
+    <p>🔄 Cargando datos del customer seleccionado...</p>
+  </div>
+
+  <!-- Mensaje cuando hay customerInfos pero no se ha seleccionado ningún customer -->
+  <div class="info-message" *ngIf="customerInfos.length > 0 && !selectedCustomerId && !isLoading">
+    <p>👆 Por favor, selecciona un customer del dropdown para ver sus members.</p>
+  </div>
+
+  <!-- Mensaje cuando no hay customerInfos (modo standalone) -->
+  <div class="info-message" *ngIf="customerInfos.length === 0 && addresses.length === 0 && !isLoading">
+    <p>🔍 Cargando datos por defecto...</p>
+  </div>
+
+  <!-- Cards de members -->
+  <div class="member-card" *ngFor="let address of addresses" [class.hidden]="isLoading">
      <div class="member-photo">
       <img src="assets/yusuf.jpg" alt="Default Member Photo" class="member-image">
     </div>
     <h3>{{ address.name1 }}{{ address.name2 ? ' ' + address.name2 : '' }}</h3>
     <p *ngIf="address.name3">{{ address.name3 }}</p>
-    <p>ID: {{ address.addressId }}</p>
-    <p *ngIf="companyName" class="company-name">{{ companyName }}</p>
+    <p>Address ID: {{ address.addressId }}</p>
+    <p *ngIf="address.customerName" class="customer-name">Customer: {{ address.customerName }}</p>
+    <p *ngIf="address.customerId" class="customer-id">Customer ID: {{ address.customerId }}</p>
+    <p *ngIf="companyName" class="company-name">Company: {{ companyName }}</p>
   </div>
 </div>

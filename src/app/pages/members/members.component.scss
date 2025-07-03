@@ -45,3 +45,98 @@
   object-fit: cover;
   border: 2px solid #e0e0e0;
 }
+
+.customer-name {
+  font-size: 14px;
+  color: #007bff;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.customer-id {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 4px 0;
+}
+
+.company-name {
+  font-size: 14px;
+  color: #28a745;
+  font-weight: 500;
+  margin: 6px 0;
+}
+
+.customer-selector {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.customer-selector label {
+  font-weight: 600;
+  margin-right: 15px;
+  color: #333;
+  font-size: 16px;
+}
+
+.customer-selector select {
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  min-width: 300px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.customer-selector select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.customer-selector select:hover {
+  border-color: #007bff;
+}
+
+.info-message {
+  background: #e3f2fd;
+  border: 1px solid #2196f3;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.info-message p {
+  margin: 0;
+  color: #1976d2;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.loading-message {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.loading-message p {
+  margin: 0;
+  color: #856404;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.hidden {
+  display: none;
+}

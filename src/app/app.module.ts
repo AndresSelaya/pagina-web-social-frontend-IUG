@@ -33,6 +33,7 @@ import { TranslateModule, TranslateLoader, TranslateDirective, TranslatePipe } f
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
+import { FormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -80,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'de',
     }),
+    FormsModule
 ],
   providers: [
     // {
