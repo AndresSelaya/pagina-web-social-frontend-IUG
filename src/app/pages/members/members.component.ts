@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { AddressService, Address, AddressWithCustomerInfo } from './service/address.service';
 import { CustomerService, Customer, CustomerInfo } from '../companies/service/customer.service';
-import { forkJoin } from 'rxjs';
+import { CustomerTypeService } from '../companies/service/customer-type.service';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements OnInit, OnChanges {
-  @Input() idType: number = 4; // Recibir el idType desde companies
+export class MembersComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  idType: number;
   customerIds: number[] = [];
   customerInfos: CustomerInfo[] = [];
   addresses: AddressWithCustomerInfo[] = [];
@@ -21,8 +23,15 @@ export class MembersComponent implements OnInit, OnChanges {
 
   constructor(
     private addressService: AddressService,
-    private customerService: CustomerService
-  ) {}
+    private customerService: CustomerService,
+    private customerTypeService: CustomerTypeService
+  ) {
+    this.idType = this.customerTypeService.getCurrentType();
+    this.subscription = this.customerTypeService.selectedType$.subscribe(newType => {
+      this.idType = newType;
+      this.loadCustomers(newType);
+    });
+  }
 
   ngOnInit(): void {
     // Cargar customers por defecto
@@ -175,5 +184,11 @@ export class MembersComponent implements OnInit, OnChanges {
     }
     const keyword = this.searchKeyword.toLowerCase();
     return this.customerInfos.filter(customerInfo => customerInfo.name1.toLowerCase().includes(keyword));
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

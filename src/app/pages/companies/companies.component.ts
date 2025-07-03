@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, Customer } from './service/customer.service';
+import { CustomerType, CustomerTypeService } from './service/customer-type.service';
 
 @Component({
   selector: 'app-companies',
@@ -8,12 +9,18 @@ import { CustomerService, Customer } from './service/customer.service';
 })
 export class CompaniesComponent implements OnInit {
   customers: Customer[] = [];
-  idType: number = 3; // Valor por defecto, puedes cambiarlo según necesites
+  idType: number;
+  customerTypes: CustomerType[] = [];
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private customerTypeService: CustomerTypeService
+  ) {
+    this.idType = this.customerTypeService.getCurrentType();
+  }
 
   ngOnInit(): void {
-    // Cargar customers por tipo y dirección
+    this.customerTypes = this.customerTypeService.getCustomerTypes();
     this.loadCustomersByTypeAndAddress(this.idType);
   }
 
@@ -41,6 +48,7 @@ export class CompaniesComponent implements OnInit {
     const target = event.target as HTMLSelectElement;
     const idType = Number(target.value);
     this.idType = idType;
+    this.customerTypeService.setSelectedType(idType);
     this.loadCustomersByTypeAndAddress(idType);
   }
 }

@@ -2,12 +2,8 @@
 <!-- Controles para cambiar el idType (opcional) -->
 <div class="controls-container">
   <label for="idType">Customer Type:</label>
-  <select id="idType" (change)="changeIdType($event)">
-    <option value="1">Interessent</option>
-    <option value="2">Kunde</option>
-    <option value="3">Partner</option>
-    <option value="4">Pot. Interessent</option>
-    <option value="5">Kein Interesse</option>
+  <select id="idType" (change)="changeIdType($event)" [(ngModel)]="idType">
+    <option *ngFor="let type of customerTypes" [value]="type.id">{{ type.name }}</option>
   </select>
 </div>
 <div class="companies-container">
