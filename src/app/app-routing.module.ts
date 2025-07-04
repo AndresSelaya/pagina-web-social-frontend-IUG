@@ -15,6 +15,8 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { authGuard } from './authentication/services/auth.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
+import { SidebarComponent } from './bm-social/components/sidebar/sidebar.component';
+import { MainLayoutComponent } from './bm-social/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
@@ -63,6 +65,10 @@ const routes: Routes = [
         component: VideosGalleryComponent
       }
     ]
+  },
+  {
+    path: 'bm',
+    component: SidebarComponent
   }
 ];
 
