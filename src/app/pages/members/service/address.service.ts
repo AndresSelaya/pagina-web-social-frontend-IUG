@@ -11,6 +11,11 @@ export interface Address {
   name3: string | null;
 }
 
+export interface AddressWithCustomerInfo extends Address {
+  customerName?: string;
+  customerId?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
