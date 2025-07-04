@@ -12,6 +12,10 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SidebarComponent,
+    MainLayoutComponent
   ]
 })
 export class BmSocialModule { }
