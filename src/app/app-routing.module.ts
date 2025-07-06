@@ -1,7 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './authentication/components/login/login.component';
 import { ViewAllPostsComponent } from './posts/components/view-all-posts/view-all-posts.component';
 import { PhotosGalleryComponent } from './posts/components/photos-gallery/photos-gallery.component';
 import { VideosGalleryComponent } from './posts/components/videos-gallery/videos-gallery.component';
@@ -68,7 +67,7 @@ const routes: Routes = [
   },
   {
     path: 'bm',
-    component: SidebarComponent
+    loadChildren: () => import('./bm-social/bm-social.module').then(m => m.BmSocialModule)
   }
 ];
 
