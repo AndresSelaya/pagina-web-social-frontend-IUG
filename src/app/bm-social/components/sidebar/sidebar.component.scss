@@ -16,16 +16,20 @@
 
     .p-menuitem-link {
       justify-content: center;
-      margin: 4px 0;
     }
 
     .menu-items a {
       justify-content: center;
+      gap: 0;
 
       i {
         font-size: 1.6rem;
         margin: 0;
       }
+    }
+
+    .menu-items {
+      padding: 0;
     }
 
     .sidebar-content {
@@ -80,7 +84,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0.85rem 1.2rem;
+    padding: 0.5rem 1.2rem;
 
     font-size: 0.94rem;
     border-radius: 8px;
@@ -90,7 +94,6 @@
       background-color: #30465d;
       transform: scale(1.02) scaleX(1.02);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      padding-left: 0.95rem;
     }
 
     &.active {
@@ -99,11 +102,6 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1),
         0 4px 12px rgba(0, 0, 0, 0.2), 0 0 10px rgba(60, 83, 114, 0.4);
       transform: scaleX(1.02);
-      padding-left: 1rem;
-
-      a {
-        font-weight: 700;
-      }
     }
 
     a {
@@ -115,6 +113,7 @@
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s ease;
+      gap: 0.5rem;
 
       .pi {
         font-size: 1.2rem !important;

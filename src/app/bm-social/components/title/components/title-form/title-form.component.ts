@@ -1,0 +1,124 @@
+import { Component } from '@angular/core';
+import { Title } from '../../../../interfaces/title';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
+import { TitleUtils } from '../../utils/title.utils';
+import { TitleStateService } from '../../utils/title-state.service';
+
+@Component({
+  selector: 'app-title-form',
+  templateUrl: './title-form.component.html',
+  styleUrl: './title-form.component.scss',
+  providers: [MessageService]
+})
+export class TitleFormComponent {
+  public showOCCErrorModaTitle = false;
+  currentTitle: Title | null = null;
+  editTitleForm!: FormGroup;
+  isSaving = false;
+  private readonly subscriptions = new Subscription();
+  private readonly editTitleSource = new BehaviorSubject<Title | null>(null);
+
+  constructor(
+    private readonly titleUtils: TitleUtils,
+    private readonly titleStateService: TitleStateService,
+    private readonly messageService: MessageService,
+    private readonly translate: TranslateService
+  ) { }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.setupTitleSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  setTitleToEdit(title: Title | null) {
+    this.editTitleSource.next(title);
+  }
+
+  private initForm(): void {
+    this.editTitleForm = new FormGroup({
+      title: new FormControl('', [Validators.required])
+    });
+  }
+
+  private setupTitleSubscription(): void {
+    this.subscriptions.add(
+      this.titleStateService.currentTitle$.subscribe(title => {
+        this.currentTitle = title;
+        title ? this.loadTitleData(title) : this.clearForm();
+      })
+    );
+  }
+
+  private loadTitleData(title: Title): void {
+    this.editTitleForm.patchValue({ title: title.name });
+  }
+
+  clearForm(): void {
+    this.editTitleForm.reset();
+    this.currentTitle = null;
+    this.isSaving = false;
+  }
+
+  onSubmit(): void {
+    if (this.editTitleForm.invalid || !this.currentTitle || this.isSaving) {
+      this.markAllAsTouched();
+      return;
+    }
+
+    this.isSaving = true;
+    const updatedTitle: Title = {
+      ...this.currentTitle,
+      name: this.editTitleForm.value.title
+    };
+
+    this.subscriptions.add(
+      this.titleUtils.updateTitle(updatedTitle).subscribe({
+        next: (savedTitle) => this.handleSaveSuccess(savedTitle),
+        error: (err) => this.handleError(err)
+      })
+    );
+  }
+
+  private handleError(err: any): void {
+    if (err.message === 'Version conflict: Title has been updated by another user') {
+      this.showOCCErrorModaTitle = true;
+    } else {
+      this.handleSaveError(err);
+    }
+    this.isSaving = false;
+  }
+
+  private handleSaveSuccess(savedTitle: Title): void {
+    this.messageService.add({
+      severity: 'success',
+      summary: this.translate.instant('TITLE.MESSAGE.SUCCESS'),
+      detail: this.translate.instant('TITLE.MESSAGE.UPDATE_SUCCESS')
+    });
+    this.titleStateService.setTitleToEdit(null);
+    this.clearForm();
+  }
+
+  private handleSaveError(error: any): void {
+    console.error('Error saving title:', error);
+    this.messageService.add({
+      severity: 'error',
+      summary: this.translate.instant('TITLE.MESSAGE.ERROR'),
+      detail: this.translate.instant('TITLE.MESSAGE.UPDATE_FAILED')
+    });
+    this.isSaving = false;
+  }
+
+  private markAllAsTouched(): void {
+    Object.values(this.editTitleForm.controls).forEach(control => {
+      control.markAsTouched();
+      control.markAsDirty();
+    });
+  }
+}

@@ -5,7 +5,31 @@
     "SIGN_IN": "Anmelden",
     "SIGN_UP": "Registrieren"
   },
+  "TABLES": {
+    "PAGINATION_LABEL": "Es werden {first} bis {last} von {totalRecords} Einträgen angezeigt",
+    "NO_RESULTS_FOUND": "Keine Ergebnisse gefunden"
+  },
+  "BUTTONS": {
+    "NEW": "Neu",
+    "SAVE": "Speichern",
+    "DELETE": "Löschen",
+    "CANCEL": "Abbrechen",
+    "NEW_YEAR": "Neues Jahr",
+    "GENERATE_PDF_SUBCONTRACT": "Subcontract-PDF erzeugen",
+    "IMPORT_INVOICES": "Rechnungen importieren",
+    "GENERATE_PDF_ORDER": "Auftrags-PDF erzeugen",
+    "IMPORT_EMPLOYEE_CONTRACTS": "Arbeitsverträge importieren",
+    "IMPORT": "Importieren"
+  },
   "COMMON": {
+    "CUSTOMER_NAME": "Kunde",
+    "YES": "Ja",
+    "NO": "Nein",
+    "SEARCH": "Suchen",
+    "SELECT_CUSTOMER": "Wählen Sie einen Kunden aus",
+    "SELECT_ONE": "Wählen Sie eine",
+    "ANY": "Beliebig",
+    "NO_DATA_AVAILABLE": "Keine Daten verfügbar",
     "LABELS": {
       "LOADING": "Laden",
       "LOADING_PHOTOS": "Lade Bilder",
@@ -149,5 +173,34 @@
     "TEXT_12": "Jährliche Konferenz in den USA mit einem internationalen Programm und der Möglichkeit, Kontakte zu knüpfen, inklusive eines Preisnachlasses für Mitglieder​.",
     "TEXT_13": "Webseiten-Zugriff",
     "TEXT_14": "Mitglieder haben Zugriff auf umfassende Informationen rund um Informix auf der IUG-Website und können die Internationale IUG-Webseite nutzen​."
+  },
+  "TITLE": {
+    "TABLE_TITLE": {
+      "TITLE": "Titel",
+      "NO_RESULTS_FOUND": "Keine Ergebnisse gefunden."
+    },
+    "LABEL": {
+      "EDIT_TITLE": "Titel bearbeiten",
+      "TITLE_LABEL": "Titel"
+    },
+    "ERROR": {
+      "TITLE_LABEL_REQUIRED": "Titel ist erforderlich"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Titel löschen",
+      "CONFIRM_QUESTION": "Sind Sie sicher, dass Sie den Titel löschen möchten: "
+    },
+    "FORM": {
+      "TITLE_FORM": "Neuer Titel",
+      "NEW_TITLE": "Titel"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ERFOLG",
+      "ERROR": "FEHLER",
+      "UPDATE_SUCCESS": "Erfolgreich aktualisiert",
+      "UPDATE_FAILED": "Update fehlgeschlagen",
+      "CONFLICT": "Versionskonflikt",
+      "REFRESH_REQUIRED": "Bitte aktualisieren Sie die Seite, um die neuesten Daten zu sehen"
+    }
   }
 }

@@ -5,7 +5,31 @@
     "SIGN_IN": "Sign in",
     "SIGN_UP": "Sign up"
   },
+  "TABLES": {
+    "PAGINATION_LABEL": "Showing {first} to {last} of {totalRecords} entries",
+    "NO_RESULTS_FOUND": "No results found"
+  },
+  "BUTTONS": {
+    "NEW": "New",
+    "SAVE": "Save",
+    "DELETE": "Delete",
+    "CANCEL": "Cancel",
+    "NEW_YEAR": "New Year",
+    "GENERATE_PDF_SUBCONTRACT": "Generate PDF",
+    "IMPORT_INVOICES": "Import Invoices",
+    "GENERATE_PDF_ORDER": "Generate PDF",
+    "IMPORT_EMPLOYEE_CONTRACTS": "Import Employee Contracts",
+    "IMPORT": "Import"
+  },
   "COMMON": {
+    "CUSTOMER_NAME": "Customer",
+    "YES": "Yes",
+    "NO": "No",
+    "SEARCH": "Search",
+    "SELECT_CUSTOMER": "Select a Customer",
+    "SELECT_ONE": "Choose One",
+    "ANY": "Any",
+    "NO_DATA_AVAILABLE": "No data available",
     "LABELS": {
       "LOADING": "Loading",
       "LOADING_PHOTOS": "Loading photos",
@@ -149,5 +173,34 @@
     "TEXT_12": "Annual conference in the USA with an international program and networking opportunities, including a member discount.",
     "TEXT_13": "Website access",
     "TEXT_14": "Members have access to comprehensive information about Informix on the IUG website and can use the International IUG website."
+  },
+  "TITLE": {
+    "TABLE_TITLE": {
+      "TITLE": "Title",
+      "NO_RESULTS_FOUND": "No results found."
+    },
+    "LABEL": {
+      "EDIT_TITLE": "Edit Title",
+      "TITLE_LABEL": "Title"
+    },
+    "ERROR": {
+      "TITLE_LABEL_REQUIRED": "Title is required"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Delete Title",
+      "CONFIRM_QUESTION": "Are you sure you want to delete the title "
+    },
+    "FORM": {
+      "TITLE_FORM": "New Title",
+      "NEW_TITLE": "Title"
+    },
+    "MESSAGE": {
+      "SUCCESS": "SUCCESS",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Successfully updated",
+      "UPDATE_FAILED": "Update failed",
+      "CONFLICT": "Version Conflict",
+      "REFRESH_REQUIRED": "The title has been updated by another user. Please refresh to get the latest version."
+    }
   }
 }
