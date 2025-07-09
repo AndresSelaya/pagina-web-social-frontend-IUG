@@ -65,10 +65,10 @@ export class SalutationModalComponent implements OnInit {
     }
 
     this.isSaving = true;
-    const salutationText = this.modalSalutationForm.value.salutation;
+    const salutationLabel = this.modalSalutationForm.value.salutation;
 
     this.subscriptions.add(
-      this.salutationUtils.createNewSalutation(salutationText).subscribe({
+      this.salutationUtils.createNewSalutation(salutationLabel).subscribe({
         next: (newSalutation) => {
           this.messageService.add({
             severity: 'success',

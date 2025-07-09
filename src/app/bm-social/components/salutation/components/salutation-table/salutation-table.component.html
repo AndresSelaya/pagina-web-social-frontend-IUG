@@ -6,6 +6,7 @@
         [tableValues]="salutations()"
         [columns]="salutationDisplayedColumns"
         [dataKeys]="dataKeys"
+        [removeKey]="'id'"
         (onColumnChanges)="onUserSalutationPreferencesChanges($event)"
         (onCreateRegister)="handleTableEvents({ type: 'create' })"
         (onDeleteRegister)="handleTableEvents({ type: 'delete', data: $event })"

@@ -33,18 +33,27 @@ export class SalutationUtils {
 
   /**
    * Creates a new salutation with validation
-   * @param salutationText - Text for the new salutation
+   * @param salutationLabel - Label for the new salutation
    * @param companyId - Company ID (defaults to 1)
+   * @param addressTextId - Address text ID (defaults to 1)
+   * @param letterTextId - Letter text ID (defaults to 1)
    * @returns Observable that emits the created salutation
    */
-  createNewSalutation(salutationText: string, companyId: number = 1): Observable<Salutation> {
-    if (!salutationText?.trim()) {
-      return throwError(() => new Error('Salutation text cannot be empty'));
+  createNewSalutation(
+    salutationLabel: string, 
+    companyId: number = 1,
+    addressTextId: number = 1,
+    letterTextId: number = 1
+  ): Observable<Salutation> {
+    if (!salutationLabel?.trim()) {
+      return throwError(() => new Error('Salutation label cannot be empty'));
     }
 
     const newSalutation: CreateSalutationRequest = {
+      addressTextId,
       companyId,
-      salutationText: salutationText.trim(),
+      letterTextId,
+      salutationLabel: salutationLabel.trim(),
       version: 1
     };
 
@@ -58,13 +67,13 @@ export class SalutationUtils {
 
   /**
    * Checks if a salutation exists (case-insensitive comparison)
-   * @param salutationText - Salutation text to check
+   * @param salutationLabel - Salutation label to check
    * @returns Observable emitting boolean indicating existence
    */
-  salutationExists(salutationText: string): Observable<boolean> {
+  salutationExists(salutationLabel: string): Observable<boolean> {
     return this.salutationService.getAllSalutations().pipe(
       map(salutations => salutations.some(
-        s => s.salutationText.toLowerCase() === salutationText.toLowerCase()
+        s => s.salutationLabel.toLowerCase() === salutationLabel.toLowerCase()
       )),
       catchError(err => {
         console.error('Error checking salutation existence:', err);
@@ -74,12 +83,12 @@ export class SalutationUtils {
   }
 
   /**
-   * Gets all salutations sorted alphabetically by salutationText
+   * Gets all salutations sorted alphabetically by salutationLabel
    * @returns Observable emitting sorted array of salutations
    */
   getSalutationsSortedByName(): Observable<Salutation[]> {
     return this.salutationService.getAllSalutations().pipe(
-      map(salutations => [...salutations].sort((a, b) => a.salutationText.localeCompare(b.salutationText))),
+      map(salutations => [...salutations].sort((a, b) => a.salutationLabel.localeCompare(b.salutationLabel))),
       catchError(err => {
         console.error('Error sorting salutations:', err);
         return throwError(() => new Error('Failed to sort salutations'));
@@ -139,8 +148,10 @@ export class SalutationUtils {
       switchMap((validatedSalutation: Salutation) => {
         const updateRequest: UpdateSalutationRequest = {
           salutationId: validatedSalutation.salutationId,
+          addressTextId: validatedSalutation.addressTextId,
           companyId: validatedSalutation.companyId,
-          salutationText: validatedSalutation.salutationText,
+          letterTextId: validatedSalutation.letterTextId,
+          salutationLabel: validatedSalutation.salutationLabel,
           version: validatedSalutation.version
         };
         return this.salutationService.updateSalutation(updateRequest);

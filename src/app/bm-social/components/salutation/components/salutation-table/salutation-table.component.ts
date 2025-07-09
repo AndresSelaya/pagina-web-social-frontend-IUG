@@ -28,7 +28,7 @@ export class SalutationTableComponent {
 
       this.salutationUtils.getSalutationById(this.selectedSalutation!).subscribe({
         next: (salutation) => {
-          this.salutationName = salutation?.salutationText ?? '';
+          this.salutationName = salutation?.salutationLabel ?? '';
         },
         error: (err) => {
           console.error('No se pudo obtener el saludo:', err);
@@ -42,7 +42,7 @@ export class SalutationTableComponent {
   readonly salutations = computed(() => {
     return this.salutationService.salutations().map(salutation => ({
       id: salutation.salutationId,
-      title: salutation.salutationText,
+      title: salutation.salutationLabel,
     }));
   });
 

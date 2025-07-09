@@ -57,7 +57,7 @@ export class SalutationFormComponent {
   }
 
   private loadSalutationData(salutation: Salutation): void {
-    this.editSalutationForm.patchValue({ salutation: salutation.salutationText });
+    this.editSalutationForm.patchValue({ salutation: salutation.salutationLabel });
   }
 
   clearForm(): void {
@@ -75,7 +75,7 @@ export class SalutationFormComponent {
     this.isSaving = true;
     const updatedSalutation: Salutation = {
       ...this.currentSalutation,
-      salutationText: this.editSalutationForm.value.salutation
+      salutationLabel: this.editSalutationForm.value.salutation
     };
 
     this.subscriptions.add(

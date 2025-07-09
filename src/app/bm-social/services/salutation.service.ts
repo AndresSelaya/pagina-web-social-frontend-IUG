@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class SalutationService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.BACK_END_HOST_DEV}/api/salutations`;
+  private readonly apiUrl = `${environment.BACK_END_HOST_IUG}/salutations`;
 
   private readonly httpOptions = {
     headers: new HttpHeaders({
