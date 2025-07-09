@@ -1,7 +1,7 @@
 import { EnvironmentInjector, Injectable, inject } from '@angular/core';
 import { Observable, catchError, filter, map, take, throwError, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { Title } from '../../../interfaces/title';
+import { Title, CreateTitleRequest, UpdateTitleRequest } from '../../../interfaces/title';
 import { TitleService } from '../../../services/title.service';
 
 /**
@@ -33,34 +33,38 @@ export class TitleUtils {
 
   /**
    * Creates a new title with validation
-   * @param nameTitle - Name for the new title
-   * @returns Observable that completes when title is created
+   * @param titleText - Text for the new title
+   * @param companyId - Company ID (defaults to 1)
+   * @returns Observable that emits the created title
    */
-  createNewTitle(nameTitle: string): Observable<void> {
-    if (!nameTitle?.trim()) {
-      return throwError(() => new Error('Title name cannot be empty'));
+  createNewTitle(titleText: string, companyId: number = 1): Observable<Title> {
+    if (!titleText?.trim()) {
+      return throwError(() => new Error('Title text cannot be empty'));
     }
 
-    return new Observable<void>(subscriber => {
-      this.titleService.addTitle({
-        name: nameTitle.trim()
-      });
+    const newTitle: CreateTitleRequest = {
+      companyId,
+      titleText: titleText.trim(),
+      version: 1
+    };
 
-      // Complete the observable after operation
-      subscriber.next();
-      subscriber.complete();
-    });
+    return this.titleService.addTitle(newTitle).pipe(
+      catchError(err => {
+        console.error('Error creating title:', err);
+        return throwError(() => new Error('Failed to create title'));
+      })
+    );
   }
 
   /**
    * Checks if a title exists (case-insensitive comparison)
-   * @param name - Name to check
+   * @param titleText - Title text to check
    * @returns Observable emitting boolean indicating existence
    */
-  titleExists(name: string): Observable<boolean> {
+  titleExists(titleText: string): Observable<boolean> {
     return this.titleService.getAllTitles().pipe(
       map(titles => titles.some(
-        t => t.name.toLowerCase() === name.toLowerCase()
+        t => t.titleText.toLowerCase() === titleText.toLowerCase()
       )),
       catchError(err => {
         console.error('Error checking title existence:', err);
@@ -70,12 +74,12 @@ export class TitleUtils {
   }
 
   /**
-   * Gets all titles sorted alphabetically by name
+   * Gets all titles sorted alphabetically by titleText
    * @returns Observable emitting sorted array of titles
    */
   getTitlesSortedByName(): Observable<Title[]> {
     return this.titleService.getAllTitles().pipe(
-      map(titles => [...titles].sort((a, b) => a.name.localeCompare(b.name))),
+      map(titles => [...titles].sort((a, b) => a.titleText.localeCompare(b.titleText))),
       catchError(err => {
         console.error('Error sorting titles:', err);
         return throwError(() => new Error('Failed to sort titles'));
@@ -96,47 +100,51 @@ export class TitleUtils {
   }
 
   /**
- * Deletes a title by ID and updates the internal titles signal.
- * @param id - ID of the title to delete
- * @returns Observable that completes when the deletion is done
- */
+   * Deletes a title by ID
+   * @param id - ID of the title to delete
+   * @returns Observable that completes when the deletion is done
+   */
   deleteTitle(id: number): Observable<void> {
-    return new Observable(observer => {
-      this.titleService.deleteTitle(id);
+    if (!id || id <= 0) {
+      return throwError(() => new Error('Invalid title ID'));
+    }
 
-      setTimeout(() => {
-        if (!this.titleService.error()) {
-          observer.next();
-          observer.complete();
-        } else {
-          observer.error(this.titleService.error());
-        }
-      }, 100);
-    });
+    return this.titleService.deleteTitle(id).pipe(
+      catchError(err => {
+        console.error('Error deleting title:', err);
+        return throwError(() => new Error('Failed to delete title'));
+      })
+    );
   }
 
   /**
- * Updates a title by ID and updates the internal titles signal.
- * @param id - ID of the title to update
- * @returns Observable that completes when the update is done
- */
+   * Updates a title
+   * @param title - Title data to update
+   * @returns Observable that emits the updated title
+   */
   updateTitle(title: Title): Observable<Title> {
-    if (!title?.id) {
+    if (!title?.titleId) {
       return throwError(() => new Error('Invalid title data'));
     }
 
-    return this.titleService.getTitleById(title.id).pipe(
+    return this.titleService.getTitleById(title.titleId).pipe(
       take(1),
       map((currentTitle) => {
         if (!currentTitle) {
           throw new Error('Title not found');
         }
-        // if (currentTitle.version !== title.version) {
-        //   throw new Error('Version conflict: Title has been updated by another user');
-        // }
+        // Version conflict check can be added here if needed
         return title;
       }),
-      switchMap((validatedTitle: Title) => this.titleService.updateTitle(validatedTitle)), 
+      switchMap((validatedTitle: Title) => {
+        const updateRequest: UpdateTitleRequest = {
+          titleId: validatedTitle.titleId,
+          companyId: validatedTitle.companyId,
+          titleText: validatedTitle.titleText,
+          version: validatedTitle.version
+        };
+        return this.titleService.updateTitle(updateRequest);
+      }),
       catchError((err) => {
         console.error('Error updating title:', err);
         return throwError(() => err);
@@ -146,7 +154,7 @@ export class TitleUtils {
 
   private waitForUpdatedTitle(id: number, observer: any) {
     return toObservable(this.titleService.titles).pipe(
-      map(titles => titles.find(t => t.id === id)),
+      map(titles => titles.find(t => t.titleId === id)),
       filter(updated => !!updated),
       take(1)
     ).subscribe({

@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Title } from '../interfaces/title';
+import { Title, CreateTitleRequest, UpdateTitleRequest } from '../interfaces/title';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class TitleService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.BACK_END_HOST_DEV}/titles`;
+  private readonly apiUrl = `${environment. BACK_END_HOST_IUG}/titles`;
 
   private readonly httpOptions = {
     headers: new HttpHeaders({
@@ -51,8 +51,8 @@ export class TitleService {
   }
 
   // CREATE
-  addTitle(title: Omit<Title, 'id' | 'createdAt' | 'updatedAt' | 'version'>): void {
-    this.http.post<Title>(this.apiUrl, title, this.httpOptions).pipe(
+  addTitle(title: CreateTitleRequest): Observable<Title> {
+    return this.http.post<Title>(this.apiUrl, title, this.httpOptions).pipe(
       tap({
         next: (newTitle) => {
           this._titles.update(titles => [...titles, newTitle]);
@@ -63,17 +63,16 @@ export class TitleService {
           console.error('Error adding title:', err);
         }
       })
-    ).subscribe();
+    );
   }
 
   // UPDATE
-  updateTitle(updatedTitle: Title): Observable<Title> {
-    const url = `${this.apiUrl}/${updatedTitle.id}`;
-    return this.http.put<Title>(url, updatedTitle, this.httpOptions).pipe(
+  updateTitle(updatedTitle: UpdateTitleRequest): Observable<Title> {
+    return this.http.put<Title>(this.apiUrl, updatedTitle, this.httpOptions).pipe(
       tap({
         next: (res) => {
           this._titles.update(titles =>
-            titles.map(t => t.id === res.id ? res : t)
+            titles.map(t => t.titleId === res.titleId ? res : t)
           );
           this._error.set(null);
         },
@@ -86,13 +85,13 @@ export class TitleService {
   }
   
   // DELETE
-  deleteTitle(id: number): void {
+  deleteTitle(id: number): Observable<void> {
     const url = `${this.apiUrl}/${id}`;
-    this.http.delete<void>(url, this.httpOptions).pipe(
+    return this.http.delete<void>(url, this.httpOptions).pipe(
       tap({
         next: () => {
           this._titles.update(titles =>
-            titles.filter(t => t.id !== id)
+            titles.filter(t => t.titleId !== id)
           );
           this._error.set(null);
         },
@@ -101,7 +100,7 @@ export class TitleService {
           console.error('Error deleting title:', err);
         }
       })
-    ).subscribe();
+    );
   }  
 
   // READ
@@ -118,7 +117,7 @@ export class TitleService {
   
   getTitleById(id: number): Observable<Title | undefined> {
     return this.getAllTitles().pipe(
-      map(titles => titles.find(t => t.id === id))
+      map(titles => titles.find(t => t.titleId === id))
     );
   }  
 
