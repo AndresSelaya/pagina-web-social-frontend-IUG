@@ -1,0 +1,71 @@
+<div [ngSwitch]="modalType">
+  <!-- Create Modal -->
+  <div *ngSwitchCase="'create'">
+    <form [formGroup]="modalSalutationForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label for="salutation" class="field-label">{{ 'SALUTATION.LABEL.SALUTATION_LABEL' | translate }}</label>
+        <input 
+          pInputText 
+          type="text" 
+          id="salutation" 
+          formControlName="salutation" 
+          class="form-input"
+          [ngClass]="{'error': modalSalutationForm.get('salutation')?.invalid && modalSalutationForm.get('salutation')?.touched}" 
+          autocomplete="off"
+          #salutationInput
+        />
+        <small 
+          class="error-message" 
+          *ngIf="modalSalutationForm.get('salutation')?.invalid && modalSalutationForm.get('salutation')?.touched && modalSalutationForm.get('salutation')!.hasError('required')">
+          {{ 'SALUTATION.ERROR.SALUTATION_LABEL_REQUIRED' | translate }}
+        </small>
+      </div>
+      
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="btn-save"
+          [disabled]="modalSalutationForm.invalid || isSaving">
+          <i class="pi pi-check"></i>
+          {{ 'BUTTONS.SAVE' | translate }}
+        </button>
+        <button 
+          type="button" 
+          class="btn-cancel"
+          (click)="closeModal()">
+          <i class="pi pi-times"></i>
+          {{ 'BUTTONS.CANCEL' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Delete Modal -->
+  <div *ngSwitchCase="'delete'">
+    <div class="delete-content">
+      <p class="delete-message">
+        {{ 'SALUTATION.DELETE.MESSAGE' | translate }}
+        <strong>"{{ salutationName }}"</strong>?
+      </p>
+      
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-delete"
+          [disabled]="isSaving"
+          (click)="onSubmit()">
+          <i class="pi pi-trash"></i>
+          {{ 'BUTTONS.DELETE' | translate }}
+        </button>
+        <button 
+          type="button" 
+          class="btn-cancel"
+          (click)="closeModal()">
+          <i class="pi pi-times"></i>
+          {{ 'BUTTONS.CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast />

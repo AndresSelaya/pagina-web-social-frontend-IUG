@@ -202,5 +202,36 @@
       "CONFLICT": "Version Conflict",
       "REFRESH_REQUIRED": "The title has been updated by another user. Please refresh to get the latest version."
     }
+  },
+  "SALUTATION": {
+    "TABLE_SALUTATION": {
+      "SALUTATION": "Salutation",
+      "NO_RESULTS_FOUND": "No results found."
+    },
+    "LABEL": {
+      "EDIT_SALUTATION": "Edit Salutation",
+      "SALUTATION_LABEL": "Salutation"
+    },
+    "ERROR": {
+      "SALUTATION_LABEL_REQUIRED": "Salutation is required"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Confirm deletion",
+      "MESSAGE": "Are you sure you want to delete the salutation"
+    },
+    "FORM": {
+      "SALUTATION_FORM": "New Salutation",
+      "NEW_SALUTATION": "Salutation"
+    },
+    "MESSAGE": {
+      "SUCCESS": "SUCCESS",
+      "ERROR": "ERROR",
+      "CREATE_SUCCESS": "Salutation created successfully",
+      "CREATE_FAILED": "Failed to create salutation",
+      "UPDATE_SUCCESS": "Salutation updated successfully",
+      "UPDATE_FAILED": "Failed to update salutation",
+      "DELETE_SUCCESS": "Salutation deleted successfully",
+      "DELETE_FAILED": "Failed to delete salutation"
+    }
   }
 }

@@ -1,0 +1,16 @@
+@use 'variables' as *;
+
+.container {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.row > div {
+  flex: 1;
+  padding: 0 15px;
+}
