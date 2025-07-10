@@ -1,0 +1,41 @@
+<div class="salutation-form-container">
+    <h3 class="form-title">{{ 'SALUTATION.LABEL.EDIT_SALUTATION' | translate }}</h3>
+    
+    <form [formGroup]="editSalutationForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <label for="salutation" class="field-label">{{ 'SALUTATION.LABEL.SALUTATION_LABEL' | translate }}</label>
+            <input 
+                pInputText 
+                type="text" 
+                id="salutation" 
+                formControlName="salutation" 
+                class="form-input"
+                [ngClass]="{'error': editSalutationForm.get('salutation')?.invalid && editSalutationForm.get('salutation')?.touched}" 
+                autocomplete="off" 
+            />
+            <small 
+                class="error-message" 
+                *ngIf="editSalutationForm.get('salutation')?.invalid && editSalutationForm.get('salutation')?.touched && editSalutationForm.get('salutation')!.hasError('required')">
+                {{ 'SALUTATION.ERROR.SALUTATION_LABEL_REQUIRED' | translate }}
+            </small>
+        </div>
+        
+        <div class="form-actions">
+            <button 
+                type="submit" 
+                class="btn-save"
+                [disabled]="editSalutationForm.invalid || !editSalutationForm.dirty || isSaving">
+                <i class="pi pi-check"></i>
+                {{ 'BUTTONS.SAVE' | translate }}
+            </button>
+            <button 
+                type="button" 
+                class="btn-cancel"
+                (click)="clearForm()">
+                <i class="pi pi-times"></i>
+                {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
+<p-toast />

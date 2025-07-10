@@ -10,8 +10,9 @@ import { BmSocialRoutingModule } from './bm-social-routing.module';
 import { SalutationComponent } from './components/salutation/salutation.component';
 import { TitleFormComponent } from './components/title/components/title-form/title-form.component';
 import { TitleTableComponent } from './components/title/components/title-table/title-table.component';
-import { SalutationFormComponent } from './components/salutation/salutation-form/salutation-form.component';
-import { SalutationTableComponent } from './components/salutation/salutation-table/salutation-table.component';
+import { SalutationFormComponent } from './components/salutation/components/salutation-form/salutation-form.component';
+import { SalutationTableComponent } from './components/salutation/components/salutation-table/salutation-table.component';
+import { SalutationModalComponent } from './components/salutation/components/salutation-modal/salutation-modal.component';
 import { CardModule } from 'primeng/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -33,6 +34,7 @@ import { InputTextModule } from 'primeng/inputtext';
     SalutationFormComponent,
     SalutationTableComponent,
     TitleModalComponent,
+    SalutationModalComponent,
   ],
   imports: [
     CommonModule,

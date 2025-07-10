@@ -197,5 +197,37 @@
       "UPDATE_SUCCESS": "Actualización exitosa",
       "UPDATE_FAILED": "Actualización fallida"
     }
+  },
+  "SALUTATION": {
+    "TABLE_SALUTATION": {
+      "SALUTATION": "Saludo",
+      "NO_RESULTS_FOUND": "No se encontraron resultados."
+    },
+    "LABEL": {
+      "EDIT_SALUTATION": "Editar Saludo",
+      "SALUTATION_LABEL": "Saludo"
+    },
+    "ERROR": {
+      "SALUTATION_LABEL_REQUIRED": "Saludo es requerido"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Confirmar eliminación",
+      "MESSAGE": "¿Estás seguro de que quieres eliminar el saludo",
+      "CONFIRM_QUESTION": "¿Estás seguro de que quieres eliminar el saludo"
+    },
+    "FORM": {
+      "SALUTATION_FORM": "Nuevo Saludo",
+      "NEW_SALUTATION": "Saludo"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ÉXITO",
+      "ERROR": "ERROR",
+      "CREATE_SUCCESS": "Saludo creado exitosamente",
+      "CREATE_FAILED": "Error al crear saludo",
+      "UPDATE_SUCCESS": "Saludo actualizado exitosamente",
+      "UPDATE_FAILED": "Error al actualizar saludo",
+      "DELETE_SUCCESS": "Saludo eliminado exitosamente",
+      "DELETE_FAILED": "Error al eliminar saludo"
+    }
   }
 }

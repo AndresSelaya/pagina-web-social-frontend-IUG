@@ -57,7 +57,7 @@ export class TitleFormComponent {
   }
 
   private loadTitleData(title: Title): void {
-    this.editTitleForm.patchValue({ title: title.name });
+    this.editTitleForm.patchValue({ title: title.titleText });
   }
 
   clearForm(): void {
@@ -75,7 +75,7 @@ export class TitleFormComponent {
     this.isSaving = true;
     const updatedTitle: Title = {
       ...this.currentTitle,
-      name: this.editTitleForm.value.title
+      titleText: this.editTitleForm.value.title
     };
 
     this.subscriptions.add(

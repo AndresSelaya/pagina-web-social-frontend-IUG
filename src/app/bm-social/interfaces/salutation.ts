@@ -1,4 +1,25 @@
 export interface Salutation {
-    id: number;
-    name: string;
+    salutationId: number;
+    addressTextId: number;
+    companyId: number;
+    letterTextId: number;
+    salutationLabel: string;
+    version: number;
+}
+
+export interface CreateSalutationRequest {
+    addressTextId: number;
+    companyId: number;
+    letterTextId: number;
+    salutationLabel: string;
+    version: number;
+}
+
+export interface UpdateSalutationRequest {
+    salutationId: number;
+    addressTextId: number;
+    companyId: number;
+    letterTextId: number;
+    salutationLabel: string;
+    version: number;
 }

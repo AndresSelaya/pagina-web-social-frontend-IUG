@@ -202,5 +202,37 @@
       "CONFLICT": "Versionskonflikt",
       "REFRESH_REQUIRED": "Bitte aktualisieren Sie die Seite, um die neuesten Daten zu sehen"
     }
+  },
+  "SALUTATION": {
+    "TABLE_SALUTATION": {
+      "SALUTATION": "Anrede",
+      "NO_RESULTS_FOUND": "Keine Ergebnisse gefunden."
+    },
+    "LABEL": {
+      "EDIT_SALUTATION": "Anrede bearbeiten",
+      "SALUTATION_LABEL": "Anrede"
+    },
+    "ERROR": {
+      "SALUTATION_LABEL_REQUIRED": "Anrede ist erforderlich"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Löschung bestätigen",
+      "MESSAGE": "Sind Sie sicher, dass Sie die Anrede löschen möchten",
+      "CONFIRM_QUESTION": "Sind Sie sicher, dass Sie die Anrede löschen möchten"
+    },
+    "FORM": {
+      "SALUTATION_FORM": "Neue Anrede",
+      "NEW_SALUTATION": "Anrede"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ERFOLG",
+      "ERROR": "FEHLER",
+      "CREATE_SUCCESS": "Anrede erfolgreich erstellt",
+      "CREATE_FAILED": "Fehler beim Erstellen der Anrede",
+      "UPDATE_SUCCESS": "Anrede erfolgreich aktualisiert",
+      "UPDATE_FAILED": "Fehler beim Aktualisieren der Anrede",
+      "DELETE_SUCCESS": "Anrede erfolgreich gelöscht",
+      "DELETE_FAILED": "Fehler beim Löschen der Anrede"
+    }
   }
 }

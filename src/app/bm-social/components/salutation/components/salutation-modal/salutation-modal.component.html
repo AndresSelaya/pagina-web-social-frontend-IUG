@@ -1,0 +1,48 @@
+<ng-container *ngIf="isCreateMode; else deleteTemplate">
+    <form [formGroup]="modalSalutationForm" (ngSubmit)="onSubmit()">
+        <div class="align-items-center mb-2 mt-4">
+            <div class="create-form flex align-items-center mb-6">
+                <label for="salutation" class="block">
+                    {{ 'SALUTATION.FORM.NEW_SALUTATION' | translate }}
+                </label>
+                <input #salutationInput pInputText type="text" id="salutation" formControlName="salutation" autocomplete="off"
+                    [attr.aria-invalid]="modalSalutationForm.get('salutation')?.invalid"
+                    [attr.aria-describedby]="modalSalutationForm.get('salutation')?.invalid ? 'salutationError' : null"
+                    class="w-full" />
+
+                <small *ngIf="modalSalutationForm.get('salutation')?.invalid && modalSalutationForm.get('salutation')?.touched"
+                    id="salutationError" class="text-red-500 block mt-1">
+                </small>
+            </div>
+
+            <div class="flex justify-content-center gap-2 mt-4">
+                <p-button type="submit" class="save" size="small" [label]="'BUTTONS.SAVE' | translate"
+                    icon="pi pi-check" iconPos="left" [loading]="isSaving"
+                    [disabled]="modalSalutationForm.invalid || isSaving" />
+
+                <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
+                    icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isSaving" />
+            </div>
+        </div>
+    </form>
+</ng-container>
+
+<ng-template #deleteTemplate>
+    <div class="confirmation-content mb-2 mt-4">
+        <p class="mb-4">
+            {{ 'SALUTATION.DELETE.CONFIRM_QUESTION' | translate }}
+            <strong class="stronglock mt-1">"{{ salutationName }}"</strong>?
+        </p>
+
+        <div class="flex justify-content-center gap-2">
+            <p-button type="button" class="delete" size="small" [label]="'BUTTONS.DELETE' | translate"
+                icon="pi pi-trash" iconPos="left" (onClick)="onDeleteConfirm()" severity="danger" [loading]="isSaving"
+                [disabled]="isSaving" />
+
+            <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
+                icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isSaving" />
+
+        </div>
+    </div>
+</ng-template>
+<p-toast />
