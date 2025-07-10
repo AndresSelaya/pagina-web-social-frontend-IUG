@@ -1,47 +1,64 @@
 <ng-container *ngIf="isCreateMode; else deleteTemplate">
     <form [formGroup]="createTitleForm" (ngSubmit)="onSubmit()">
-        <div class="align-items-center mb-2 mt-4">
-            <div class="create-form flex align-items-center mb-6">
-                <label for="titleName" class="block">
-                    {{ 'TITLE.FORM.NEW_TITLE' | translate }}
-                </label>
-                <input #titleInput pInputText type="text" id="titleName" formControlName="name" autocomplete="off"
-                    [attr.aria-invalid]="createTitleForm.get('name')?.invalid"
-                    [attr.aria-describedby]="createTitleForm.get('name')?.invalid ? 'titleError' : null"
-                    class="w-full" />
+        <div class="align-items-center m-4">
+            <div class="create-form mb-3"> 
+                <label for="titleName" >{{ 'TITLE.FORM.NEW_TITLE' | translate }}</label>
+                <input #titleInput 
+                    pInputText 
+                    type="text" 
+                    id="titleName" 
+                    formControlName="name" 
+                    [ngClass]="{'error': createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched}" 
+                    autocomplete="off"/>
 
-                <small *ngIf="createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched"
-                    id="titleError" class="text-red-500 block mt-1">
+                <small class="error-message" 
+                *ngIf="createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched && createTitleForm.get('name')!.hasError('required')">
+                {{ 'TITLE.ERROR.TITLE_LABEL_REQUIRED' | translate }}
                 </small>
             </div>
 
-            <div class="flex justify-content-center gap-2 mt-4">
-                <p-button type="submit" class="save" size="small" [label]="'BUTTONS.SAVE' | translate"
-                    icon="pi pi-check" iconPos="left" [loading]="isLoading"
-                    [disabled]="createTitleForm.invalid || isLoading" />
-
-                <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
-                    icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isLoading" />
+            <div class="form-actions mt-3">
+                <button 
+                    type="submit" 
+                    class="btn-save"
+                    [disabled]="createTitleForm.invalid || isLoading">
+                    <i class="bi bi-check-lg"></i>
+                    {{ 'BUTTONS.SAVE' | translate }}
+                </button>
+                <button 
+                    type="button" 
+                    class="btn-cancel"
+                    (click)="closeModal()">
+                    <i class="bi bi-x-lg"></i>
+                    {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
             </div>
         </div>
     </form>
 </ng-container>
 
 <ng-template #deleteTemplate>
-    <div class="confirmation-content mb-2 mt-4">
+    <div class="confirmation-content m-3">
         <p class="mb-4">
             {{ 'TITLE.DELETE.CONFIRM_QUESTION' | translate }}
             <strong class="stronglock mt-1">"{{ titleName }}"</strong>?
         </p>
 
-        <div class="flex justify-content-center gap-2">
-            <p-button type="button" class="delete" size="small" [label]="'BUTTONS.DELETE' | translate"
-                icon="pi pi-trash" iconPos="left" (onClick)="onDeleteConfirm()" severity="danger" [loading]="isLoading"
-                [disabled]="isLoading" />
-
-            <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
-                icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isLoading" />
-
+        <div class="form-actions">
+            <button 
+                type="button"
+                class="btn-delete"
+                (click)="onDeleteConfirm()">
+                <i class="bi bi-trash"></i>
+                {{ 'BUTTONS.SAVE' | translate }}
+            </button>
+            <button 
+                type="button" 
+                class="btn-cancel"
+                (click)="closeModal()">
+                <i class="bi bi-x-lg"></i>
+                {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
         </div>
     </div>
 </ng-template>
