@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+.title-form {
+    label {
+        width: 120px;
+
+    }
+
+    .input-message{
+        position: relative;
+        input {
+            width: 250px;
+        }
+        p-message{
+            position: absolute;
+            bottom: -20px;
+            left: 0px;
+        }
+    }
+}

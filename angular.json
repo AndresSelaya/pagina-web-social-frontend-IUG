@@ -12,6 +12,7 @@
         },
         "@schematics/angular:directive": {
           "standalone": false
+          
         },
         "@schematics/angular:pipe": {
           "standalone": false
@@ -46,7 +47,10 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            }
           },
           "configurations": {
             "production": {

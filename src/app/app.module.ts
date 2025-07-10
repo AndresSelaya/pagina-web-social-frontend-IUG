@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BmSocialModule } from './bm-social/bm-social.module';
+import { SharedModule } from './shared/shared.module';
 
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './authentication/http-interceptors/auth-interceptor';
@@ -82,6 +84,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'de',
     }),
+    BmSocialModule,
+    SharedModule,
     FormsModule,
     ListboxModule
 ],

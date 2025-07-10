@@ -1,0 +1,67 @@
+@use "variables" as *;
+
+.layout {
+
+  .layout-content {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 82px);
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .sidebar {
+    margin-top: 0;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 1rem;
+    min-width: 0;
+    transition: margin-left 0.3s;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    overflow-y: auto; // Solo esta sección podrá hacer scroll
+    max-height: 100%; // Se asegura de respetar los límites
+  }
+}
+
+// Add these new styles
+:host ::ng-deep {
+  .custom-sidebar {
+    .p-sidebar-header {
+      padding: 0;
+    }
+
+    .custom-sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: $primary-light;
+
+      span {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      button {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.close-button {
+  background-color: $primary-dark;
+  color: $primary-dark;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}

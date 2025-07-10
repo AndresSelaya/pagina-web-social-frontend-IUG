@@ -1,0 +1,88 @@
+@use "variables" as *;
+
+p-button {
+  color: $primary-light;
+}
+
+.thead {
+  background: $primary-color;
+  color: #fff;
+  min-width: 1.25rem;
+
+  &:hover {
+    background: $accent-color;
+    color: $primary-dark;
+  }
+}
+
+.thead-bg-blue {
+  background: $primary-color;
+}
+
+.thead-input-id {
+  min-width: 4.4rem;
+  width: 100%;
+}
+
+.thead-input-width {
+  width: 100%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.nowrap-row {
+  cursor: zoom-in;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+}
+
+:host ::ng-deep {
+  p-columnfilter {
+    button {
+      background-color: unset !important;
+      border: none !important;
+    }
+  }
+
+  p-columnfilter > div > p-columnfilterformelement {
+    width: 100%;
+  }
+
+  .p-inputtext {
+    min-width: 130px !important;
+    width: 100% !important;
+  }
+
+    .p-datatable-resizable-table > .p-datatable-thead > tr > th.p-datatable-resizable-column:not(.p-datatable-frozen-column) {
+        width: 100% !important;
+    }
+
+
+    thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue {
+        width:75px !important;
+        max-width: 75px !important;    
+    }
+}
+
+.clickable-title:hover {
+  text-decoration: underline !important;
+  color: #1976d2 !important;
+  cursor: pointer;
+}
+
+.without-margin {
+  display: inline-block !important;
+  margin: 0px !important;
+}
+
+td {
+  user-select: none;
+}
+
+::ng-deep .p-datatable-table-container {
+  padding-bottom: 10px;
+}

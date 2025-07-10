@@ -1,7 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './authentication/components/login/login.component';
 import { ViewAllPostsComponent } from './posts/components/view-all-posts/view-all-posts.component';
 import { PhotosGalleryComponent } from './posts/components/photos-gallery/photos-gallery.component';
 import { VideosGalleryComponent } from './posts/components/videos-gallery/videos-gallery.component';
@@ -15,6 +14,8 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { authGuard } from './authentication/services/auth.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
+import { SidebarComponent } from './bm-social/components/sidebar/sidebar.component';
+import { MainLayoutComponent } from './bm-social/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
         component: VideosGalleryComponent
       }
     ]
+  },
+  {
+    path: 'bm',
+    loadChildren: () => import('./bm-social/bm-social.module').then(m => m.BmSocialModule)
   }
 ];
 
