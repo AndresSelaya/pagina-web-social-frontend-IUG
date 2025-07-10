@@ -212,7 +212,8 @@
     },
     "DELETE": {
       "CONFIRMATION": "Confirmar eliminación",
-      "MESSAGE": "¿Estás seguro de que quieres eliminar el saludo"
+      "MESSAGE": "¿Estás seguro de que quieres eliminar el saludo",
+      "CONFIRM_QUESTION": "¿Estás seguro de que quieres eliminar el saludo"
     },
     "FORM": {
       "SALUTATION_FORM": "Nuevo Saludo",

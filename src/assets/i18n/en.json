@@ -217,7 +217,8 @@
     },
     "DELETE": {
       "CONFIRMATION": "Confirm deletion",
-      "MESSAGE": "Are you sure you want to delete the salutation"
+      "MESSAGE": "Are you sure you want to delete the salutation",
+      "CONFIRM_QUESTION": "Are you sure you want to delete the salutation"
     },
     "FORM": {
       "SALUTATION_FORM": "New Salutation",

@@ -36,11 +36,17 @@ export class SalutationModalComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  get isCreateMode(): boolean {
+    return this.modalType === 'create';
+  }
+
   focusInputIfNeeded(): void {
-    if (this.modalType === 'create' && this.salutationInput) {
+    if (this.isCreateMode && this.salutationInput) {
       setTimeout(() => {
-        this.salutationInput.nativeElement.focus();
-      }, 100);
+        if (this.salutationInput?.nativeElement) {
+          this.salutationInput.nativeElement.focus();
+        }
+      }, 150);
     }
   }
 
@@ -54,7 +60,35 @@ export class SalutationModalComponent implements OnInit {
     if (this.modalType === 'create') {
       this.createSalutation();
     } else if (this.modalType === 'delete') {
-      this.deleteSalutation();
+      this.onDeleteConfirm();
+    }
+  }
+
+  onDeleteConfirm(): void {
+    this.isSaving = true;
+    if (this.salutationToDelete) {
+      this.subscriptions.add(
+        this.salutationUtils.deleteSalutation(this.salutationToDelete).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: this.translate.instant('SALUTATION.MESSAGE.SUCCESS'),
+              detail: this.translate.instant('SALUTATION.MESSAGE.DELETE_SUCCESS')
+            });
+            this.closeModal();
+            this.isSaving = false;
+          },
+          error: (err) => {
+            console.error('Error deleting salutation:', err);
+            this.messageService.add({
+              severity: 'error',
+              summary: this.translate.instant('SALUTATION.MESSAGE.ERROR'),
+              detail: this.translate.instant('SALUTATION.MESSAGE.DELETE_FAILED')
+            });
+            this.isSaving = false;
+          }
+        })
+      );
     }
   }
 
@@ -84,36 +118,6 @@ export class SalutationModalComponent implements OnInit {
             severity: 'error',
             summary: this.translate.instant('SALUTATION.MESSAGE.ERROR'),
             detail: this.translate.instant('SALUTATION.MESSAGE.CREATE_FAILED')
-          });
-          this.isSaving = false;
-        }
-      })
-    );
-  }
-
-  private deleteSalutation(): void {
-    if (!this.salutationToDelete || this.isSaving) {
-      return;
-    }
-
-    this.isSaving = true;
-    this.subscriptions.add(
-      this.salutationUtils.deleteSalutation(this.salutationToDelete).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: this.translate.instant('SALUTATION.MESSAGE.SUCCESS'),
-            detail: this.translate.instant('SALUTATION.MESSAGE.DELETE_SUCCESS')
-          });
-          this.closeModal();
-          this.isSaving = false;
-        },
-        error: (err) => {
-          console.error('Error deleting salutation:', err);
-          this.messageService.add({
-            severity: 'error',
-            summary: this.translate.instant('SALUTATION.MESSAGE.ERROR'),
-            detail: this.translate.instant('SALUTATION.MESSAGE.DELETE_FAILED')
           });
           this.isSaving = false;
         }
