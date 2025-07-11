@@ -39,24 +39,103 @@ body {
 	font-size: 14px;
 }
 
-div.p-toast.p-component {
-    .p-toast-message-content {
-		  padding: 10px 5px 10px 0;
+.btn-delete {
+  background-color: #ff0000c1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.15s ease-in-out;
+  
+  &:hover:not(:disabled) {
+    background-color: #b30000e7;
+  }
+  
+  i {
+    font-size: 14px;
+  }
+}
 
-        .p-toast-message-icon {
-			      display: flex;
-            margin: 5px 10px 0 !important;
-
-            .p-icon {
-              width: 1.5rem !important;
-              height: 1.5rem !important;
-            }
-        }
-
-        .p-toast-icon-close {
-          border-radius: 50%;
-        }
+.btn-save {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.15s ease-in-out;
+  
+  &:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  
+  i {
+    font-size: 14px;
+  }
+}
+        
+.btn-cancel {
+    background-color: transparent;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease-in-out;
+    
+    &:hover {
+        background-color: #6c757d;
+        color: white;
     }
+    
+    i {
+      font-size: 14px;
+    }
+}
+
+div.p-toast.p-component {
+  .p-toast-message-content {
+    padding: 10px 5px 10px 0;
+
+    .p-toast-message-icon {
+      display: flex;
+      margin: 5px 10px 0 !important;
+
+      .p-icon {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+      }
+    }
+
+    .p-toast-icon-close {
+      border-radius: 50%;
+    }
+  }
 }
 
 // Popup sobre imagenes de usuarios
@@ -94,24 +173,12 @@ div.p-toast.p-component {
 	border-radius: 3px;
 }
 
-.p-multiselect-trigger-icon.bi.bi-eye {
-	color: #fff !important;
-}
-
 //Button  +New
 button.p-ripple.p-button.p-component {
   height: 27px;
   background-color: $primary-color;
   border: $primary-color;
 }
-
-//Cancel button
-.cancel button.p-ripple.p-button {
-  background-color: #fff ;
-  color: $primary-color;
-  border: 1px solid $primary-color;
-}
-
 
 input,
 .p-select {
@@ -129,27 +196,12 @@ input,
   }
 }
 
-.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
-  background-color: #34495e38 !important;
-}
-
 td,
 th {
   padding: 5px 16px !important;
   font-size: 14px;
   margin-left: 15px !important;
-}
-
-// //Styles btns edit delete
-.p-button-rounded {
-  height: 1.5rem !important;
-  width: 1.5rem !important;
-}
-
-.w-13em
-  .p-datepicker:has(.p-datepicker-input-icon-container)
-  .p-datepicker-input {
-  width: 15em !important;
+  border: 2px white solid;
 }
 
 .p-datatable-thead > tr > th.p-datatable-column-sorted {
@@ -280,10 +332,6 @@ p-multiselect.p-component.p-inputwrapper.p-multiselect {
   }
 }
 
-#pn_id_1-table{
-  width: 100% !important;
-}
-
 /*Styles password*/
 .user-form .p-password, .p-password-input {
   width: 100% !important;
@@ -309,8 +357,8 @@ p-password {
   text-align: center;
   padding: 0.4rem 1rem !important; 
   min-height: unset !important;
-  border-top-left-radius: 10px !important;
-  border-top-right-radius: 10px !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
 }
 
 .p-dialog-title {
@@ -320,10 +368,8 @@ p-password {
   text-align: center;
 }
 
-.p-dialog-close-button .p-icon,
-.p-dialog-close-button svg {
+.p-dialog-header-close-icon  {
   color: #fff !important;
-  fill: #fff !important;
 }
 
 .p-dialog-close-button:hover,
@@ -341,5 +387,20 @@ p-password {
 thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue{
   width: 75px !important;
   max-width: 75px !important;
-  min-width: 75px !important;
+}
+
+.odd-row {
+  background-color: #ffffff !important;
+}
+
+.even-row {
+  background-color: #34495e38 !important;
+}
+
+.p-column-filter-row-items {
+  padding: 0;
+  margin: 0.5rem 0;
+  .p-column-filter-row-item {
+    padding: 8px;
+  }
 }

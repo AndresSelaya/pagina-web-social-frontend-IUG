@@ -8,6 +8,7 @@ p-button {
   background: $primary-color;
   color: #fff;
   min-width: 1.25rem;
+  border-radius: 0 5px 0 0;
 
   &:hover {
     background: $accent-color;
@@ -41,6 +42,72 @@ p-button {
 }
 
 :host ::ng-deep {
+
+  // Paginator bottom table
+  .p-paginator-bottom.p-paginator.p-component{
+
+    // Label
+    .p-paginator-current{
+      font-size: 14px !important;
+    }
+
+    // Arrows
+    .p-element.p-paginator-element.p-paginator-first,
+    .p-element.p-paginator-element.p-paginator-prev,
+    .p-element.p-paginator-element.p-paginator-next,
+    .p-element.p-paginator-element.p-paginator-last {
+      min-width: 2rem;
+    }
+    
+    // Current page (number)
+    .p-element.p-paginator-page.p-paginator-element{
+      min-width: 2rem !important;
+      height: 2rem !important;
+      border-radius: 50%;
+    }
+
+    // Options select 15 30 50
+    .p-paginator-rpp-options.p-dropdown{
+      height: 2rem !important;
+  
+      .p-dropdown-label.p-inputtext{
+        display: flex;
+        align-items: center;
+        margin: 0.3rem;
+      }
+  
+      .p-dropdown-trigger{
+        width: 2rem !important;
+      }
+  
+      .p-dropdown-items{
+        padding: 0 !important;
+        margin: 0.2rem 0 !important;
+  
+        .p-dropdown-item {
+          padding: 2px !important;
+          margin: 5px 0 !important;
+        }
+        .p-dropdown-item > span {
+          margin-left: 5px;
+        }
+      }
+    }
+
+  }
+
+  // Location botton New
+  .p-toolbar.p-component {
+    padding: 0.5rem !important;
+  }
+
+  .p-datatable-thead > tr > th:nth-child(1),
+  .p-datatable-tbody > tr > td:nth-child(1),
+  .p-datatable-tfoot > tr > td:nth-child(1){
+    width: 77px !important;
+    max-width: 77px !important;
+  }
+
   p-columnfilter {
     button {
       background-color: unset !important;
@@ -53,19 +120,40 @@ p-button {
   }
 
   .p-inputtext {
-    min-width: 130px !important;
     width: 100% !important;
   }
 
-    .p-datatable-resizable-table > .p-datatable-thead > tr > th.p-datatable-resizable-column:not(.p-datatable-frozen-column) {
-        width: 100% !important;
-    }
+  .p-datatable-resizable-table > .p-datatable-thead > tr > th.p-datatable-resizable-column:not(.p-datatable-frozen-column) {
+      width: 100% !important;
+  }
 
 
-    thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue {
-        width:75px !important;
-        max-width: 75px !important;    
-    }
+  thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue {
+      width:75px !important;
+      max-width: 75px !important;    
+  }
+  
+  // Eye and arrow sort of table
+  .p-multiselect-trigger-icon.bi.bi-eye,
+  .p-icon.p-sortable-column-icon {
+    color: #fff !important;
+  }
+
+  // Message No results found
+  .p-message-icon {
+    margin: auto 7px;
+    display: flex;
+    align-items: center;
+    height: 36px;
+  }
+}
+
+
+// Button option - edit delete
+.button-option {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 }
 
 .clickable-title:hover {

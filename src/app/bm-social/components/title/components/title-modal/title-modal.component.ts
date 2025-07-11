@@ -24,7 +24,7 @@ export class TitleModalComponent {
   readonly createTitleForm = new FormGroup({
     name: new FormControl('', [
       Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(1),
       Validators.maxLength(50)
     ])
   });
