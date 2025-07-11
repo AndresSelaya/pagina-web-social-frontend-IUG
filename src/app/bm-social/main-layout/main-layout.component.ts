@@ -28,7 +28,8 @@ export class MainLayoutComponent {
   {label: string, icon: string, command: string, absoluteRoute: string}[] = [
     { label: 'Title', icon: 'bi bi-person-vcard', command: 'dashboard', absoluteRoute: 'title' },
     { label: 'Salutation', icon: 'bi bi-person-raised-hand', command: 'customers', absoluteRoute: 'salutation' },
-
+    { label: 'Countries', icon: 'bi bi-flag-fill', command: 'customers', absoluteRoute: 'countries' },
+    { label: 'Person types', icon: 'bi bi-person-fill', command: 'customers', absoluteRoute: 'person-types' },
   ];
   
   private readonly sidebarItemsConfig: Record<

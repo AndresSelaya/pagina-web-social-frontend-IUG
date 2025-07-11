@@ -13,8 +13,7 @@
                 [ngClass]="{'error': editSalutationForm.get('salutation')?.invalid && editSalutationForm.get('salutation')?.touched}" 
                 autocomplete="off" 
             />
-            <small 
-                class="error-message" 
+            <small class="error-message"
                 *ngIf="editSalutationForm.get('salutation')?.invalid && editSalutationForm.get('salutation')?.touched && editSalutationForm.get('salutation')!.hasError('required')">
                 {{ 'SALUTATION.ERROR.SALUTATION_LABEL_REQUIRED' | translate }}
             </small>
@@ -25,14 +24,14 @@
                 type="submit" 
                 class="bttn btn-save"
                 [disabled]="editSalutationForm.invalid || !editSalutationForm.dirty || isSaving">
-                <i class="pi pi-check"></i>
+                <i class="bi bi-check-lg"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
                 class="bttn btn-cancel"
                 (click)="clearForm()">
-                <i class="pi pi-times"></i>
+                <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}
             </button>
         </div>

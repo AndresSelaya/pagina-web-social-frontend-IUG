@@ -234,5 +234,43 @@
       "DELETE_SUCCESS": "Anrede erfolgreich gelöscht",
       "DELETE_FAILED": "Fehler beim Löschen der Anrede"
     }
+  },
+  "COUNTRIES": {
+    "HEADER": {
+      "EDIT_COUNTRY": "Land bearbeiten"
+    },
+    "LABEL": {
+      "NAME": "Land",
+      "ABBREVIATION": "Kürzel",
+      "IS_STANDARD": "Ist Standard?"
+    },
+    "TABLE": {
+      "NAME": "Land",
+      "ABBREVIATION": "Kürzel",
+      "IS_STANDARD": "Standard?",
+      "COLUMNS_SELECTED": "{0} Spalten ausgewählt",
+      "CHOOSE_COLUMNS": "Spalten auswählen",
+      "NO_DATA": "Keine Länder gefunden.",
+      "PAGE_INFO": "{first} - {last} von {totalRecords} Einträgen"
+    },
+    "MESSAGE": {
+      "NO_COUNTRIES": "Keine Länder vorhanden.",
+      "SUCCESS": "ERFOLG",
+      "ERROR": "FEHLER",
+      "UPDATE_SUCCESS": "Erfolgreich aktualisiert",
+      "UPDATE_FAILED": "Update fehlgeschlagen"
+    },
+    "MODAL_CREATE": {
+      "CREATE_FORM": "Neues Land",
+      "NEW_COUNTRY": "Neuer Länder"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Land löschen",
+      "CONFIRM_QUESTION": "Sind Sie sicher, dass Sie den Land löschen möchten: "
+    },
+    "ERROR": {
+      "COUNTRY_NAME_REQUIRED": "Land erforderlich",
+      "ABBREVIATION_REQUIRED": "Kürzel erforderlich"
+    }
   }
 }
