@@ -39,7 +39,8 @@ body {
 	font-size: 14px;
 }
 
-.btn {
+// General button
+.bttn {
   color: white;
   border-radius: 4px;
   padding: 8px 16px;
@@ -55,6 +56,7 @@ body {
   }
 }
 
+// Button delete
 .btn-delete {
   background-color: #ff0000c1;
   border: none;
@@ -66,6 +68,7 @@ body {
   }
 }
 
+// Button save
 .btn-save {
   background-color: #007bff;
   border: none;
@@ -84,7 +87,8 @@ body {
   }
   
 }
-        
+
+// Button cancel
 .btn-cancel {
   background-color: transparent;
   color: #6c757d;
@@ -95,6 +99,112 @@ body {
     background-color: #6c757d;
     color: white;
   } 
+}
+
+// Buttons forms
+.form-actions{
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+// FORMS create - delete (modal) & edit
+// create (modal in New)
+.create-form {
+
+  .form-field {
+    display: inline-block;
+    align-items: center;
+    
+    label {
+      width: auto;
+      font-weight: 500;
+      color: #495057;
+      font-size: 15px;
+    }
+  
+    input {
+      margin-left: 1rem;
+      width: 300px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: white;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+      
+      &.error {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+      }
+    }
+  }
+}
+
+// edit form
+.form-edit-container {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+  .form-title {
+    color: #495057;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+    display: inline-block;
+  }
+    
+  .form-field {
+    margin-bottom: 20px;
+      
+    .field-label {
+      display: block;
+      color: #495057;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    .form-input {
+      width: 100%;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: white;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+      
+      &.error {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+      }
+    }
+      
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
 }
 
 div.p-toast.p-component {
@@ -152,18 +262,12 @@ div.p-toast.p-component {
 	border-radius: 3px;
 }
 
-//Button  +New
-button.p-ripple.p-button.p-component {
-  height: 27px;
-  background-color: $primary-color;
-  border: $primary-color;
-}
-
 input,
 .p-select {
   height: 25px;
   font-size: 0.85rem;
   padding: 2.5px 10px;
+  border-radius: 4px;
 }
 
 .p-select-label {
@@ -330,37 +434,35 @@ p-password {
   color: #ffffff !important; 
 }
 
-/* Form modals create and delete */
-.p-dialog-header {
-  background: $primary-color !important;
-  text-align: center;
-  padding: 0.4rem 1rem !important; 
-  min-height: unset !important;
-  border-top-left-radius: 8px !important;
-  border-top-right-radius: 8px !important;
-}
+/* Modal prime ng create and delete */
+.p-dialog.p-component.p-dialog-draggable.p-dialog-resizable {
+  .p-dialog-header {
+    background: $primary-color !important;
+    text-align: center;
+    padding: 0.4rem 1rem !important; 
+    min-height: unset !important;
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    
+    .p-dialog-title {
+      color: #fff !important;
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
 
-.p-dialog-title {
-  color: #fff !important;
-  width: 100%;
-  display: block;
-  text-align: center;
-}
-
-.p-dialog-header-close-icon  {
-  color: #fff !important;
-}
-
-.p-dialog-close-button:hover,
-.p-dialog-close-button:focus {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-.p-dialog {
-  border: none !important;
-  box-shadow: none !important; 
-  border-radius: 11px !important; 
+    .p-dialog-header-icon.p-dialog-header-close{
+      border-radius: 50%;
+      &:hover {
+        background-color: gray;
+      }
+      .p-dialog-header-close-icon  {
+        color: #fff !important;
+      }
+    }
+  }
+  
+  
 }
 
 thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue{

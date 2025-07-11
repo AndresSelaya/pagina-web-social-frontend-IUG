@@ -140,11 +140,20 @@ p-button {
   }
 
   // Message No results found
-  .p-message-icon {
-    margin: auto 7px;
-    display: flex;
-    align-items: center;
-    height: 36px;
+  .p-messages {
+
+    // Container icon
+    .p-message-icon {
+      margin: auto 7px;
+      display: flex;
+      align-items: center;
+      height: 36px;
+  
+      .p-icon {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
   }
 }
 

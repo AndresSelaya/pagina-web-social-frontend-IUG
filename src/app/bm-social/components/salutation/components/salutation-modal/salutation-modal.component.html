@@ -1,47 +1,67 @@
 <ng-container *ngIf="isCreateMode; else deleteTemplate">
     <form [formGroup]="modalSalutationForm" (ngSubmit)="onSubmit()">
-        <div class="align-items-center m-4">
-            <div class="create-form flex align-items-center mb-6">
-                <label for="salutation" class="block">
-                    {{ 'SALUTATION.FORM.NEW_SALUTATION' | translate }}
-                </label>
-                <input #salutationInput pInputText type="text" id="salutation" formControlName="salutation" autocomplete="off"
+        <div class="create-form m-4">
+            <div class="form-field mb-3">
+                <label for="salutation">{{ 'SALUTATION.FORM.NEW_SALUTATION' | translate }}</label>
+                <input #salutationInput 
+                    pInputText 
+                    type="text" 
+                    id="salutation" 
+                    formControlName="salutation" 
+                    autocomplete="off"
                     [attr.aria-invalid]="modalSalutationForm.get('salutation')?.invalid"
-                    [attr.aria-describedby]="modalSalutationForm.get('salutation')?.invalid ? 'salutationError' : null"
-                    class="w-full" />
+                    [attr.aria-describedby]="modalSalutationForm.get('salutation')?.invalid ? 'salutationError' : null"/>
 
-                <small *ngIf="modalSalutationForm.get('salutation')?.invalid && modalSalutationForm.get('salutation')?.touched"
-                    id="salutationError" class="text-red-500 block mt-1">
-                </small>
+                <!-- <small class="error-message"
+                    *ngIf="modalSalutationForm.get('salutation')?.invalid && modalSalutationForm.get('salutation')?.touched">
+                    {{ 'SALUTATION.ERROR.SALUTATION_LABEL_REQUIRED' | translate }}
+                </small> -->
             </div>
 
-            <div class="flex justify-content-center gap-2 mt-4">
-                <p-button type="submit" class="save" size="small" [label]="'BUTTONS.SAVE' | translate"
-                    icon="pi pi-check" iconPos="left" [loading]="isSaving"
-                    [disabled]="modalSalutationForm.invalid || isSaving" />
-
-                <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
-                    icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isSaving" />
+            <div class="form-actions mt-3">
+                <button
+                    type="submit"
+                    class="bttn btn-save"
+                    [disabled]="modalSalutationForm.invalid || isSaving">
+                    <i class="bi bi-check-lg"></i>
+                    {{ 'BUTTONS.SAVE' | translate }}
+                </button>
+                <button 
+                    type="button" 
+                    class="bttn btn-cancel"
+                    (click)="closeModal()">
+                    <i class="bi bi-x-lg"></i>
+                    {{ 'BUTTONS.CANCEL' | translate }}
+                </button>
             </div>
         </div>
     </form>
 </ng-container>
 
 <ng-template #deleteTemplate>
-    <div class="confirmation-content mb-2 mt-4">
+    <div class="confirmation-content m-3">
         <p class="mb-4">
             {{ 'SALUTATION.DELETE.CONFIRM_QUESTION' | translate }}
             <strong class="stronglock mt-1">"{{ salutationName }}"</strong>?
         </p>
 
-        <div class="flex justify-content-center gap-2">
-            <p-button type="button" class="delete" size="small" [label]="'BUTTONS.DELETE' | translate"
-                icon="pi pi-trash" iconPos="left" (onClick)="onDeleteConfirm()" severity="danger" [loading]="isSaving"
-                [disabled]="isSaving" />
-
-            <p-button type="button" class="cancel" size="small" [label]="'BUTTONS.CANCEL' | translate"
-                icon="pi pi-times" iconPos="left" (onClick)="closeModal()" [disabled]="isSaving" />
-
+        <div class="form-actions">
+            <button 
+                type="button"
+                class="bttn btn-delete"
+                [disabled]="isSaving"
+                (click)="onDeleteConfirm()">
+                <i class="bi bi-trash"></i>
+                {{ 'BUTTONS.DELETE' | translate }}
+            </button>
+            <button 
+                type="button" 
+                class="bttn btn-cancel"
+                [disabled]="isSaving"
+                (click)="closeModal()">
+                <i class="bi bi-x-lg"></i>
+                {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
         </div>
     </div>
 </ng-template>

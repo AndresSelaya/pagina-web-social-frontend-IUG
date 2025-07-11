@@ -1,4 +1,4 @@
-<div class="salutation-form-container">
+<div class="form-edit-container">
     <h3 class="form-title">{{ 'SALUTATION.LABEL.EDIT_SALUTATION' | translate }}</h3>
     
     <form [formGroup]="editSalutationForm" (ngSubmit)="onSubmit()">
@@ -23,14 +23,14 @@
         <div class="form-actions">
             <button 
                 type="submit" 
-                class="btn-save"
+                class="bttn btn-save"
                 [disabled]="editSalutationForm.invalid || !editSalutationForm.dirty || isSaving">
                 <i class="pi pi-check"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
-                class="btn-cancel"
+                class="bttn btn-cancel"
                 (click)="clearForm()">
                 <i class="pi pi-times"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

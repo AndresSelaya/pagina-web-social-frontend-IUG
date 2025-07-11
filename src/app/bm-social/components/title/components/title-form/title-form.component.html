@@ -1,4 +1,4 @@
-<div class="title-form-container">
+<div class="form-edit-container">
     <h3 class="form-title">{{ 'TITLE.LABEL.EDIT_TITLE' | translate }}</h3>
 
     <form [formGroup]="editTitleForm" (ngSubmit)="onSubmit()">
@@ -21,14 +21,14 @@
         <div class="form-actions">
             <button 
                 type="submit" 
-                class="btn btn-save"
+                class="bttn btn-save"
                 [disabled]="editTitleForm.invalid || !editTitleForm.dirty || isSaving">
                 <i class="bi bi-check-lg"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
-                class="btn btn-cancel"
+                class="bttn btn-cancel"
                 (click)="clearForm()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}
