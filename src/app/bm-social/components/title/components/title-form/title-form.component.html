@@ -21,14 +21,14 @@
         <div class="form-actions">
             <button 
                 type="submit" 
-                class="btn-save"
+                class="btn btn-save"
                 [disabled]="editTitleForm.invalid || !editTitleForm.dirty || isSaving">
                 <i class="bi bi-check-lg"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
-                class="btn-cancel"
+                class="btn btn-cancel"
                 (click)="clearForm()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

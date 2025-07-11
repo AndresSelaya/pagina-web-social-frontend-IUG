@@ -20,18 +20,18 @@
             <div class="form-actions mt-3">
                 <button 
                     type="submit" 
-                    class="btn-save"
+                    class="btn btn-save"
                     [disabled]="createTitleForm.invalid || isLoading">
                     <i class="bi bi-check-lg"></i>
                     {{ 'BUTTONS.SAVE' | translate }}
                 </button>
                 <button 
                     type="button" 
-                    class="btn-cancel"
+                    class="btn btn-cancel"
                     (click)="closeModal()">
                     <i class="bi bi-x-lg"></i>
                     {{ 'BUTTONS.CANCEL' | translate }}
-            </button>
+                </button>
             </div>
         </div>
     </form>
@@ -47,14 +47,14 @@
         <div class="form-actions">
             <button 
                 type="button"
-                class="btn-delete"
+                class="btn btn-delete"
                 (click)="onDeleteConfirm()">
                 <i class="bi bi-trash"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
-                class="btn-cancel"
+                class="btn btn-cancel"
                 (click)="closeModal()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

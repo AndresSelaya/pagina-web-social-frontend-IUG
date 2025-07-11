@@ -39,83 +39,62 @@ body {
 	font-size: 14px;
 }
 
-.btn-delete {
-  background-color: #ff0000c1;
+.btn {
   color: white;
-  border: none;
   border-radius: 4px;
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 500;
   line-height: normal;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: background-color 0.15s ease-in-out;
-  
-  &:hover:not(:disabled) {
-    background-color: #b30000e7;
-  }
-  
+
   i {
     font-size: 14px;
   }
 }
 
+.btn-delete {
+  background-color: #ff0000c1;
+  border: none;
+  transition: background-color 0.15s ease-in-out;
+  
+  &:hover {
+    background-color: #b30000e7;
+    color: white;
+  }
+}
+
 .btn-save {
   background-color: #007bff;
-  color: white;
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: normal;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
   transition: background-color 0.15s ease-in-out;
   
   &:hover:not(:disabled) {
     background-color: #0056b3;
+    color: white;
   }
   
   &:disabled {
     background-color: #6c757d;
+    color: white;
     cursor: not-allowed;
     opacity: 0.65;
   }
   
-  i {
-    font-size: 14px;
-  }
 }
         
 .btn-cancel {
-    background-color: transparent;
-    color: #6c757d;
-    border: 1px solid #6c757d;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.15s ease-in-out;
-    
-    &:hover {
-        background-color: #6c757d;
-        color: white;
-    }
-    
-    i {
-      font-size: 14px;
-    }
+  background-color: transparent;
+  color: #6c757d;
+  border: 1px solid #6c757d;
+  transition: all 0.15s ease-in-out;
+  
+  &:hover {
+    background-color: #6c757d;
+    color: white;
+  } 
 }
 
 div.p-toast.p-component {

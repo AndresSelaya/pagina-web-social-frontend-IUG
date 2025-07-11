@@ -1,6 +1,6 @@
 <ng-container *ngIf="isCreateMode; else deleteTemplate">
     <form [formGroup]="modalSalutationForm" (ngSubmit)="onSubmit()">
-        <div class="align-items-center mb-2 mt-4">
+        <div class="align-items-center m-4">
             <div class="create-form flex align-items-center mb-6">
                 <label for="salutation" class="block">
                     {{ 'SALUTATION.FORM.NEW_SALUTATION' | translate }}
