@@ -22,6 +22,14 @@ import { TitleModalComponent } from './components/title/components/title-modal/t
 import { SharedModule } from '../shared/shared.module';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { CountriesComponent } from './components/countries/countries.component';
+import { PersonTypesComponent } from './components/person-types/person-types.component';
+import { CountryTableComponent } from './components/countries/components/country-table/country-table.component';
+import { CountryFormComponent } from './components/countries/components/country-form/country-form.component';
+import { CountryModalComponent } from './components/countries/components/country-modal/country-modal.component';
+import { PersonFormComponent } from './components/person-types/components/person-form/person-form.component';
+import { PersonModalComponent } from './components/person-types/components/person-modal/person-modal.component';
+import { PersonTableComponent } from './components/person-types/components/person-table/person-table.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +43,14 @@ import { InputTextModule } from 'primeng/inputtext';
     SalutationTableComponent,
     TitleModalComponent,
     SalutationModalComponent,
+    CountriesComponent,
+    PersonTypesComponent,
+    CountryTableComponent,
+    CountryFormComponent,
+    CountryModalComponent,
+    PersonFormComponent,
+    PersonModalComponent,
+    PersonTableComponent,
   ],
   imports: [
     CommonModule,

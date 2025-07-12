@@ -174,6 +174,16 @@
     "TEXT_13": "Webseiten-Zugriff",
     "TEXT_14": "Mitglieder haben Zugriff auf umfassende Informationen rund um Informix auf der IUG-Website und können die Internationale IUG-Webseite nutzen​."
   },
+  "SIDEBAR": {
+    "LABEL": {
+      "EXPAND": "Die Navigation erweitern",
+      "COLLAPSE": "Navigation reduzieren"
+    },
+    "TITLE": "Titel",
+    "SALUTATION": "Anreden",
+    "COUNTRIES": "Länder",
+    "PERSON":"Personentypen"
+  },
   "TITLE": {
     "TABLE_TITLE": {
       "TITLE": "Titel",
@@ -233,6 +243,73 @@
       "UPDATE_FAILED": "Fehler beim Aktualisieren der Anrede",
       "DELETE_SUCCESS": "Anrede erfolgreich gelöscht",
       "DELETE_FAILED": "Fehler beim Löschen der Anrede"
+    }
+  },
+  "COUNTRIES": {
+    "HEADER": {
+      "EDIT_COUNTRY": "Land bearbeiten"
+    },
+    "LABEL": {
+      "NAME": "Land",
+      "ABBREVIATION": "Kürzel",
+      "IS_STANDARD": "Ist Standard?"
+    },
+    "TABLE": {
+      "NAME": "Land",
+      "ABBREVIATION": "Kürzel",
+      "IS_STANDARD": "Standard?",
+      "COLUMNS_SELECTED": "{0} Spalten ausgewählt",
+      "CHOOSE_COLUMNS": "Spalten auswählen",
+      "NO_DATA": "Keine Länder gefunden.",
+      "PAGE_INFO": "{first} - {last} von {totalRecords} Einträgen"
+    },
+    "MESSAGE": {
+      "NO_COUNTRIES": "Keine Länder vorhanden.",
+      "SUCCESS": "ERFOLG",
+      "ERROR": "FEHLER",
+      "UPDATE_SUCCESS": "Erfolgreich aktualisiert",
+      "UPDATE_FAILED": "Update fehlgeschlagen"
+    },
+    "MODAL_CREATE": {
+      "CREATE_FORM": "Neues Land",
+      "NEW_COUNTRY": "Neuer Länder"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Land löschen",
+      "CONFIRM_QUESTION": "Sind Sie sicher, dass Sie den Land löschen möchten: "
+    },
+    "ERROR": {
+      "COUNTRY_NAME_REQUIRED": "Land erforderlich",
+      "ABBREVIATION_REQUIRED": "Kürzel erforderlich"
+    }
+  },
+  "PERSON": {
+    "TABLE_PERSON": {
+      "PERSON": "Personentypen",
+      "NO_RESULTS_FOUND": "Keine Ergebnisse gefunden."
+    },
+    "LABEL": {
+      "EDIT_PERSON": "Personentypen bearbeiten",
+      "PERSON_LABEL": "Name"
+    },
+    "ERROR": {
+      "PERSON_LABEL_REQUIRED": "Name ist erforderlich"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Personentypen löschen",
+      "CONFIRM_QUESTION": "Sind Sie sicher, dass Sie den Personentypen löschen möchten: "
+    },
+    "FORM": {
+      "PERSON_FORM": "Neuer Personentypen",
+      "NEW_PERSON": "Name"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ERFOLG",
+      "ERROR": "FEHLER",
+      "UPDATE_SUCCESS": "Erfolgreich aktualisiert",
+      "UPDATE_FAILED": "Update fehlgeschlagen",
+      "CONFLICT": "Versionskonflikt",
+      "REFRESH_REQUIRED": "Bitte aktualisieren Sie die Seite, um die neuesten Daten zu sehen"
     }
   }
 }

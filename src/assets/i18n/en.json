@@ -174,6 +174,16 @@
     "TEXT_13": "Website access",
     "TEXT_14": "Members have access to comprehensive information about Informix on the IUG website and can use the International IUG website."
   },
+  "SIDEBAR": {
+    "LABEL": {
+      "EXPAND": "Expand the navigation",
+      "COLLAPSE": "Collapse the navigation"
+    },
+    "TITLE": "Title",
+    "SALUTATION": "Salutation",
+    "COUNTRIES": "Countries",
+    "PERSON":"Person types"
+  },
   "TITLE": {
     "TABLE_TITLE": {
       "TITLE": "Title",
@@ -233,6 +243,73 @@
       "UPDATE_FAILED": "Failed to update salutation",
       "DELETE_SUCCESS": "Salutation deleted successfully",
       "DELETE_FAILED": "Failed to delete salutation"
+    }
+  },
+  "COUNTRIES": {
+    "HEADER": {
+      "EDIT_COUNTRY": "Edit Country"
+    },
+    "LABEL": {
+      "NAME": "Name",
+      "ABBREVIATION": "Abbreviation",
+      "IS_STANDARD": "Is Standard?"
+    },
+    "TABLE": {
+      "NAME": "Name",
+      "ABBREVIATION": "Abbreviation",
+      "IS_STANDARD": "Standard?",
+      "COLUMNS_SELECTED": "{0} columns selected",
+      "CHOOSE_COLUMNS": "Choose columns",
+      "NO_DATA": "No countries available.",
+      "PAGE_INFO": "Showing {first} - {last} of {totalRecords}"
+    },
+    "MESSAGE": {
+      "NO_COUNTRIES": "No countries found.",
+      "SUCCESS": "SUCCESS",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Successfully updated",
+      "UPDATE_FAILED": "Update failed"
+    },
+    "MODAL_CREATE": {
+      "CREATE_FORM": "Create Country",
+      "NEW_COUNTRY": "New Country"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Delete Country",
+      "CONFIRM_QUESTION": "Are you sure you want to delete the Country "
+    },
+    "ERROR": {
+      "COUNTRY_NAME_REQUIRED": "Country name required",
+      "ABBREVIATION_REQUIRED": "Abbreviation required"
+    }
+  },
+  "PERSON": {
+    "TABLE_PERSON": {
+      "PERSON": "Person types",
+      "NO_RESULTS_FOUND": "No results found."
+    },
+    "LABEL": {
+      "EDIT_PERSON": "Edit Person types",
+      "PERSON_LABEL": "Name"
+    },
+    "ERROR": {
+      "PERSON_LABEL_REQUIRED": "Name is required"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Delete person type",
+      "CONFIRM_QUESTION": "Are you sure you want to delete the person type "
+    },
+    "FORM": {
+      "PERSON_FORM": "New person type",
+      "NEW_PERSON": "Name"
+    },
+    "MESSAGE": {
+      "SUCCESS": "SUCCESS",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Successfully updated",
+      "UPDATE_FAILED": "Update failed",
+      "CONFLICT": "Version Conflict",
+      "REFRESH_REQUIRED": "The person has been updated by another user. Please refresh to get the latest version."
     }
   }
 }

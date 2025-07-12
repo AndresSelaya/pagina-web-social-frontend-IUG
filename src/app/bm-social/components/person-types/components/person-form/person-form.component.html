@@ -1,0 +1,39 @@
+<div class="form-edit-container">
+    <h3 class="form-title">{{ 'PERSON.LABEL.EDIT_PERSON' | translate }}</h3>
+
+    <form [formGroup]="editPersonForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <label for="name" class="field-label">{{ 'PERSON.LABEL.PERSON_LABEL' | translate }}</label>
+            <input pInputText 
+                type="text" 
+                id="name" 
+                formControlName="name"
+                class="form-input" 
+                [ngClass]="{'error': editPersonForm.get('name')?.invalid && editPersonForm.get('name')?.touched}" 
+                autocomplete="off" 
+            />
+            <small 
+                class="error-message" 
+                *ngIf="editPersonForm.get('name')?.invalid && editPersonForm.get('name')?.touched && editPersonForm.get('name')!.hasError('required')">
+                {{ 'PERSON.ERROR.PERSON_LABEL_REQUIRED' | translate }}
+            </small>  
+        </div>
+        <div class="form-actions">
+            <button 
+                type="submit" 
+                class="bttn btn-save"
+                [disabled]="editPersonForm.invalid || !editPersonForm.dirty || isSaving">
+                <i class="bi bi-check-lg"></i>
+                {{ 'BUTTONS.SAVE' | translate }}
+            </button>
+            <button 
+                type="button" 
+                class="bttn btn-cancel"
+                (click)="clearForm()">
+                <i class="bi bi-x-lg"></i>
+                {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
+<p-toast />

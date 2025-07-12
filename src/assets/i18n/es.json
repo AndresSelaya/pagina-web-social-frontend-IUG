@@ -171,6 +171,16 @@
     "TEXT_13": "Acceso al sitio web",
     "TEXT_14": "Los miembros tienen acceso a información completa sobre Informix en el sitio web de la IUG y pueden utilizar el sitio web internacional de la IUG."
   },
+  "SIDEBAR": {
+    "LABEL": {
+      "EXPAND": "Expandir la navegación",
+      "COLLAPSE": "Colapsar la navegación"
+    },
+    "TITLE": "Título",
+    "SALUTATION": "Saludo",
+    "COUNTRIES": "Países",
+    "PERSON":"Tipos de personas"
+  },
   "TITLE": {
     "TABLE_TITLE": {
       "TITLE": "Titulo",
@@ -228,6 +238,67 @@
       "UPDATE_FAILED": "Error al actualizar saludo",
       "DELETE_SUCCESS": "Saludo eliminado exitosamente",
       "DELETE_FAILED": "Error al eliminar saludo"
+    }
+  },
+  "COUNTRIES": {
+    "HEADER": {
+      "EDIT_COUNTRY": "Editar País"
+    },
+    "LABEL": {
+      "NAME": "Nombre",
+      "ABBREVIATION": "Abreviatura",
+      "IS_STANDARD": "¿Es estándar?"
+    },
+    "TABLE": {
+      "NAME": "Nombre",
+      "ABBREVIATION": "Abreviatura",
+      "IS_STANDARD": "¿Estándar?",
+      "COLUMNS_SELECTED": "{0} columnas seleccionadas",
+      "CHOOSE_COLUMNS": "Elegir columnas",
+      "NO_DATA": "No hay países registrados.",
+      "PAGE_INFO": "Mostrando {first} - {last} de {totalRecords}"
+    },
+    "MESSAGE": {
+      "NO_COUNTRIES": "No se encontraron países.",
+      "SUCCESS": "ÉXITO",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Actualización exitosa",
+      "UPDATE_FAILED": "Actualización fallida"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Eliminar País",
+      "CONFIRM_QUESTION": "¿Está seguro que desea eliminar "
+    },
+    "ERROR": {
+      "COUNTRY_NAME_REQUIRED": "Nombre de país requerido",
+      "ABBREVIATION_REQUIRED": "Abreviatura requerida"
+    }
+  },
+  "PERSON": {
+    "TABLE_PERSON": {
+      "PERSON": "Tipos de personas",
+      "NO_RESULTS_FOUND": "No se encontraron resultados."
+    },
+    "LABEL": {
+      "EDIT_PERSON": "Editar tipo de persona",
+      "PERSON_LABEL": "Nombre"
+    },
+    "ERROR": {
+      "PERSON_LABEL_REQUIRED": "Nombre es requerido"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Eliminar tipo de persona",
+      "CONFIRM_QUESTION": "¿Está seguro que desea eliminar "
+    },
+    "FORM": {
+      "PERSON_FORM": "Nuevo tipo de persona",
+      "NEW_PERSON": "Nombre"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ÉXITO",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Actualización exitosa",
+      "UPDATE_FAILED": "Actualización fallida"
     }
   }
 }

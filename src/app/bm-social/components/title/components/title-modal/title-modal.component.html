@@ -1,37 +1,36 @@
 <ng-container *ngIf="isCreateMode; else deleteTemplate">
     <form [formGroup]="createTitleForm" (ngSubmit)="onSubmit()">
-        <div class="align-items-center m-4">
-            <div class="create-form mb-3"> 
+        <div class="create-form m-4">
+            <div class="form-field mb-3"> 
                 <label for="titleName" >{{ 'TITLE.FORM.NEW_TITLE' | translate }}</label>
                 <input #titleInput 
                     pInputText 
                     type="text" 
                     id="titleName" 
                     formControlName="name" 
-                    [ngClass]="{'error': createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched}" 
                     autocomplete="off"/>
 
-                <small class="error-message" 
-                *ngIf="createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched && createTitleForm.get('name')!.hasError('required')">
-                {{ 'TITLE.ERROR.TITLE_LABEL_REQUIRED' | translate }}
-                </small>
+                <!-- <small class="error-message" 
+                    *ngIf="createTitleForm.get('name')?.invalid && createTitleForm.get('name')?.touched">
+                    {{ 'TITLE.ERROR.TITLE_LABEL_REQUIRED' | translate }}
+                </small> -->
             </div>
 
             <div class="form-actions mt-3">
                 <button 
                     type="submit" 
-                    class="btn-save"
+                    class="bttn btn-save"
                     [disabled]="createTitleForm.invalid || isLoading">
                     <i class="bi bi-check-lg"></i>
                     {{ 'BUTTONS.SAVE' | translate }}
                 </button>
                 <button 
                     type="button" 
-                    class="btn-cancel"
+                    class="bttn btn-cancel"
                     (click)="closeModal()">
                     <i class="bi bi-x-lg"></i>
                     {{ 'BUTTONS.CANCEL' | translate }}
-            </button>
+                </button>
             </div>
         </div>
     </form>
@@ -47,14 +46,14 @@
         <div class="form-actions">
             <button 
                 type="button"
-                class="btn-delete"
+                class="bttn btn-delete"
                 (click)="onDeleteConfirm()">
                 <i class="bi bi-trash"></i>
-                {{ 'BUTTONS.SAVE' | translate }}
+                {{ 'BUTTONS.DELETE' | translate }}
             </button>
             <button 
                 type="button" 
-                class="btn-cancel"
+                class="bttn btn-cancel"
                 (click)="closeModal()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

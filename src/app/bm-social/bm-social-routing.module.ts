@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { MainLayoutComponent } from "./main-layout/main-layout.component";
 import { TitleComponent } from "./components/title/title.component";
 import { SalutationComponent } from "./components/salutation/salutation.component";
+import { CountriesComponent } from "./components/countries/countries.component";
+import { PersonTypesComponent } from "./components/person-types/person-types.component";
 
 const routes: Routes = [
     {
@@ -11,7 +13,9 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'title', pathMatch: 'full'},
             { path: 'title', component: TitleComponent },
-            { path: 'salutation', component: SalutationComponent }
+            { path: 'salutation', component: SalutationComponent },
+            { path: 'countries', component: CountriesComponent },
+            { path: 'person-types', component: PersonTypesComponent }
         ]
     }   
 ];

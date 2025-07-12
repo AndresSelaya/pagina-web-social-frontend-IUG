@@ -8,7 +8,6 @@ p-button {
   background: $primary-color;
   color: #fff;
   min-width: 1.25rem;
-  border-radius: 0 5px 0 0;
 
   &:hover {
     background: $accent-color;
@@ -140,11 +139,20 @@ p-button {
   }
 
   // Message No results found
-  .p-message-icon {
-    margin: auto 7px;
-    display: flex;
-    align-items: center;
-    height: 36px;
+  .p-messages {
+
+    // Container icon
+    .p-message-icon {
+      margin: auto 7px;
+      display: flex;
+      align-items: center;
+      height: 36px;
+  
+      .p-icon {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
   }
 }
 

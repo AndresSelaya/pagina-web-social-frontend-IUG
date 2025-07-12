@@ -26,9 +26,10 @@ export class MainLayoutComponent {
   
   private readonly menuConfigs:  
   {label: string, icon: string, command: string, absoluteRoute: string}[] = [
-    { label: 'Title', icon: 'bi bi-person-vcard', command: 'dashboard', absoluteRoute: 'title' },
-    { label: 'Salutation', icon: 'bi bi-person-raised-hand', command: 'customers', absoluteRoute: 'salutation' },
-
+    { label: 'SIDEBAR.TITLE', icon: 'bi bi-person-vcard', command: 'dashboard', absoluteRoute: 'title' },
+    { label: 'SIDEBAR.SALUTATION', icon: 'bi bi-person-raised-hand', command: 'customers', absoluteRoute: 'salutation' },
+    { label: 'SIDEBAR.COUNTRIES', icon: 'bi bi-flag-fill', command: 'customers', absoluteRoute: 'countries' },
+    { label: 'SIDEBAR.PERSON', icon: 'bi bi-person-fill', command: 'customers', absoluteRoute: 'person-types' },
   ];
   
   private readonly sidebarItemsConfig: Record<

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <app-general-table
+      [tableId]="tableKey"
+      [tableValues]="countries()"
+      [columns]="columnsHeaderFieldCoutries"
+      [dataKeys]="dataKeys"
+      (onColumnChanges)="onUserCountriesPreferencesChanges($event)"
+      (onCreateRegister)="visibleModal=true"
+      (onCreateRegister)="handleTableEvents({ type: 'create' })"
+      (onDeleteRegister)="handleTableEvents({ type: 'delete', data: $event })"
+      (onEditRegister)="editCountry($event)"
+      ></app-general-table>
+      <p-dialog 
+        [header]="modalType === 'create' 
+          ? ('COUNTRIES.MODAL_CREATE.CREATE_FORM' | translate) 
+          : ('COUNTRIES.DELETE.CONFIRMATION' | translate)" 
+        [modal]="true" 
+        [(visible)]="visibleModal"
+        (onShow)="onDialogShow()" 
+      >
+        <app-country-modal
+          #countryModal
+          (isVisibleModal)="onVisibleModal($event)"
+          (confirmDelete)="onConfirmDelete($event)"
+          [modalType]="modalType"
+          [countryName]="CountryName"
+          [countryToDelete]="selectedCountry"
+          (isVisibleModal)="onModalVisibilityChange($event)"
+        ></app-country-modal>
+      </p-dialog>
+  </div>
+</div>
+<p-toast/>
+

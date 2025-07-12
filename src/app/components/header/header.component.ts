@@ -4,6 +4,8 @@ import { PostService } from '../../posts/services/post.service';
 import { Router } from '@angular/router';
 import { Follower } from '../../posts/models/follower';
 import { environment } from '../../../environments/environment';
+import { UserDetail } from '../../posts/models/user-detail';
+import { AuthService } from '../../authentication/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,17 +15,32 @@ import { environment } from '../../../environments/environment';
 export class HeaderComponent {
 
   uuidIntitutionDric = `${environment.INSTITUTION_ID}`;
-
+  public currentUser!: UserDetail;
+  public isAuthenticated: boolean = false;
   
   institution!: Institution
   totalFollowers: number = 127;
 
   isPostsRoute = false;
 
-  constructor(private postService: PostService, private router: Router){
-  }
+  constructor(
+    private readonly postService: PostService, 
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ){}
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    if (this.isAuthenticated) {
+      this.postService.getUser().subscribe({
+        next: (responseUser) => {
+          this.currentUser = responseUser;
+        },
+        error: (error) => {
+          console.log('Error al obtener al user', error);
+        }
+      })
+    }
     this.getInstitutionData(this.uuidIntitutionDric);
     this.getNumberFollowers(this.uuidIntitutionDric);
     this.router.events.subscribe(() => {
