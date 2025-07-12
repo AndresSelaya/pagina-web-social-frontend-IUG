@@ -175,7 +175,11 @@
     "LABEL": {
       "EXPAND": "Expandir la navegación",
       "COLLAPSE": "Colapsar la navegación"
-    }
+    },
+    "TITLE": "Título",
+    "SALUTATION": "Saludo",
+    "COUNTRIES": "Países",
+    "PERSON":"Tipos de personas"
   },
   "TITLE": {
     "TABLE_TITLE": {

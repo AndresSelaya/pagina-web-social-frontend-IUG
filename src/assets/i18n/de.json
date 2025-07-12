@@ -178,7 +178,11 @@
     "LABEL": {
       "EXPAND": "Die Navigation erweitern",
       "COLLAPSE": "Navigation reduzieren"
-    }
+    },
+    "TITLE": "Titel",
+    "SALUTATION": "Anreden",
+    "COUNTRIES": "Länder",
+    "PERSON":"Personentypen"
   },
   "TITLE": {
     "TABLE_TITLE": {

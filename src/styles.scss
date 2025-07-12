@@ -485,3 +485,10 @@ thead.p-datatable-thead > tr > th#hide-columns.thead-bg-blue{
     padding: 8px;
   }
 }
+
+.p-tooltip.p-tooltip-right {
+  .p-tooltip-arrow{
+    left: -6px;
+    margin-top: -0.25rem !important;
+  }
+}

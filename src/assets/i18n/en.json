@@ -178,7 +178,11 @@
     "LABEL": {
       "EXPAND": "Expand the navigation",
       "COLLAPSE": "Collapse the navigation"
-    }
+    },
+    "TITLE": "Title",
+    "SALUTATION": "Salutation",
+    "COUNTRIES": "Countries",
+    "PERSON":"Person types"
   },
   "TITLE": {
     "TABLE_TITLE": {
