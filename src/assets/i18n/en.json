@@ -174,6 +174,12 @@
     "TEXT_13": "Website access",
     "TEXT_14": "Members have access to comprehensive information about Informix on the IUG website and can use the International IUG website."
   },
+  "SIDEBAR": {
+    "LABEL": {
+      "EXPAND": "Expand the navigation",
+      "COLLAPSE": "Collapse the navigation"
+    }
+  },
   "TITLE": {
     "TABLE_TITLE": {
       "TITLE": "Title",
@@ -271,6 +277,35 @@
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Country name required",
       "ABBREVIATION_REQUIRED": "Abbreviation required"
+    }
+  },
+  "PERSON": {
+    "TABLE_PERSON": {
+      "PERSON": "Person types",
+      "NO_RESULTS_FOUND": "No results found."
+    },
+    "LABEL": {
+      "EDIT_PERSON": "Edit Person types",
+      "PERSON_LABEL": "Name"
+    },
+    "ERROR": {
+      "PERSON_LABEL_REQUIRED": "Name is required"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Delete person type",
+      "CONFIRM_QUESTION": "Are you sure you want to delete the person type "
+    },
+    "FORM": {
+      "PERSON_FORM": "New person type",
+      "NEW_PERSON": "Name"
+    },
+    "MESSAGE": {
+      "SUCCESS": "SUCCESS",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Successfully updated",
+      "UPDATE_FAILED": "Update failed",
+      "CONFLICT": "Version Conflict",
+      "REFRESH_REQUIRED": "The person has been updated by another user. Please refresh to get the latest version."
     }
   }
 }

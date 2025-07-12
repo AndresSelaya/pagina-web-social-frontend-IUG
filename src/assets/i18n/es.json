@@ -171,6 +171,12 @@
     "TEXT_13": "Acceso al sitio web",
     "TEXT_14": "Los miembros tienen acceso a información completa sobre Informix en el sitio web de la IUG y pueden utilizar el sitio web internacional de la IUG."
   },
+  "SIDEBAR": {
+    "LABEL": {
+      "EXPAND": "Expandir la navegación",
+      "COLLAPSE": "Colapsar la navegación"
+    }
+  },
   "TITLE": {
     "TABLE_TITLE": {
       "TITLE": "Titulo",
@@ -262,6 +268,33 @@
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Nombre de país requerido",
       "ABBREVIATION_REQUIRED": "Abreviatura requerida"
+    }
+  },
+  "PERSON": {
+    "TABLE_PERSON": {
+      "PERSON": "Tipos de personas",
+      "NO_RESULTS_FOUND": "No se encontraron resultados."
+    },
+    "LABEL": {
+      "EDIT_PERSON": "Editar tipo de persona",
+      "PERSON_LABEL": "Nombre"
+    },
+    "ERROR": {
+      "PERSON_LABEL_REQUIRED": "Nombre es requerido"
+    },
+    "DELETE": {
+      "CONFIRMATION": "Eliminar tipo de persona",
+      "CONFIRM_QUESTION": "¿Está seguro que desea eliminar "
+    },
+    "FORM": {
+      "PERSON_FORM": "Nuevo tipo de persona",
+      "NEW_PERSON": "Nombre"
+    },
+    "MESSAGE": {
+      "SUCCESS": "ÉXITO",
+      "ERROR": "ERROR",
+      "UPDATE_SUCCESS": "Actualización exitosa",
+      "UPDATE_FAILED": "Actualización fallida"
     }
   }
 }

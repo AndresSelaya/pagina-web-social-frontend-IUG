@@ -1,1 +1,33 @@
-<p>person-table works!</p>
+<div class="container">
+  <div class="row">
+    <div class>
+      <app-general-table
+        [tableId]="tableKey"
+        [tableValues]="persons()"
+        [columns]="personDisplayedColumns"
+        [dataKeys]="dataKeys"
+        (onColumnChanges)="onUserTitlePreferencesChanges($event)"
+        (onCreateRegister)="handleTableEvents({ type: 'create' })"
+        (onDeleteRegister)="handleTableEvents({ type: 'delete', data: $event })"
+        (onEditRegister)="editPerson($event)"
+      ></app-general-table>
+
+      <p-dialog 
+        [header]="modalType === 'create' 
+          ? ('PERSON.FORM.PERSON_FORM' | translate) 
+          : ('PERSON.DELETE.CONFIRMATION' | translate)" 
+        [modal]="true" 
+        [(visible)]="visibleModal" 
+        (onShow)="onDialogShow()"
+      >
+        <app-person-modal
+          [modalType]="modalType"
+          [personName]="personName"
+          [personToDelete]="selectedPerson"
+          (isVisibleModal)="onModalVisibilityChange($event)"
+          #personModal
+        ></app-person-modal>
+      </p-dialog>
+    </div>
+  </div>
+</div>

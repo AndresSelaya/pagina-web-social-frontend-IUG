@@ -1,1 +1,63 @@
-<p>person-modal works!</p>
+<ng-container *ngIf="isCreateMode; else deleteTemplate">
+    <form [formGroup]="createPersonForm" (ngSubmit)="onSubmit()">
+        <div class="create-form m-4">
+            <div class="form-field mb-3"> 
+                <label for="personName" >{{ 'PERSON.FORM.NEW_PERSON' | translate }}</label>
+                <input #personInput 
+                    pInputText 
+                    type="text" 
+                    id="personName" 
+                    formControlName="name" 
+                    autocomplete="off"/>
+
+                <!-- <small class="error-message" 
+                    *ngIf="createPersonForm.get('name')?.invalid && createPersonForm.get('name')?.touched">
+                    {{ 'PERSON.ERROR.PERSON_LABEL_REQUIRED' | translate }}
+                </small> -->
+            </div>
+
+            <div class="form-actions mt-3">
+                <button 
+                    type="submit" 
+                    class="bttn btn-save"
+                    [disabled]="createPersonForm.invalid || isLoading">
+                    <i class="bi bi-check-lg"></i>
+                    {{ 'BUTTONS.SAVE' | translate }}
+                </button>
+                <button 
+                    type="button" 
+                    class="bttn btn-cancel"
+                    (click)="closeModal()">
+                    <i class="bi bi-x-lg"></i>
+                    {{ 'BUTTONS.CANCEL' | translate }}
+                </button>
+            </div>
+        </div>
+    </form>
+</ng-container>
+
+<ng-template #deleteTemplate>
+    <div class="confirmation-content m-3">
+        <p class="mb-4">
+            {{ 'PERSON.DELETE.CONFIRM_QUESTION' | translate }}
+            <strong class="stronglock mt-1">"{{ personName }}"</strong>?
+        </p>
+
+        <div class="form-actions">
+            <button 
+                type="button"
+                class="bttn btn-delete"
+                (click)="onDeleteConfirm()">
+                <i class="bi bi-trash"></i>
+                {{ 'BUTTONS.DELETE' | translate }}
+            </button>
+            <button 
+                type="button" 
+                class="bttn btn-cancel"
+                (click)="closeModal()">
+                <i class="bi bi-x-lg"></i>
+                {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
+        </div>
+    </div>
+</ng-template>
