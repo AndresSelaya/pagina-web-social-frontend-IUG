@@ -33,17 +33,15 @@ export class PersonTypeUtils {
   /**
    * Creates a new person with validation
    * @param name - Text for the new person
-   * @param companyId - Company ID (defaults to 1)
    * @returns Observable that emits the created person
    */
-  createNewPerson(name: string, companyId: number = 1): Observable<PersonType> {
+  createNewPerson(name: string): Observable<PersonType> {
     if (!name?.trim()) {
       return throwError(() => new Error('Person name cannot be empty'));
     }
 
     const newPerson: CreatePersonTypeRequest = {
-      companyId,
-      name: name.trim(),
+      personTypeName: name.trim(),
       version: 1
     };
 
@@ -63,7 +61,7 @@ export class PersonTypeUtils {
   personExists(name: string): Observable<boolean> {
     return this.personService.getAllPersonTypes().pipe(
       map(persons => persons.some(
-        p => p.name.toLowerCase() === name.toLowerCase()
+        p => p.personTypeName.toLowerCase() === name.toLowerCase()
       )),
       catchError(err => {
         console.error('Error checking person existence:', err);
@@ -78,7 +76,7 @@ export class PersonTypeUtils {
    */
   getPersonsSortedByName(): Observable<PersonType[]> {
     return this.personService.getAllPersonTypes().pipe(
-      map(persons => [...persons].sort((a, b) => a.name.localeCompare(b.name))),
+      map(persons => [...persons].sort((a, b) => a.personTypeName.localeCompare(b.personTypeName))),
       catchError(err => {
         console.error('Error sorting persons:', err);
         return throwError(() => new Error('Failed to sort persons'));
@@ -138,8 +136,7 @@ export class PersonTypeUtils {
       switchMap((validatedPerson: PersonType) => {
         const updateRequest: UpdatePersonTypeRequest = {
           personTypeId: validatedPerson.personTypeId,
-          companyId: validatedPerson.companyId,
-          name: validatedPerson.name,
+          personTypeName: validatedPerson.personTypeName,
           version: validatedPerson.version
         };
         return this.personService.updatePersonType(updateRequest);

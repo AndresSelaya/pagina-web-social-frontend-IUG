@@ -57,7 +57,7 @@ export class PersonFormComponent {
   }
 
   private loadPersonData(person: PersonType): void {
-    this.editPersonForm.patchValue({ person: person.name });
+    this.editPersonForm.patchValue({ name: person.personTypeName });
   }
 
   clearForm(): void {
@@ -75,7 +75,7 @@ export class PersonFormComponent {
     this.isSaving = true;
     const updatedPerson: PersonType = {
       ...this.currentPerson,
-      name: this.editPersonForm.value.name
+      personTypeName: this.editPersonForm.value.name
     };
 
     this.subscriptions.add(
@@ -96,6 +96,7 @@ export class PersonFormComponent {
   }
 
   private handleSaveSuccess(savedPerson: PersonType): void {
+    this.isSaving = false;
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('PERSON.MESSAGE.SUCCESS'),
@@ -103,6 +104,8 @@ export class PersonFormComponent {
     });
     this.personStateService.setPersonTypeToEdit(null);
     this.clearForm();
+    // Refrescar la tabla después de guardar
+    this.personUtils.refreshPersons().subscribe();
   }
 
   private handleSaveError(error: any): void {

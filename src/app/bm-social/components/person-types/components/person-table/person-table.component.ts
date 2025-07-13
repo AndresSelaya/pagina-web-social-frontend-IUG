@@ -27,7 +27,7 @@ export class PersonTableComponent {
 
       this.personUtils.getPersonById(this.selectedPerson!).subscribe({
         next: (person) => {
-          this.personName = person?.name ?? '';
+          this.personName = person?.personTypeName ?? '';
         },
         error: (err) => {
           console.error('No se pudo obtener la persona:', err);
@@ -42,16 +42,10 @@ export class PersonTableComponent {
     const rawPersons = this.personService.personTypes();
     console.log('Raw persons from service:', rawPersons);
     
-    // Datos de prueba temporales si no hay datos del servicio
-    const testPersons = rawPersons.length === 0 ? [
-      { personTypeId: 1, companyId: 1, name: 'Omar', version: 1 },
-      { personTypeId: 2, companyId: 1, name: 'Sergio', version: 1 },
-      { personTypeId: 3, companyId: 1, name: 'Andres', version: 1 }
-    ] : rawPersons;
-    
-    const mappedPersons = testPersons.map(person => ({
+    // Usar los datos del servicio directamente
+    const mappedPersons = rawPersons.map(person => ({
       id: person.personTypeId,
-      name: person.name,
+      name: person.personTypeName,
     }));
     
     console.log('Mapped person for table:', mappedPersons);
@@ -141,8 +135,8 @@ export class PersonTableComponent {
 
   editPerson(person: any) {
     const personToEdit = {
-      personTypeId: person.personTypeId,
-      name: person.name
+      personTypeId: person.id,
+      personTypeName: person.name
     };
 
     this.personUtils.getPersonById(personToEdit.personTypeId).subscribe({
