@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild }
 import { CountryUtils } from '../../utils/country.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, finalize, of, switchMap } from 'rxjs';
+import { Country } from '../../../../interfaces/country';
 
 @Component({
   selector: 'app-country-modal',
@@ -12,7 +13,7 @@ export class CountryModalComponent {
   private readonly countryUtils = inject(CountryUtils);
 
   @Input() modalType: 'create' | 'delete' = 'create';
-  @Input() countryToDelete: number | null = null;
+  @Input() countryToDelete: Country | null = null;
   @Input() countryName: string | null = null;
   @Output() isVisibleModal = new EventEmitter<boolean>();
   @Output() countryCreated = new EventEmitter<void>();
@@ -55,8 +56,8 @@ export class CountryModalComponent {
   }
   onDeleteConfirm(): void {
     this.isLoading = true;
-    if (this.countryToDelete) {
-      this.countryUtils.deleteCountry(this.countryToDelete).subscribe({
+    if (this.countryToDelete && this.countryToDelete.countryId) {
+      this.countryUtils.deleteCountry(this.countryToDelete.countryId).subscribe({
         next: () => {
           this.isLoading = false;
           this.confirmDelete.emit({
@@ -78,6 +79,9 @@ export class CountryModalComponent {
           this.closeModal();
         }
       });
+    } else {
+      console.error('No country selected for deletion');
+      this.isLoading = false;
     }
   }
   private handleCountryExistence(

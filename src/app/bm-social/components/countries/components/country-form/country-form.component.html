@@ -18,34 +18,48 @@
                     *ngIf="countryForm.get('name')?.invalid && countryForm.get('name')?.touched && countryForm.get('name')!.hasError('required')">
                     {{ 'COUNTRIES.ERROR.COUNTRY_NAME_REQUIRED' | translate }}
                 </small>
-            </div>
-        
-            <div class="form-field">
-            <label for="abbreviation" class="field-label">{{ "COUNTRIES.LABEL.ABBREVIATION" | translate }}</label>
-            <div class="input-message">
-                <input
-                pInputText
-                type="text"
-                id="abbreviation"
-                class="form-input"
-                formControlName="abbreviation"
-                [ngClass]="{'ng-invalid ng-dirty': countryForm.get('abbreviation')?.invalid && countryForm.get('abbreviation')?.touched}"
-                autocomplete="off"
-                />
                 <small class="error-message" 
-                    *ngIf="countryForm.get('abbreviation')?.invalid && countryForm.get('abbreviation')?.touched && countryForm.get('abbreviation')!.hasError('required')">
-                    {{ 'COUNTRIES.ERROR.ABBREVIATION_REQUIRED' | translate }}
+                    *ngIf="countryForm.get('name')?.invalid && countryForm.get('name')?.touched && countryForm.get('name')!.hasError('minlength')">
+                    El nombre debe tener al menos 2 caracteres
                 </small>
             </div>
+        
+            <div class="form-field">
+                <label for="areaCode" class="field-label">{{ "COUNTRIES.LABEL.AREA_CODE" | translate }}</label>
+                <input
+                    pInputText
+                    type="text"
+                    id="areaCode"
+                    class="form-input"
+                    formControlName="areaCode"
+                    [ngClass]="{'ng-invalid ng-dirty': countryForm.get('areaCode')?.invalid && countryForm.get('areaCode')?.touched}"
+                    autocomplete="off"
+                />
+                <small class="error-message" 
+                    *ngIf="countryForm.get('areaCode')?.invalid && countryForm.get('areaCode')?.touched && countryForm.get('areaCode')!.hasError('required')">
+                    El código de área es requerido
+                </small>
             </div>
         
             <div class="form-field">
-            <label for="isStandardChecked" class="field-label">{{ "COUNTRIES.LABEL.IS_STANDARD" | translate }}</label>
-            <p-toggleswitch formControlName="isStandard" class="flex">
-                <ng-template #handle let-checked="checked">
-                <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-check' : 'pi-times']"></i>
-                </ng-template>
-            </p-toggleswitch>
+                <label for="prefix" class="field-label">{{ "COUNTRIES.LABEL.PREFIX" | translate }}</label>
+                <input
+                    pInputText
+                    type="number"
+                    id="prefix"
+                    class="form-input"
+                    formControlName="prefix"
+                    [ngClass]="{'ng-invalid ng-dirty': countryForm.get('prefix')?.invalid && countryForm.get('prefix')?.touched}"
+                    autocomplete="off"
+                />
+                <small class="error-message" 
+                    *ngIf="countryForm.get('prefix')?.invalid && countryForm.get('prefix')?.touched && countryForm.get('prefix')!.hasError('required')">
+                    El prefijo es requerido
+                </small>
+                <small class="error-message" 
+                    *ngIf="countryForm.get('prefix')?.invalid && countryForm.get('prefix')?.touched && countryForm.get('prefix')!.hasError('min')">
+                    El prefijo debe ser mayor a 0
+                </small>
             </div>
         </div>
       <div class="form-actions">

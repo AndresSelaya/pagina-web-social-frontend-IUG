@@ -44,9 +44,9 @@ export class CountryFormComponent {
 
   private initForm(): void {
     this.countryForm = new FormGroup({
-      countryName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      areaCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      prefix: new FormControl('', [Validators.required, Validators.min(1), Validators.max(999)])
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      areaCode: new FormControl('', [Validators.required]),
+      prefix: new FormControl('', [Validators.required, Validators.min(1)])
     });
   }
 
@@ -61,7 +61,7 @@ export class CountryFormComponent {
 
   private loadCountryData(country: Country): void {
     this.countryForm.patchValue({
-      countryName: country.countryName,
+      name: country.countryName,
       areaCode: country.areaCode,
       prefix: country.prefix
     });
@@ -82,7 +82,7 @@ export class CountryFormComponent {
     this.isSaving = true;
     const updatedCountry: Country = {
       ...this.currentCountry,
-      countryName: this.countryForm.value.countryName,
+      countryName: this.countryForm.value.name,
       areaCode: this.countryForm.value.areaCode,
       prefix: this.countryForm.value.prefix
     };

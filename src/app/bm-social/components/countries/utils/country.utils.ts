@@ -105,9 +105,15 @@ export class CountryUtils {
  * @returns Observable that completes when the deletion is done
  */
   deleteCountry(id: number): Observable<void> {
-    // Note: Since we only have a GET endpoint, we cannot actually delete countries
-    // This method is kept for interface compatibility but will throw an error
-    return throwError(() => new Error('Delete operation not supported by current API'));
+    if (!id || id <= 0) {
+      return throwError(() => new Error('Invalid country ID'));
+    }
+
+    return this.countryService.deleteCountry(id).pipe(
+      catchError(err => {
+        return throwError(() => new Error('Failed to delete country'));
+      })
+    );
   }
 
   /**
@@ -132,8 +138,10 @@ export class CountryUtils {
       return throwError(() => new Error('Invalid country data'));
     }
 
-    // Note: Since we only have a GET endpoint, we cannot actually update countries
-    // This method is kept for interface compatibility but will throw an error
-    return throwError(() => new Error('Update operation not supported by current API'));
+    return this.countryService.updateCountry(country).pipe(
+      catchError(err => {
+        return throwError(() => new Error('Failed to update country'));
+      })
+    );
   }
 }
