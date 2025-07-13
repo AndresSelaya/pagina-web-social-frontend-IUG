@@ -45,6 +45,29 @@ export class CountryService {
 
   // ==================== CREATE OPERATIONS ====================
   /**
+   * Creates a new country record
+   * @param country Country data (without countryId and companyId)
+   * @returns Observable with the created Country object
+   * @throws Error when validation fails or server error occurs
+   */
+  addCountry(country: Omit<Country, 'countryId' | 'companyId'>): Observable<Country> {
+    this._loading.set(true);
+    return this.http.post<Country>(this.apiUrl, country, this.httpOptions).pipe(
+      tap({
+        next: (newCountry) => {
+          this._countries.update(countries => [...countries, newCountry]);
+          this._error.set(null);
+        },
+        error: (err) => {
+          this._error.set('Failed to add country');
+          console.error('Error adding country:', err);
+        }
+      }),
+      finalize(() => this._loading.set(false))
+    );
+  }
+
+  /**
    * Retrieves all countries from the API
    * @returns Observable with Country array
    * @throws Error when server request fails

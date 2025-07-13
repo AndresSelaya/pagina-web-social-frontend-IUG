@@ -34,18 +34,28 @@ export class CountryUtils {
    * @param countryName - Name for the new country
    * @param areaCode - Area code for the country
    * @param prefix - Prefix for the country
-   * @param companyId - Company ID
-   * @param currencyId - Currency ID
    * @returns Observable that completes when country is created
    */
-  createNewCountry(countryName: string, areaCode: string, prefix: number, companyId: number, currencyId: number): Observable<void> {
+  createNewCountry(countryName: string, areaCode: string, prefix: number): Observable<Country> {
     if (!countryName?.trim()) {
       return throwError(() => new Error('Country name cannot be empty'));
     }
+    if (!areaCode?.trim()) {
+      return throwError(() => new Error('Area code cannot be empty'));
+    }
+    if (!prefix || prefix <= 0) {
+      return throwError(() => new Error('Prefix must be a positive number'));
+    }
 
-    // Note: Since we only have a GET endpoint, we cannot actually create countries
-    // This method is kept for interface compatibility but will throw an error
-    return throwError(() => new Error('Create operation not supported by current API'));
+    const newCountry: Omit<Country, 'countryId' | 'companyId'> = {
+      countryName: countryName.trim(),
+      areaCode: areaCode.trim(),
+      prefix: prefix,
+      currencyId: 1, // Default value
+      version: 1 // Default value
+    };
+
+    return this.countryService.addCountry(newCountry);
   }
 
   /**

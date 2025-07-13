@@ -250,7 +250,9 @@
       "EDIT_COUNTRY": "Land bearbeiten"
     },
     "LABEL": {
-      "NAME": "Land",
+      "NAME": "Ländername",
+      "AREA_CODE": "Bereichscode",
+      "PREFIX": "Vorwahl",
       "ABBREVIATION": "Kürzel",
       "IS_STANDARD": "Ist Standard?"
     },
@@ -284,6 +286,7 @@
       "COUNTRY_NAME_REQUIRED": "Land erforderlich",
       "ABBREVIATION_REQUIRED": "Kürzel erforderlich",
       "CREATION_NOT_SUPPORTED": "Ländererstellung wird von der aktuellen API nicht unterstützt",
+      "CREATION_FAILED": "Fehler beim Erstellen des Landes",
       "ALREADY_EXISTS": "Land existiert bereits"
     }
   },

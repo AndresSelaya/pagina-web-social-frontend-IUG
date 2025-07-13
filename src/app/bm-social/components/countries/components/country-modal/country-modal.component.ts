@@ -24,8 +24,8 @@ export class CountryModalComponent {
 
   readonly createCountryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-    abbreviation: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    isStandard: new FormControl(false)
+    areaCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    prefix: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(9999)])
   });
 
   ngOnInit(): void {
@@ -40,11 +40,11 @@ export class CountryModalComponent {
     if (this.shouldPreventSubmission()) return;
 
     this.prepareForSubmission();
-    const { name, label, isDefault } = this.getCountryFormValues();
+    const { name, areaCode, prefix } = this.getCountryFormValues();
 
     this.countryUtils.countryExists(name).pipe(
-      switchMap(exists => this.handleCountryExistence(exists, name, label, isDefault)),
-      catchError(err => this.handleError('COUNTRY.ERROR.CHECKING_DUPLICATE', err)),
+      switchMap(exists => this.handleCountryExistence(exists, name, areaCode, prefix)),
+      catchError(err => this.handleError('COUNTRIES.ERROR.CREATION_FAILED', err)),
       finalize(() => this.isLoading = false)
     ).subscribe(result => {
       if (result !== null) {
@@ -83,17 +83,17 @@ export class CountryModalComponent {
   private handleCountryExistence(
     exists: boolean,
     name: string,
-    label: string,
-    isDefault: boolean
+    areaCode: string,
+    prefix: number
   ) {
     if (exists) {
       this.errorMessage = 'COUNTRIES.ERROR.ALREADY_EXISTS';
       return of(null);
     }
-    // Since we only have a GET endpoint, we cannot create countries
-    // Return an error message instead
-    this.errorMessage = 'COUNTRIES.ERROR.CREATION_NOT_SUPPORTED';
-    return of(null);
+    
+    return this.countryUtils.createNewCountry(name, areaCode, prefix).pipe(
+      catchError(err => this.handleError('COUNTRIES.ERROR.CREATION_FAILED', err))
+    );
   }
   private shouldPreventSubmission(): boolean {
     return this.createCountryForm.invalid || this.isLoading;
@@ -132,8 +132,8 @@ export class CountryModalComponent {
   private getCountryFormValues() {
     return {
       name: this.createCountryForm.value.name?.trim() ?? '',
-      label: this.createCountryForm.value.abbreviation?.trim() ?? '',
-      isDefault: !!this.createCountryForm.value.isStandard
+      areaCode: this.createCountryForm.value.areaCode?.trim() ?? '',
+      prefix: this.createCountryForm.value.prefix ?? 0
     };
   }
 

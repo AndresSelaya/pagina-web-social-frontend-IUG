@@ -1,39 +1,86 @@
 <ng-container *ngIf="isCreateMode;  else deleteTemplate">
   <form [formGroup]="createCountryForm" (ngSubmit)="onSubmit()">
     <div class="create-form m-4">
-      <div class="form-field mb-3">
-        <label for="name">{{ "COUNTRIES.LABEL.NAME" | translate }}</label>
-        <input
-          #countryNameInput
-          pInputText
-          type="text"
-          id="name"
-          formControlName="name"
-          autocomplete="off"
-        />
+      <!-- Error message general -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        {{ errorMessage | translate }}
       </div>
 
-      <div class="form-field mb-3">
-        <label for="abbreviation">{{ "COUNTRIES.LABEL.ABBREVIATION" | translate }}</label>
-        <input
-          pInputText
-          type="text"
-          id="abbreviation"
-          formControlName="abbreviation"
-          autocomplete="off"
-        />
+      <div class="form-field mb-2 d-flex align-items-start">
+        <div class="label-column">
+          <label for="name" class="form-label">{{ "COUNTRIES.LABEL.NAME" | translate }}</label>
+        </div>
+        <div class="input-column">
+          <input
+            #countryNameInput
+            pInputText
+            type="text"
+            id="name"
+            formControlName="name"
+            autocomplete="off"
+            class="form-control w-100"
+            [class.is-invalid]="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched"
+          />
+          <div class="invalid-feedback" *ngIf="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched">
+            <small *ngIf="createCountryForm.get('name')?.errors?.['required']">
+              {{ "COUNTRIES.ERROR.COUNTRY_NAME_REQUIRED" | translate }}
+            </small>
+            <small *ngIf="createCountryForm.get('name')?.errors?.['minlength']">
+              El nombre debe tener al menos 2 caracteres
+            </small>
+          </div>
+        </div>
       </div>
 
-      <div class="form-field mb-3">
-        <label for="isStandardChecked">{{ "COUNTRIES.LABEL.IS_STANDARD" | translate }}</label>
-        <p-toggleswitch formControlName="isStandard" class="flex">
-          <ng-template #handle let-checked="checked">
-            <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-check' : 'pi-times']"></i>
-          </ng-template>
-        </p-toggleswitch>
+      <div class="form-field mb-2 d-flex align-items-start">
+        <div class="label-column">
+          <label for="areaCode" class="form-label">{{ "COUNTRIES.LABEL.AREA_CODE" | translate }}</label>
+        </div>
+        <div class="input-column">
+          <input
+            pInputText
+            type="text"
+            id="areaCode"
+            formControlName="areaCode"
+            autocomplete="off"
+            class="form-control w-100"
+            [class.is-invalid]="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched"
+          />
+          <div class="invalid-feedback" *ngIf="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched">
+            <small *ngIf="createCountryForm.get('areaCode')?.errors?.['required']">
+              El código de área es requerido
+            </small>
+          </div>
+        </div>
       </div>
 
-      <div class="form-actions mt-3">  
+      <div class="form-field mb-2 d-flex align-items-start">
+        <div class="label-column">
+          <label for="prefix" class="form-label">{{ "COUNTRIES.LABEL.PREFIX" | translate }}</label>
+        </div>
+        <div class="input-column">
+          <input
+            pInputText
+            type="number"
+            id="prefix"
+            formControlName="prefix"
+            autocomplete="off"
+            class="form-control w-100"
+            [class.is-invalid]="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched"
+          />
+          <div class="invalid-feedback" *ngIf="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched">
+            <small *ngIf="createCountryForm.get('prefix')?.errors?.['required']">
+              El prefijo es requerido
+            </small>
+            <small *ngIf="createCountryForm.get('prefix')?.errors?.['min']">
+              El prefijo debe ser mayor a 0
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions mt-2 d-flex justify-content-center gap-2">  
         <button
             type="submit"
             class="bttn btn-save"
@@ -42,13 +89,13 @@
             {{ 'BUTTONS.SAVE' | translate }}
         </button>
 
-        <button 
+        <button
             type="button" 
             class="bttn btn-cancel"
             (click)="closeModal()">
             <i class="bi bi-x-lg"></i>
             {{ 'BUTTONS.CANCEL' | translate }}
-        </button>
+        </button> 
       </div>
     </div>
   </form>

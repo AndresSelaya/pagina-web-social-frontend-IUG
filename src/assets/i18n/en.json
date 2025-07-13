@@ -250,7 +250,9 @@
       "EDIT_COUNTRY": "Edit Country"
     },
     "LABEL": {
-      "NAME": "Name",
+      "NAME": "Country Name",
+      "AREA_CODE": "Area Code",
+      "PREFIX": "Prefix",
       "ABBREVIATION": "Abbreviation",
       "IS_STANDARD": "Is Standard?"
     },
@@ -284,6 +286,7 @@
       "COUNTRY_NAME_REQUIRED": "Country name required",
       "ABBREVIATION_REQUIRED": "Abbreviation required",
       "CREATION_NOT_SUPPORTED": "Country creation is not supported with current API",
+      "CREATION_FAILED": "Failed to create country",
       "ALREADY_EXISTS": "Country already exists"
     }
   },

@@ -85,17 +85,17 @@ export class CountryTableComponent {
     this.columnsHeaderFieldCoutries = [
       {
         field: 'countryName',
-        header: this.translate.instant(_('COUNTRIES.TABLE.NAME')),
+        header: this.translate.instant(_('COUNTRIES.LABEL.NAME')),
         styles: { width: '200px' },
       },
       {
         field: 'areaCode',
-        header: this.translate.instant(_('COUNTRIES.TABLE.AREA_CODE')),
+        header: this.translate.instant(_('COUNTRIES.LABEL.AREA_CODE')),
         styles: { width: '120px' },
       },
       {
         field: 'prefix',
-        header: this.translate.instant(_('COUNTRIES.TABLE.PREFIX')),
+        header: this.translate.instant(_('COUNTRIES.LABEL.PREFIX')),
         styles: { width: '100px' },
       },
     ];
