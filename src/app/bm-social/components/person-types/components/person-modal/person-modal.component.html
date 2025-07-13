@@ -21,12 +21,14 @@
                     type="submit" 
                     class="bttn btn-save"
                     [disabled]="createPersonForm.invalid || isLoading">
-                    <i class="bi bi-check-lg"></i>
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <i *ngIf="!isLoading" class="bi bi-check-lg"></i>
                     {{ 'BUTTONS.SAVE' | translate }}
                 </button>
                 <button 
                     type="button" 
                     class="bttn btn-cancel"
+                    [disabled]="isLoading"
                     (click)="closeModal()">
                     <i class="bi bi-x-lg"></i>
                     {{ 'BUTTONS.CANCEL' | translate }}
@@ -47,13 +49,16 @@
             <button 
                 type="button"
                 class="bttn btn-delete"
+                [disabled]="isLoading"
                 (click)="onDeleteConfirm()">
-                <i class="bi bi-trash"></i>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <i *ngIf="!isLoading" class="bi bi-trash"></i>
                 {{ 'BUTTONS.DELETE' | translate }}
             </button>
             <button 
                 type="button" 
                 class="bttn btn-cancel"
+                [disabled]="isLoading"
                 (click)="closeModal()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

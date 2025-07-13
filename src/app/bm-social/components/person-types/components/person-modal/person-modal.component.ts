@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { PersonTypeUtils } from '../../utils/person-type.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, finalize, of, switchMap } from 'rxjs';
+import { catchError, finalize, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-person-modal',
@@ -35,12 +35,16 @@ export class PersonModalComponent {
 
   onDeleteConfirm(): void {
     this.isLoading = true;
+    this.errorMessage = null;
+    
     if(this.personToDelete){
       this.personUtils.deletePerson(this.personToDelete).subscribe({
         next: () => {
           this.isLoading = false;
           this.confirmDelete.emit(); 
           this.closeModal();
+          // Refrescar la tabla después de eliminar
+          this.personUtils.refreshPersons().subscribe();
         },
         error: (error) => {
           this.isLoading = false;
@@ -60,10 +64,24 @@ export class PersonModalComponent {
     this.personUtils.personExists(personName).pipe(
       switchMap(exists => this.handlePersonExistence(exists, personName)),
       catchError(err => this.handleError('PERSON.ERROR.CHECKING_DUPLICATE', err)),
-      finalize(() => this.isLoading = false)
-    ).subscribe();
-
-    this.handleClose();
+      finalize(() => {
+        this.isLoading = false;
+        // Solo cerrar el modal si la creación fue exitosa
+        if (!this.errorMessage) {
+          this.handleClose();
+        }
+      })
+    ).subscribe({
+      next: (result) => {
+        if (result) {
+          // Creación exitosa
+          this.handleClose();
+        }
+      },
+      error: (err) => {
+        console.error('Error in creation process:', err);
+      }
+    });
   }
 
   private shouldPreventSubmission(): boolean {
@@ -86,6 +104,12 @@ export class PersonModalComponent {
     }
 
     return this.personUtils.createNewPerson(personName).pipe(
+      tap((createdPerson) => {
+        if (createdPerson) {
+          // Refrescar la tabla después de crear
+          this.personUtils.refreshPersons().subscribe();
+        }
+      }),
       catchError(err => this.handleError('PERSON.ERROR.CREATION_FAILED', err))
     );
   }

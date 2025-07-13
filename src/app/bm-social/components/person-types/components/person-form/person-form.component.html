@@ -23,12 +23,14 @@
                 type="submit" 
                 class="bttn btn-save"
                 [disabled]="editPersonForm.invalid || !editPersonForm.dirty || isSaving">
-                <i class="bi bi-check-lg"></i>
+                <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <i *ngIf="!isSaving" class="bi bi-check-lg"></i>
                 {{ 'BUTTONS.SAVE' | translate }}
             </button>
             <button 
                 type="button" 
                 class="bttn btn-cancel"
+                [disabled]="isSaving"
                 (click)="clearForm()">
                 <i class="bi bi-x-lg"></i>
                 {{ 'BUTTONS.CANCEL' | translate }}

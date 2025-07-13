@@ -96,6 +96,7 @@ export class PersonFormComponent {
   }
 
   private handleSaveSuccess(savedPerson: PersonType): void {
+    this.isSaving = false;
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('PERSON.MESSAGE.SUCCESS'),
@@ -103,6 +104,8 @@ export class PersonFormComponent {
     });
     this.personStateService.setPersonTypeToEdit(null);
     this.clearForm();
+    // Refrescar la tabla después de guardar
+    this.personUtils.refreshPersons().subscribe();
   }
 
   private handleSaveError(error: any): void {
