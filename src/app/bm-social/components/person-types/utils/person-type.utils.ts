@@ -33,16 +33,14 @@ export class PersonTypeUtils {
   /**
    * Creates a new person with validation
    * @param name - Text for the new person
-   * @param companyId - Company ID (defaults to 1)
    * @returns Observable that emits the created person
    */
-  createNewPerson(name: string, companyId: number = 1): Observable<PersonType> {
+  createNewPerson(name: string): Observable<PersonType> {
     if (!name?.trim()) {
       return throwError(() => new Error('Person name cannot be empty'));
     }
 
     const newPerson: CreatePersonTypeRequest = {
-      companyId,
       personTypeName: name.trim(),
       version: 1
     };
@@ -138,7 +136,6 @@ export class PersonTypeUtils {
       switchMap((validatedPerson: PersonType) => {
         const updateRequest: UpdatePersonTypeRequest = {
           personTypeId: validatedPerson.personTypeId,
-          companyId: validatedPerson.companyId,
           personTypeName: validatedPerson.personTypeName,
           version: validatedPerson.version
         };

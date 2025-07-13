@@ -57,7 +57,7 @@ export class PersonFormComponent {
   }
 
   private loadPersonData(person: PersonType): void {
-    this.editPersonForm.patchValue({ person: person.personTypeName });
+    this.editPersonForm.patchValue({ name: person.personTypeName });
   }
 
   clearForm(): void {
