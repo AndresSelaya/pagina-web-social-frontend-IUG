@@ -31,36 +31,42 @@ export class CountryUtils {
 
   /**
    * Creates a new country with validation
-   * @param name - Name for the new country
+   * @param countryName - Name for the new country
+   * @param areaCode - Area code for the country
+   * @param prefix - Prefix for the country
    * @returns Observable that completes when country is created
    */
-  createNewCountry(nameC: string, labelC: string, isDefaultC: boolean): Observable<void> {
-    if (!nameC?.trim()) {
+  createNewCountry(countryName: string, areaCode: string, prefix: number): Observable<Country> {
+    if (!countryName?.trim()) {
       return throwError(() => new Error('Country name cannot be empty'));
     }
+    if (!areaCode?.trim()) {
+      return throwError(() => new Error('Area code cannot be empty'));
+    }
+    if (!prefix || prefix <= 0) {
+      return throwError(() => new Error('Prefix must be a positive number'));
+    }
 
-    return new Observable<void>(subscriber => {
-      this.countryService.addCountry({
-        name: nameC.trim(),
-        label: labelC.trim(),
-        isDefault: isDefaultC
-      });
+    const newCountry: Omit<Country, 'countryId' | 'companyId'> = {
+      countryName: countryName.trim(),
+      areaCode: areaCode.trim(),
+      prefix: prefix,
+      currencyId: 1, // Default value
+      version: 1 // Default value
+    };
 
-      // Complete the observable after operation
-      subscriber.next();
-      subscriber.complete();
-    });
+    return this.countryService.addCountry(newCountry);
   }
 
   /**
    * Checks if a COUNTRY exists (case-insensitive comparison)
-   * @param name - Name to check
+   * @param countryName - Name to check
    * @returns Observable emitting boolean indicating existence
    */
-  countryExists(name: string): Observable<boolean> {
+  countryExists(countryName: string): Observable<boolean> {
     return this.countryService.getAllCountries().pipe(
       map(countries => countries.some(
-        c => c.name.toLowerCase() === name.toLowerCase()
+        c => c.countryName.toLowerCase() === countryName.toLowerCase()
       )),
       catchError(err => {
         return throwError(() => new Error('Failed to check country existence'));
@@ -74,7 +80,7 @@ export class CountryUtils {
    */
   getCountriesSortedByName(): Observable<Country[]> {
     return this.countryService.getAllCountries().pipe(
-      map(countries => [...countries].sort((a, b) => a.name.localeCompare(b.name))),
+      map(countries => [...countries].sort((a, b) => a.countryName.localeCompare(b.countryName))),
       catchError(err => {
         return throwError(() => new Error('Failed to sort countries'));
       })
@@ -99,18 +105,15 @@ export class CountryUtils {
  * @returns Observable that completes when the deletion is done
  */
   deleteCountry(id: number): Observable<void> {
-    // return this.checkCountryUsage(id).pipe(
-    //   switchMap(isUsed => {
-    //     if (isUsed) {
-    //       return throwError(() => new Error('Cannot delete register: it is in use by other entities'));
-    //     }
-    //     return this.countryService.deleteCountry(id);
-    //   }),
-    //   catchError(error => {
-    //     return throwError(() => error);
-    //   })
-    // );
-    return this.countryService.deleteCountry(id);
+    if (!id || id <= 0) {
+      return throwError(() => new Error('Invalid country ID'));
+    }
+
+    return this.countryService.deleteCountry(id).pipe(
+      catchError(err => {
+        return throwError(() => new Error('Failed to delete country'));
+      })
+    );
   }
 
   /**
@@ -131,22 +134,13 @@ export class CountryUtils {
  * @returns Observable that completes when the update is done
  */
   updateCountry(country: Country): Observable<Country> {
-    if(!country.id) {
+    if(!country.countryId) {
       return throwError(() => new Error('Invalid country data'));
     }
 
-    return this.countryService.getCountryById(country.id).pipe(
-      take(1),
-      switchMap((currentCountry) => {
-        if(!currentCountry) {
-          return throwError(() => new Error('Country not found'));
-        }
-
-        if (currentCountry.version !== country.version) {
-          return throwError(() => new Error('Conflict detected: country version mismatch'));
-        }
-
-        return this.countryService.updateCountry(country);
+    return this.countryService.updateCountry(country).pipe(
+      catchError(err => {
+        return throwError(() => new Error('Failed to update country'));
       })
     );
   }

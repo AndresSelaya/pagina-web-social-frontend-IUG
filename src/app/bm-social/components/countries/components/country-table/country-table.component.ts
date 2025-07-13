@@ -21,31 +21,41 @@ export class CountryTableComponent {
   private readonly messageService = inject(MessageService);
   visibleModal: boolean = false;
   modalType: 'create' | 'delete' = 'create';
-  selectedCountry: number | null = null;
+  selectedCountry: Country | null = null;
   CountryName: string = '';
   @ViewChild('countryModal') countryModalComponent!: CountryModalComponent;
 
   handleTableEvents(event: { type: 'create' | 'delete', data?: any }): void {
     this.modalType = event.type;
     if (event.type === 'delete' && event.data) {
-      this.selectedCountry = event.data;
-
-      this.countryUtils.getCountryById(this.selectedCountry!).subscribe({
-        next: (country) => {
-          this.CountryName = country?.name ?? '';
-        },
-        error: (err) => {
-          console.error('No se pudo obtener el título:', err);
-          this.CountryName = '';
-        }
-      });
+      // Si event.data es el objeto completo del país
+      if (event.data.countryId) {
+        this.selectedCountry = event.data;
+        this.CountryName = event.data.countryName ?? '';
+      } else {
+        // Si event.data es solo el ID, buscar el objeto completo
+        const countryId = event.data;
+        this.countryUtils.getCountryById(countryId).subscribe({
+          next: (country) => {
+            if (country) {
+              this.selectedCountry = country;
+              this.CountryName = country.countryName ?? '';
+            }
+          },
+          error: (err) => {
+            console.error('No se pudo obtener el país:', err);
+            this.CountryName = '';
+            this.selectedCountry = null;
+          }
+        });
+      }
     }
     this.visibleModal = true;
   }
   columnsHeaderFieldCoutries: any[] = [];
   // userCountriesPreferences: UserPreference = {};
   tableKey: string = 'Countries'
-  dataKeys = ['name', 'abbreviation', 'isStandard'];
+  dataKeys = ['countryName', 'areaCode', 'prefix'];
 
   private langSubscription!: Subscription;
 
@@ -60,7 +70,7 @@ export class CountryTableComponent {
     this.loadColumnsCountries();
     // this.userCountriesPreferences = this.userPreferenceService.getUserPreferences(this.tableKey, this.columnsHeaderFieldCoutries);
     this.langSubscription = this.translate.onLangChange.subscribe(() => {
-      // this.loadColumnsCountries();
+      this.loadColumnsCountries();
       // this.userCountriesPreferences = this.userPreferenceService.getUserPreferences(this.tableKey, this.columnsHeaderFieldCoutries);
     });
     this.countryService.loadInitialData().pipe(
@@ -70,10 +80,10 @@ export class CountryTableComponent {
 
   readonly countries = computed(() => {
     return this.countryService.countries().map(country => ({
-      id: country.id,
-      name: country.name,
-      abbreviation: country.label,
-      isStandard: country.isDefault
+      countryId: country.countryId,
+      countryName: country.countryName,
+      areaCode: country.areaCode,
+      prefix: country.prefix
     }));
   });
 
@@ -84,22 +94,19 @@ export class CountryTableComponent {
   loadColumnsCountries(): void {
     this.columnsHeaderFieldCoutries = [
       {
-        field: 'name',
-        header: this.translate.instant(_('COUNTRIES.TABLE.NAME')),
+        field: 'countryName',
+        header: this.translate.instant('COUNTRIES.TABLE.NAME'),
+        styles: { width: '200px' },
+      },
+      {
+        field: 'areaCode',
+        header: this.translate.instant('COUNTRIES.TABLE.AREA_CODE'),
         styles: { width: '120px' },
       },
       {
-        field: 'abbreviation',
-        header: this.translate.instant(_('COUNTRIES.TABLE.ABBREVIATION')),
-        styles: { width: '120px' },
-      },
-      {
-        field: 'isStandard',
-        filter: {
-          type: 'boolean'
-        },
-        header: this.translate.instant(_('COUNTRIES.TABLE.IS_STANDARD')),
-        styles: { width: '140px' },
+        field: 'prefix',
+        header: this.translate.instant('COUNTRIES.TABLE.PREFIX'),
+        styles: { width: '100px' },
       },
     ];
   }
@@ -122,15 +129,16 @@ export class CountryTableComponent {
   }
   editCountry(country: Country) {
     const countryToEdit: Country = {
-      id: country.id,
-      name: country.name,
-      label: country.label,
-      isDefault: country.isDefault,
-      createdAt: country.createdAt ?? '',
-      updatedAt: country.updatedAt ?? ''
+      countryId: country.countryId,
+      areaCode: country.areaCode,
+      companyId: country.companyId,
+      countryName: country.countryName,
+      currencyId: country.currencyId,
+      prefix: country.prefix,
+      version: country.version
     };
 
-    this.countryUtils.getCountryById(countryToEdit.id).subscribe({
+    this.countryUtils.getCountryById(countryToEdit.countryId).subscribe({
       next: (fullCountry) => {
         if (fullCountry) {
           this.countryStateService.setCountryToEdit(fullCountry);

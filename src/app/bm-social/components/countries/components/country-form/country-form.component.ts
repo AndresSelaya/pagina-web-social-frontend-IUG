@@ -44,9 +44,9 @@ export class CountryFormComponent {
 
   private initForm(): void {
     this.countryForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      abbreviation: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      isStandard: new FormControl(false)
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      areaCode: new FormControl('', [Validators.required]),
+      prefix: new FormControl('', [Validators.required, Validators.min(1)])
     });
   }
 
@@ -61,9 +61,9 @@ export class CountryFormComponent {
 
   private loadCountryData(country: Country): void {
     this.countryForm.patchValue({
-      name: country.name,
-      abbreviation: country.label,
-      isStandard: country.isDefault
+      name: country.countryName,
+      areaCode: country.areaCode,
+      prefix: country.prefix
     });
   }
 
@@ -82,9 +82,9 @@ export class CountryFormComponent {
     this.isSaving = true;
     const updatedCountry: Country = {
       ...this.currentCountry,
-      name: this.countryForm.value.name,
-      label: this.countryForm.value.abbreviation,
-      isDefault: this.countryForm.value.isStandard
+      countryName: this.countryForm.value.name,
+      areaCode: this.countryForm.value.areaCode,
+      prefix: this.countryForm.value.prefix
     };
 
     this.subscriptions.add(
@@ -138,8 +138,8 @@ export class CountryFormComponent {
   }
 
   onRefresh(): void {
-    if (this.currentCountry?.id) {
-      localStorage.setItem('selectedCountryId', this.currentCountry.id.toString());
+    if (this.currentCountry?.countryId) {
+      localStorage.setItem('selectedCountryId', this.currentCountry.countryId.toString());
       window.location.reload();
     }
   }

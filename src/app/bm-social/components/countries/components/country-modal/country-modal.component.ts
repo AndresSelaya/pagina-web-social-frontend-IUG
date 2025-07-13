@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild }
 import { CountryUtils } from '../../utils/country.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, finalize, of, switchMap } from 'rxjs';
+import { Country } from '../../../../interfaces/country';
 
 @Component({
   selector: 'app-country-modal',
@@ -12,7 +13,7 @@ export class CountryModalComponent {
   private readonly countryUtils = inject(CountryUtils);
 
   @Input() modalType: 'create' | 'delete' = 'create';
-  @Input() countryToDelete: number | null = null;
+  @Input() countryToDelete: Country | null = null;
   @Input() countryName: string | null = null;
   @Output() isVisibleModal = new EventEmitter<boolean>();
   @Output() countryCreated = new EventEmitter<void>();
@@ -24,8 +25,8 @@ export class CountryModalComponent {
 
   readonly createCountryForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-    abbreviation: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    isStandard: new FormControl(false)
+    areaCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    prefix: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(9999)])
   });
 
   ngOnInit(): void {
@@ -40,11 +41,11 @@ export class CountryModalComponent {
     if (this.shouldPreventSubmission()) return;
 
     this.prepareForSubmission();
-    const { name, label, isDefault } = this.getCountryFormValues();
+    const { name, areaCode, prefix } = this.getCountryFormValues();
 
     this.countryUtils.countryExists(name).pipe(
-      switchMap(exists => this.handleCountryExistence(exists, name, label, isDefault)),
-      catchError(err => this.handleError('COUNTRY.ERROR.CHECKING_DUPLICATE', err)),
+      switchMap(exists => this.handleCountryExistence(exists, name, areaCode, prefix)),
+      catchError(err => this.handleError('COUNTRIES.ERROR.CREATION_FAILED', err)),
       finalize(() => this.isLoading = false)
     ).subscribe(result => {
       if (result !== null) {
@@ -55,14 +56,14 @@ export class CountryModalComponent {
   }
   onDeleteConfirm(): void {
     this.isLoading = true;
-    if (this.countryToDelete) {
-      this.countryUtils.deleteCountry(this.countryToDelete).subscribe({
+    if (this.countryToDelete && this.countryToDelete.countryId) {
+      this.countryUtils.deleteCountry(this.countryToDelete.countryId).subscribe({
         next: () => {
           this.isLoading = false;
           this.confirmDelete.emit({
             severity: 'success',
-            summary: 'MESSAGE.SUCCESS',
-            detail: 'MESSAGE.DELETE_SUCCESS'
+            summary: 'TABLE.MESSAGE.DELETE_SUCCESS',
+            detail: 'TABLE.MESSAGE.DELETE_SUCCESS'
           });
           this.closeModal();
         },
@@ -72,26 +73,30 @@ export class CountryModalComponent {
           console.error('Delete error:', error);
           this.confirmDelete.emit({
             severity: 'error',
-            summary: 'MESSAGE.ERROR',
+            summary: 'TABLE.MESSAGE.DELETE_FAILED',
             detail: this.errorMessage?.includes('it is in use by other entities') ? 'MESSAGE.DELETE_ERROR_IN_USE' : 'MESSAGE.DELETE_FAILED'
           });
           this.closeModal();
         }
       });
+    } else {
+      console.error('No country selected for deletion');
+      this.isLoading = false;
     }
   }
   private handleCountryExistence(
     exists: boolean,
     name: string,
-    label: string,
-    isDefault: boolean
+    areaCode: string,
+    prefix: number
   ) {
     if (exists) {
-      this.errorMessage = 'COUNTRY.ERROR.ALREADY_EXISTS';
+      this.errorMessage = 'COUNTRIES.ERROR.ALREADY_EXISTS';
       return of(null);
     }
-    return this.countryUtils.createNewCountry(name, label, isDefault).pipe(
-      catchError(err => this.handleError('COUNTRY.ERROR.CREATION_FAILED', err))
+    
+    return this.countryUtils.createNewCountry(name, areaCode, prefix).pipe(
+      catchError(err => this.handleError('COUNTRIES.ERROR.CREATION_FAILED', err))
     );
   }
   private shouldPreventSubmission(): boolean {
@@ -131,8 +136,8 @@ export class CountryModalComponent {
   private getCountryFormValues() {
     return {
       name: this.createCountryForm.value.name?.trim() ?? '',
-      label: this.createCountryForm.value.abbreviation?.trim() ?? '',
-      isDefault: !!this.createCountryForm.value.isStandard
+      areaCode: this.createCountryForm.value.areaCode?.trim() ?? '',
+      prefix: this.createCountryForm.value.prefix ?? 0
     };
   }
 

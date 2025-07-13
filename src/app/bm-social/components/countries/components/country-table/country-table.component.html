@@ -5,6 +5,7 @@
       [tableValues]="countries()"
       [columns]="columnsHeaderFieldCoutries"
       [dataKeys]="dataKeys"
+      [removeKey]="'countryId'"
       (onColumnChanges)="onUserCountriesPreferencesChanges($event)"
       (onCreateRegister)="visibleModal=true"
       (onCreateRegister)="handleTableEvents({ type: 'create' })"

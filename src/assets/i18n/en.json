@@ -250,12 +250,16 @@
       "EDIT_COUNTRY": "Edit Country"
     },
     "LABEL": {
-      "NAME": "Name",
+      "NAME": "Country Name",
+      "AREA_CODE": "Area Code",
+      "PREFIX": "Prefix",
       "ABBREVIATION": "Abbreviation",
       "IS_STANDARD": "Is Standard?"
     },
     "TABLE": {
-      "NAME": "Name",
+      "NAME": "Country Name",
+      "AREA_CODE": "Area Code",
+      "PREFIX": "Prefix",
       "ABBREVIATION": "Abbreviation",
       "IS_STANDARD": "Standard?",
       "COLUMNS_SELECTED": "{0} columns selected",
@@ -280,7 +284,10 @@
     },
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Country name required",
-      "ABBREVIATION_REQUIRED": "Abbreviation required"
+      "ABBREVIATION_REQUIRED": "Abbreviation required",
+      "CREATION_NOT_SUPPORTED": "Country creation is not supported with current API",
+      "CREATION_FAILED": "Failed to create country",
+      "ALREADY_EXISTS": "Country already exists"
     }
   },
   "PERSON": {
@@ -310,6 +317,12 @@
       "UPDATE_FAILED": "Update failed",
       "CONFLICT": "Version Conflict",
       "REFRESH_REQUIRED": "The person has been updated by another user. Please refresh to get the latest version."
+    }
+  },
+  "TABLE": {
+    "MESSAGE": {
+      "DELETE_SUCCESS": "Successfully deleted",
+      "DELETE_FAILED": "Failed to delete"
     }
   }
 }

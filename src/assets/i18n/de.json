@@ -250,12 +250,16 @@
       "EDIT_COUNTRY": "Land bearbeiten"
     },
     "LABEL": {
-      "NAME": "Land",
+      "NAME": "Ländername",
+      "AREA_CODE": "Bereichscode",
+      "PREFIX": "Vorwahl",
       "ABBREVIATION": "Kürzel",
       "IS_STANDARD": "Ist Standard?"
     },
     "TABLE": {
-      "NAME": "Land",
+      "NAME": "Ländername",
+      "AREA_CODE": "Bereichscode",
+      "PREFIX": "Vorwahl",
       "ABBREVIATION": "Kürzel",
       "IS_STANDARD": "Standard?",
       "COLUMNS_SELECTED": "{0} Spalten ausgewählt",
@@ -280,7 +284,10 @@
     },
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Land erforderlich",
-      "ABBREVIATION_REQUIRED": "Kürzel erforderlich"
+      "ABBREVIATION_REQUIRED": "Kürzel erforderlich",
+      "CREATION_NOT_SUPPORTED": "Ländererstellung wird von der aktuellen API nicht unterstützt",
+      "CREATION_FAILED": "Fehler beim Erstellen des Landes",
+      "ALREADY_EXISTS": "Land existiert bereits"
     }
   },
   "PERSON": {
@@ -310,6 +317,12 @@
       "UPDATE_FAILED": "Update fehlgeschlagen",
       "CONFLICT": "Versionskonflikt",
       "REFRESH_REQUIRED": "Bitte aktualisieren Sie die Seite, um die neuesten Daten zu sehen"
+    }
+  },
+  "TABLE": {
+    "MESSAGE": {
+      "DELETE_SUCCESS": "Erfolgreich gelöscht",
+      "DELETE_FAILED": "Fehler beim Löschen"
     }
   }
 }
