@@ -32,7 +32,7 @@ export class CountryTableComponent {
 
       this.countryUtils.getCountryById(this.selectedCountry!).subscribe({
         next: (country) => {
-          this.CountryName = country?.name ?? '';
+          this.CountryName = country?.countryName ?? '';
         },
         error: (err) => {
           console.error('No se pudo obtener el título:', err);
@@ -45,7 +45,7 @@ export class CountryTableComponent {
   columnsHeaderFieldCoutries: any[] = [];
   // userCountriesPreferences: UserPreference = {};
   tableKey: string = 'Countries'
-  dataKeys = ['name', 'abbreviation', 'isStandard'];
+  dataKeys = ['countryName', 'areaCode', 'prefix'];
 
   private langSubscription!: Subscription;
 
@@ -70,10 +70,10 @@ export class CountryTableComponent {
 
   readonly countries = computed(() => {
     return this.countryService.countries().map(country => ({
-      id: country.id,
-      name: country.name,
-      abbreviation: country.label,
-      isStandard: country.isDefault
+      countryId: country.countryId,
+      countryName: country.countryName,
+      areaCode: country.areaCode,
+      prefix: country.prefix
     }));
   });
 
@@ -84,22 +84,19 @@ export class CountryTableComponent {
   loadColumnsCountries(): void {
     this.columnsHeaderFieldCoutries = [
       {
-        field: 'name',
+        field: 'countryName',
         header: this.translate.instant(_('COUNTRIES.TABLE.NAME')),
+        styles: { width: '200px' },
+      },
+      {
+        field: 'areaCode',
+        header: this.translate.instant(_('COUNTRIES.TABLE.AREA_CODE')),
         styles: { width: '120px' },
       },
       {
-        field: 'abbreviation',
-        header: this.translate.instant(_('COUNTRIES.TABLE.ABBREVIATION')),
-        styles: { width: '120px' },
-      },
-      {
-        field: 'isStandard',
-        filter: {
-          type: 'boolean'
-        },
-        header: this.translate.instant(_('COUNTRIES.TABLE.IS_STANDARD')),
-        styles: { width: '140px' },
+        field: 'prefix',
+        header: this.translate.instant(_('COUNTRIES.TABLE.PREFIX')),
+        styles: { width: '100px' },
       },
     ];
   }
@@ -122,15 +119,16 @@ export class CountryTableComponent {
   }
   editCountry(country: Country) {
     const countryToEdit: Country = {
-      id: country.id,
-      name: country.name,
-      label: country.label,
-      isDefault: country.isDefault,
-      createdAt: country.createdAt ?? '',
-      updatedAt: country.updatedAt ?? ''
+      countryId: country.countryId,
+      areaCode: country.areaCode,
+      companyId: country.companyId,
+      countryName: country.countryName,
+      currencyId: country.currencyId,
+      prefix: country.prefix,
+      version: country.version
     };
 
-    this.countryUtils.getCountryById(countryToEdit.id).subscribe({
+    this.countryUtils.getCountryById(countryToEdit.countryId).subscribe({
       next: (fullCountry) => {
         if (fullCountry) {
           this.countryStateService.setCountryToEdit(fullCountry);

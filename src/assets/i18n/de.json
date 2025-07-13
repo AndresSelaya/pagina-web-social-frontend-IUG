@@ -255,7 +255,9 @@
       "IS_STANDARD": "Ist Standard?"
     },
     "TABLE": {
-      "NAME": "Land",
+      "NAME": "Ländername",
+      "AREA_CODE": "Bereichscode",
+      "PREFIX": "Vorwahl",
       "ABBREVIATION": "Kürzel",
       "IS_STANDARD": "Standard?",
       "COLUMNS_SELECTED": "{0} Spalten ausgewählt",
@@ -280,7 +282,9 @@
     },
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Land erforderlich",
-      "ABBREVIATION_REQUIRED": "Kürzel erforderlich"
+      "ABBREVIATION_REQUIRED": "Kürzel erforderlich",
+      "CREATION_NOT_SUPPORTED": "Ländererstellung wird von der aktuellen API nicht unterstützt",
+      "ALREADY_EXISTS": "Land existiert bereits"
     }
   },
   "PERSON": {

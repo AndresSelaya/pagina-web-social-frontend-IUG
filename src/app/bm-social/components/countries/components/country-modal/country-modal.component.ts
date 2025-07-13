@@ -87,12 +87,13 @@ export class CountryModalComponent {
     isDefault: boolean
   ) {
     if (exists) {
-      this.errorMessage = 'COUNTRY.ERROR.ALREADY_EXISTS';
+      this.errorMessage = 'COUNTRIES.ERROR.ALREADY_EXISTS';
       return of(null);
     }
-    return this.countryUtils.createNewCountry(name, label, isDefault).pipe(
-      catchError(err => this.handleError('COUNTRY.ERROR.CREATION_FAILED', err))
-    );
+    // Since we only have a GET endpoint, we cannot create countries
+    // Return an error message instead
+    this.errorMessage = 'COUNTRIES.ERROR.CREATION_NOT_SUPPORTED';
+    return of(null);
   }
   private shouldPreventSubmission(): boolean {
     return this.createCountryForm.invalid || this.isLoading;

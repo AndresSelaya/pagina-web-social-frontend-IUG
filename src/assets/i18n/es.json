@@ -250,7 +250,9 @@
       "IS_STANDARD": "¿Es estándar?"
     },
     "TABLE": {
-      "NAME": "Nombre",
+      "NAME": "Nombre del País",
+      "AREA_CODE": "Código de Área",
+      "PREFIX": "Prefijo",
       "ABBREVIATION": "Abreviatura",
       "IS_STANDARD": "¿Estándar?",
       "COLUMNS_SELECTED": "{0} columnas seleccionadas",
@@ -271,7 +273,9 @@
     },
     "ERROR": {
       "COUNTRY_NAME_REQUIRED": "Nombre de país requerido",
-      "ABBREVIATION_REQUIRED": "Abreviatura requerida"
+      "ABBREVIATION_REQUIRED": "Abreviatura requerida",
+      "CREATION_NOT_SUPPORTED": "La creación de países no está soportada con la API actual",
+      "ALREADY_EXISTS": "El país ya existe"
     }
   },
   "PERSON": {
