@@ -318,5 +318,11 @@
       "CONFLICT": "Versionskonflikt",
       "REFRESH_REQUIRED": "Bitte aktualisieren Sie die Seite, um die neuesten Daten zu sehen"
     }
+  },
+  "TABLE": {
+    "MESSAGE": {
+      "DELETE_SUCCESS": "Erfolgreich gelöscht",
+      "DELETE_FAILED": "Fehler beim Löschen"
+    }
   }
 }

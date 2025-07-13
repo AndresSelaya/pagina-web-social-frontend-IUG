@@ -307,5 +307,11 @@
       "UPDATE_SUCCESS": "Actualización exitosa",
       "UPDATE_FAILED": "Actualización fallida"
     }
+  },
+  "TABLE": {
+    "MESSAGE": {
+      "DELETE_SUCCESS": "Eliminado exitosamente",
+      "DELETE_FAILED": "Error al eliminar"
+    }
   }
 }

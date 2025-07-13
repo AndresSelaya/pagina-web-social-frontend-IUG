@@ -318,5 +318,11 @@
       "CONFLICT": "Version Conflict",
       "REFRESH_REQUIRED": "The person has been updated by another user. Please refresh to get the latest version."
     }
+  },
+  "TABLE": {
+    "MESSAGE": {
+      "DELETE_SUCCESS": "Successfully deleted",
+      "DELETE_FAILED": "Failed to delete"
+    }
   }
 }

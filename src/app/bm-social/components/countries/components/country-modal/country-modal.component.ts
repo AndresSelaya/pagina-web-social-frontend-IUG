@@ -62,8 +62,8 @@ export class CountryModalComponent {
           this.isLoading = false;
           this.confirmDelete.emit({
             severity: 'success',
-            summary: 'MESSAGE.SUCCESS',
-            detail: 'MESSAGE.DELETE_SUCCESS'
+            summary: 'TABLE.MESSAGE.DELETE_SUCCESS',
+            detail: 'TABLE.MESSAGE.DELETE_SUCCESS'
           });
           this.closeModal();
         },
@@ -73,7 +73,7 @@ export class CountryModalComponent {
           console.error('Delete error:', error);
           this.confirmDelete.emit({
             severity: 'error',
-            summary: 'MESSAGE.ERROR',
+            summary: 'TABLE.MESSAGE.DELETE_FAILED',
             detail: this.errorMessage?.includes('it is in use by other entities') ? 'MESSAGE.DELETE_ERROR_IN_USE' : 'MESSAGE.DELETE_FAILED'
           });
           this.closeModal();
