@@ -111,6 +111,23 @@ body {
 // FORMS create - delete (modal) & edit
 // create (modal in New)
 .create-form {
+  .alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    
+    &.alert-danger {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c2c7;
+      
+      i {
+        color: #dc3545;
+      }
+    }
+  }
 
   .form-field {
     display: flex;
@@ -143,6 +160,11 @@ body {
         box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
       }
     }
+  }
+  
+  .form-actions {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
   }
 }
 

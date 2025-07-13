@@ -19,10 +19,9 @@
             id="name"
             formControlName="name"
             autocomplete="off"
-            class="form-control w-100"
-            [class.is-invalid]="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched"
+            [class.error]="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched"
           />
-          <div class="invalid-feedback" *ngIf="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched">
+          <div class="error-message" *ngIf="createCountryForm.get('name')?.invalid && createCountryForm.get('name')?.touched">
             <small *ngIf="createCountryForm.get('name')?.errors?.['required']">
               {{ "COUNTRIES.ERROR.COUNTRY_NAME_REQUIRED" | translate }}
             </small>
@@ -44,10 +43,9 @@
             id="areaCode"
             formControlName="areaCode"
             autocomplete="off"
-            class="form-control w-100"
-            [class.is-invalid]="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched"
+            [class.error]="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched"
           />
-          <div class="invalid-feedback" *ngIf="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched">
+          <div class="error-message" *ngIf="createCountryForm.get('areaCode')?.invalid && createCountryForm.get('areaCode')?.touched">
             <small *ngIf="createCountryForm.get('areaCode')?.errors?.['required']">
               El código de área es requerido
             </small>
@@ -66,10 +64,9 @@
             id="prefix"
             formControlName="prefix"
             autocomplete="off"
-            class="form-control w-100"
-            [class.is-invalid]="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched"
+            [class.error]="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched"
           />
-          <div class="invalid-feedback" *ngIf="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched">
+          <div class="error-message" *ngIf="createCountryForm.get('prefix')?.invalid && createCountryForm.get('prefix')?.touched">
             <small *ngIf="createCountryForm.get('prefix')?.errors?.['required']">
               El prefijo es requerido
             </small>
@@ -80,7 +77,7 @@
         </div>
       </div>
 
-      <div class="form-actions mt-2 d-flex justify-content-center gap-2">  
+      <div class="form-actions mt-3">  
         <button
             type="submit"
             class="bttn btn-save"
