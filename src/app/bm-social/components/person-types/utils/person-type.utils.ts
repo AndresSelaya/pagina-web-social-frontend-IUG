@@ -43,7 +43,7 @@ export class PersonTypeUtils {
 
     const newPerson: CreatePersonTypeRequest = {
       companyId,
-      name: name.trim(),
+      personTypeName: name.trim(),
       version: 1
     };
 
@@ -63,7 +63,7 @@ export class PersonTypeUtils {
   personExists(name: string): Observable<boolean> {
     return this.personService.getAllPersonTypes().pipe(
       map(persons => persons.some(
-        p => p.name.toLowerCase() === name.toLowerCase()
+        p => p.personTypeName.toLowerCase() === name.toLowerCase()
       )),
       catchError(err => {
         console.error('Error checking person existence:', err);
@@ -78,7 +78,7 @@ export class PersonTypeUtils {
    */
   getPersonsSortedByName(): Observable<PersonType[]> {
     return this.personService.getAllPersonTypes().pipe(
-      map(persons => [...persons].sort((a, b) => a.name.localeCompare(b.name))),
+      map(persons => [...persons].sort((a, b) => a.personTypeName.localeCompare(b.personTypeName))),
       catchError(err => {
         console.error('Error sorting persons:', err);
         return throwError(() => new Error('Failed to sort persons'));
@@ -139,7 +139,7 @@ export class PersonTypeUtils {
         const updateRequest: UpdatePersonTypeRequest = {
           personTypeId: validatedPerson.personTypeId,
           companyId: validatedPerson.companyId,
-          name: validatedPerson.name,
+          personTypeName: validatedPerson.personTypeName,
           version: validatedPerson.version
         };
         return this.personService.updatePersonType(updateRequest);

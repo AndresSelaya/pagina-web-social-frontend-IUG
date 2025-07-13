@@ -9,7 +9,7 @@ import { CreatePersonTypeRequest, PersonType, UpdatePersonTypeRequest } from '..
 })
 export class PersonTypeService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment. BACK_END_HOST_IUG}/person-type`;
+  private readonly apiUrl = `${environment.BACK_END_HOST_IUG}/persontypes`;
 
   private readonly httpOptions = {
     headers: new HttpHeaders({

@@ -57,7 +57,7 @@ export class PersonFormComponent {
   }
 
   private loadPersonData(person: PersonType): void {
-    this.editPersonForm.patchValue({ person: person.name });
+    this.editPersonForm.patchValue({ person: person.personTypeName });
   }
 
   clearForm(): void {
@@ -75,7 +75,7 @@ export class PersonFormComponent {
     this.isSaving = true;
     const updatedPerson: PersonType = {
       ...this.currentPerson,
-      name: this.editPersonForm.value.name
+      personTypeName: this.editPersonForm.value.name
     };
 
     this.subscriptions.add(
