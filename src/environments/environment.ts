@@ -11,8 +11,8 @@ export const environment = {
   BACK_END_HOST_PROD: 'https://devpws.cs.umss.edu.bo/api/v1',
   BACK_END_HOST_DEV: 'https://devpws.cs.umss.edu.bo/api/v1',
   BACK_END_HOST_DEV_AUTH: 'https://devpws.cs.umss.edu.bo/api/auth',
-  BACK_END_HOST_IUG: 'http://localhost:8081/api',
-
+  BACK_END_HOST_IUG: 'http://vps54072.piramide.de/api',
+  BACK_END_PROD_IUG: 'http://localhost:8081/api',
   //Facebook data
   GRAPH_FACEBOOK_API_URL: 'https://graph.facebook.com',
   FACEBOOK_PAGE_ID: '622983367573605',

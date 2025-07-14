@@ -22,7 +22,7 @@ export interface CustomerTypeResponse {
 export class CustomerTypeService {
   private selectedTypeSubject = new BehaviorSubject<number>(3);
   selectedType$ = this.selectedTypeSubject.asObservable();
-  private apiUrl = 'http://localhost:8081/api/customertypes';
+  private apiUrl = `${environment.BACK_END_HOST_IUG}/customertypes`;
 
   constructor(private http: HttpClient) {}
 
