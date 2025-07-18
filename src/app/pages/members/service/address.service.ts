@@ -5,10 +5,11 @@ import { environment } from '../../../../environments/environment';
 
 export interface Address {
   addressId: number;
-  version: number;
+  version?: number;
   name1: string;
   name2: string | null;
-  name3: string | null;
+  name3?: string | null;
+  imageData?: string | null; // base64 string
 }
 
 export interface AddressWithCustomerInfo extends Address {

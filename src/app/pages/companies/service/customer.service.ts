@@ -8,6 +8,7 @@ export interface Customer {
   customerNumber: string;
   name1: string;
   name2: string | null;
+  imageData?: string | null; // base64 string
 }
 
 export interface CustomerInfo {

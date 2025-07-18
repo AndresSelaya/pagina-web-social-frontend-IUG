@@ -9,11 +9,10 @@
 <div class="companies-container">
   <div class="company-card" *ngFor="let customer of customers">
     <div class="company-photo">
-      <img src="assets/user-icon.png" alt="Default Company Logo" class="company-image">
+      <img *ngIf="customer.imageData" [src]="'data:image/jpeg;base64,' + customer.imageData" alt="Imagen del cliente" class="company-image">
+      <img *ngIf="!customer.imageData" src="assets/user-icon.png" alt="Default Company Logo" class="company-image">
     </div>
     <h3>{{ customer.name1 }}</h3>
-    <p class="customer-number">Número: {{ customer.customerNumber }}</p>
-    <p class="customer-id">ID: {{ customer.customerId }}</p>
   </div>
 </div>
 
