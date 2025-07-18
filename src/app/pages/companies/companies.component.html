@@ -9,8 +9,8 @@
 <div class="companies-container">
   <div class="company-card" *ngFor="let customer of customers">
     <div class="company-photo">
-      <img *ngIf="customer.imageData" [src]="'data:image/jpeg;base64,' + customer.imageData" alt="Imagen del cliente" class="company-image">
-      <img *ngIf="!customer.imageData" src="assets/user-icon.png" alt="Default Company Logo" class="company-image">
+      <img *ngIf="customer.imageData" [src]="'data:image/jpeg;base64,' + customer.imageData" alt="Imagen del cliente" class="company-image company-image-rect">
+      <img *ngIf="!customer.imageData" src="assets/user-icon.png" alt="Default Company Logo" class="company-image company-image-circle">
     </div>
     <h3>{{ customer.name1 }}</h3>
   </div>

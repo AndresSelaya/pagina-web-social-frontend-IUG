@@ -92,11 +92,28 @@
 }
 
 .company-image {
+  width: 120px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.company-image-rect {
+  border-radius: 10px;
+  background: #fff;
+  object-fit: contain;
+  /* Opcional: borde gris claro para mejor contraste */
+  border: 2px solid #e0e0e0;
+}
+
+.company-image-circle {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #e0e0e0;
+  background: #fff;
 }
 
 .company-card h3 {

@@ -43,8 +43,6 @@
     </div>
     <h3>{{ address.name1 }}{{ address.name2 ? ' ' + address.name2 : '' }}</h3>
     <p *ngIf="address.name3">{{ address.name3 }}</p>
-    <p>Address ID: {{ address.addressId }}</p>
     <p *ngIf="address.customerName" class="customer-name"> {{ address.customerName }}</p>
-    <p *ngIf="address.customerId" class="customer-id">Customer ID: {{ address.customerId }}</p>
   </div>
 </div>
