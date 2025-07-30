@@ -1,5 +1,5 @@
 <h1 class="companies-title">{{ 'NAVBAR_PAGES.FIRMAS'| translate }}</h1>
-<!-- Controles para cambiar el idType (opcional) -->
+
 <div class="controls-container">
   <label for="idType">Customer Type:</label>
   <select id="idType" (change)="changeIdType($event)" [(ngModel)]="idType">
@@ -12,7 +12,7 @@
       <img *ngIf="customer.address?.imageBase64" [src]="'data:image/jpeg;base64,' + customer.address.imageBase64" alt="Imagen del cliente" class="company-image company-image-rect">
       <img *ngIf="!customer.address?.imageBase64" src="assets/firma.webp" alt="Default Company Logo" class="company-image company-image-circle">
     </div>
-    <div class="customer-branch"><strong>Industria:</strong> {{ customer.branch?.name }}</div>
+    <div class="customer-branch"><strong>Industria:</strong> {{ customer.branch.name }}</div>
     <h3 *ngIf="customer.address?.name1">{{ customer.address.name1 }}</h3>
     <div class="customer-city" *ngIf="customer.address?.city?.name"><strong>Ciudad:</strong> {{ customer.address.city.name }}</div>
     <div class="customer-contact" *ngIf="customer.contact">
