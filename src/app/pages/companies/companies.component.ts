@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService, Customer } from './service/customer.service';
+import { CustomerService, CustomerIU } from './service/customer.service';
 import { CustomerType, CustomerTypeService } from './service/customer-type.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CustomerType, CustomerTypeService } from './service/customer-type.servi
   styleUrls: ['companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
-  customers: Customer[] = [];
+  customers: CustomerIU[] = [];
   idType: number;
   customerTypes: CustomerType[] = [];
 
@@ -32,17 +32,17 @@ export class CompaniesComponent implements OnInit {
   }
 
   /**
-   * Método para cargar customers por tipo y dirección
-   * @param idType ID del tipo de customer y dirección
+   * Método para cargar customers usando el nuevo endpoint CustomerIU
+   * @param idType ID del tipo de customer
    */
   loadCustomersByTypeAndAddress(idType: number): void {
-    this.customerService.getCustomersByTypeAndAddress(idType).subscribe({
+    this.customerService.getCustomersByCustomertype(idType).subscribe({
       next: (customers) => {
-        console.log('Customers:', customers);
+        console.log('CustomerIU:', customers);
         this.customers = customers;
       },
       error: (error) => {
-        console.error('Error fetching customers:', error);
+        console.error('Error fetching CustomerIU:', error);
       }
     });
   }

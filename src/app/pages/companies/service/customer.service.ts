@@ -16,6 +16,46 @@ export interface CustomerInfo {
   name1: string;
 }
 
+// Interfaz para la respuesta del endpoint /customersiu/filter-by-customertype/idType
+export interface CustomerIU {
+  customerId: number;
+  customerNumber: string;
+  companyId: number;
+  employeeId: number;
+  expectedTurnover: number;
+  numberOfEmployees: number;
+  invoiceShipping: number;
+  payConditionId: number;
+  payMoralityId: number;
+  customerType: {
+    id: number;
+    name: string;
+  };
+  branch: {
+    id: number;
+    name: string;
+  };
+  address: {
+    id: number;
+    name1: string;
+    city: {
+      name: string;
+      zip: string;
+      country: {
+        name: string;
+        prefix: number;
+      };
+    };
+    imageBase64: string;
+  };
+  contact: {
+    phone: string;
+    fax: string;
+    email: string;
+    website: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -48,5 +88,13 @@ export class CustomerService {
    */
   getCustomerById(customerId: number): Observable<Customer> {
     return this.http.get<Customer>(`${this.apiUrl}/customers/${customerId}`);
+  }
+  /**
+   * Fetches customers from the new endpoint by customer type ID.
+   * @param idType The customer type ID
+   * @returns An Observable containing an array of Customer objects.
+   */
+  getCustomersByCustomertype(idType: number): Observable<CustomerIU[]> {
+    return this.http.get<CustomerIU[]>(`${this.apiUrl}/customersiu/filter-by-customertype/${idType}`);
   }
 }

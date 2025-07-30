@@ -9,10 +9,17 @@
 <div class="companies-container">
   <div class="company-card" *ngFor="let customer of customers">
     <div class="company-photo">
-      <img *ngIf="customer.imageData" [src]="'data:image/jpeg;base64,' + customer.imageData" alt="Imagen del cliente" class="company-image company-image-rect">
-      <img *ngIf="!customer.imageData" src="assets/user-icon.png" alt="Default Company Logo" class="company-image company-image-circle">
+      <img *ngIf="customer.address?.imageBase64" [src]="'data:image/jpeg;base64,' + customer.address.imageBase64" alt="Imagen del cliente" class="company-image company-image-rect">
+      <img *ngIf="!customer.address?.imageBase64" src="assets/firma.webp" alt="Default Company Logo" class="company-image company-image-circle">
     </div>
-    <h3>{{ customer.name1 }}</h3>
+    <div class="customer-branch"><strong>Industria:</strong> {{ customer.branch?.name }}</div>
+    <h3 *ngIf="customer.address?.name1">{{ customer.address.name1 }}</h3>
+    <div class="customer-city" *ngIf="customer.address?.city?.name"><strong>Ciudad:</strong> {{ customer.address.city.name }}<span *ngIf="customer.address.city.zip"> ({{ customer.address.city.zip }})</span></div>
+    <div class="customer-contact" *ngIf="customer.contact">
+      <div *ngIf="customer.contact.phone"><strong>Tel:</strong> {{ customer.contact.phone }}</div>
+      <div *ngIf="customer.contact.email"><strong>Email:</strong> <a [href]="'mailto:' + customer.contact.email">{{ customer.contact.email }}</a></div>
+      <div *ngIf="customer.contact.website"><strong>Web:</strong> <a [href]="'http://' + customer.contact.website" target="_blank">{{ customer.contact.website }}</a></div>
+    </div>
   </div>
 </div>
 
