@@ -128,7 +128,8 @@
     "SERVICES": "Services",
     "MEMBERS": "Persons",
     "MEMBER": "Members",
-    "FIRMAS": "Companies"
+    "FIRMAS": "Companies",
+    "PRODUCT": "Product"
   },
   "PRESENTATION": {
     "ABOUT_US": "About Us",

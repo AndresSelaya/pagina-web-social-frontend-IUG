@@ -14,6 +14,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { authGuard } from './authentication/services/auth.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
+import { ProductComponent } from './pages/product/product.component';
 import { SidebarComponent } from './bm-social/components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './bm-social/main-layout/main-layout.component';
 
@@ -38,8 +39,9 @@ const routes: Routes = [
           { path: 'becas-movilidad', component: ScholarshipsMobilityComponent },
           { path: 'membresias', component: MembershipsComponent },
           { path: 'informes-gestion', component: ReportsComponent },
-            { path: 'members', component: MembersComponent },
+          { path: 'members', component: MembersComponent },
           { path: 'firmas', component: CompaniesComponent },
+          { path: 'product', component: ProductComponent },
           { path: '**', redirectTo: 'presentacion', pathMatch: 'full' },
         
         ]

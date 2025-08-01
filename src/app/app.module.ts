@@ -37,6 +37,8 @@ import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { FormsModule } from '@angular/forms';
 import { ListboxModule } from 'primeng/listbox';
+import { ProductComponent } from './pages/product/product.component';
+import { ParticipantsModalComponent } from './pages/product/participants-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,7 +59,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MembershipsComponent,
     ReportsComponent,
     MembersComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    ProductComponent,
+    ParticipantsModalComponent
   ],
   imports: [
     BrowserModule,
