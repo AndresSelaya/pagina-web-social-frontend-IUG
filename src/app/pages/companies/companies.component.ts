@@ -38,8 +38,14 @@ export class CompaniesComponent implements OnInit {
     private customerService: CustomerService,
     private customerTypeService: CustomerTypeService
   ) {
-    const current = this.customerTypeService.getCurrentType();
-    this.idType = current ? [current] : [];
+    // Restaurar los tipos seleccionados si existen
+    const selectedIds = this.customerTypeService.getSelectedTypeIds();
+    if (selectedIds && selectedIds.length > 0) {
+      this.idType = [...selectedIds];
+    } else {
+      const current = this.customerTypeService.getCurrentType();
+      this.idType = current ? [current] : [];
+    }
   }
 
   ngOnInit(): void {
@@ -63,16 +69,23 @@ export class CompaniesComponent implements OnInit {
    */
   loadCustomersByTypeAndAddress(idTypes: number[]): void {
     this.customers = [];
-    if (!idTypes || idTypes.length === 0) return;
+    if (!idTypes || idTypes.length === 0) {
+      this.customerTypeService.setCustomerIds([]);
+      return;
+    }
     this.loading = true;
     const requests = idTypes.map(idType => this.customerService.getCustomersByCustomertypeCached(idType));
     forkJoin(requests).subscribe({
       next: (results) => {
         this.customers = results.flat();
+        // Guardar los customerIds en el servicio compartido
+        const customerIds = this.customers.map(c => c.customerId);
+        this.customerTypeService.setCustomerIds(customerIds);
         this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching CustomerIU:', error);
+        this.customerTypeService.setCustomerIds([]);
         this.loading = false;
       }
     });
@@ -86,6 +99,8 @@ export class CompaniesComponent implements OnInit {
 
   applyTypeFilter(): void {
     this.idType = this.customerTypes.filter(t => t.checked).map(t => t.id);
+    // Guardar todos los tipos seleccionados en el servicio
+    this.customerTypeService.setSelectedTypeIds(this.idType);
     if (this.idType.length > 0) {
       this.customerTypeService.setSelectedType(this.idType[0]);
     }

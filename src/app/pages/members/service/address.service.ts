@@ -15,6 +15,7 @@ export interface Address {
 export interface AddressWithCustomerInfo extends Address {
   customerName?: string;
   customerId?: number;
+  companyName?: string;
 }
 
 @Injectable({

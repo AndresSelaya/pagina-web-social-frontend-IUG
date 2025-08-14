@@ -4,6 +4,7 @@ import { CustomerService, Customer, CustomerInfo } from '../companies/service/cu
 import { CustomerTypeService } from '../companies/service/customer-type.service';
 import { forkJoin, Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
@@ -11,7 +12,8 @@ import { forkJoin, Subscription } from 'rxjs';
 })
 export class MembersComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  idType: number;
+  private customerIdsSubscription: Subscription;
+  idTypes: number[] = [];
   customerIds: number[] = [];
   customerInfos: CustomerInfo[] = [];
   addresses: AddressWithCustomerInfo[] = [];
@@ -27,22 +29,65 @@ export class MembersComponent implements OnInit, OnDestroy {
     private customerService: CustomerService,
     private customerTypeService: CustomerTypeService
   ) {
-    this.idType = this.customerTypeService.getCurrentType();
-    this.subscription = this.customerTypeService.selectedType$.subscribe(newType => {
-      this.idType = newType;
-      this.loadCustomers(newType);
+    this.idTypes = this.customerTypeService.getSelectedTypeIds();
+    this.subscription = this.customerTypeService.selectedTypeIds$.subscribe(newTypes => {
+      this.idTypes = newTypes;
+      this.loadCustomers(this.idTypes);
+    });
+    // Suscribirse a los customerIds compartidos
+    this.customerIdsSubscription = this.customerTypeService.customerIds$.subscribe(ids => {
+      this.customerIds = ids;
+      if (ids && ids.length > 0) {
+        this.loadAllMembersForCustomerIds(ids);
+      } else {
+        this.addresses = [];
+      }
+    });
+  }
+
+  /**
+   * Cargar todos los members (addresses) de todos los customerIds recibidos
+   */
+  private loadAllMembersForCustomerIds(customerIds: number[]): void {
+    this.isLoading = true;
+    // Para cada customerId, obtener addresses y companyName en paralelo
+    const requests = customerIds.map(id =>
+      forkJoin({
+        companyName: this.addressService.getCompanyName(id),
+        addresses: this.addressService.getAddressesByContactAddress(id)
+      }).pipe()
+    );
+    forkJoin(requests).subscribe({
+      next: (results) => {
+        // results es un array de objetos { companyName, addresses }
+        const allAddresses: AddressWithCustomerInfo[] = [];
+        results.forEach((result, idx) => {
+          const customerId = customerIds[idx];
+          const companyName = result.companyName;
+          result.addresses.forEach(address => {
+            allAddresses.push({ ...address, customerId, companyName });
+          });
+        });
+        this.addresses = allAddresses;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading all members:', error);
+        this.addresses = [];
+        this.isLoading = false;
+      }
     });
   }
 
   ngOnInit(): void {
-    // Cargar customers por defecto
-    this.loadCustomers(this.idType);
+    // Ya no cargar customers por defecto aquí, solo por customerIds recibidos
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     // Si cambia el idType, recargar customers
-    if (changes['idType'] && !changes['idType'].firstChange) {
-      this.loadCustomers(this.idType);
+    if (changes['idTypes'] && !changes['idTypes'].firstChange) {
+      // Si necesitas recargar customers por tipo, hazlo aquí usando this.idTypes
+      // this.loadCustomers(this.idTypes); // Si implementas soporte para múltiples tipos
     }
   }
 
@@ -78,9 +123,9 @@ export class MembersComponent implements OnInit, OnDestroy {
         const addressesWithCustomerInfo = result.addresses.map(address => ({
           ...address,
           customerName: customerInfo?.name1 || `Customer ${customerId}`,
-          customerId: customerId
+          customerId: customerId,
+          companyName: result.companyName
         }));
-        
         this.addresses = addressesWithCustomerInfo;
         this.isLoading = false;
       },
@@ -134,9 +179,17 @@ export class MembersComponent implements OnInit, OnDestroy {
    * @param contactAddressId ID del contact address
    */
   loadAddressesByContactAddress(contactAddressId: number): void {
-    this.addressService.getAddressesByContactAddress(contactAddressId).subscribe({
-      next: (data) => {
-        this.addresses = data;
+    forkJoin({
+      companyName: this.addressService.getCompanyName(contactAddressId),
+      addresses: this.addressService.getAddressesByContactAddress(contactAddressId)
+    }).subscribe({
+      next: (result) => {
+        const addressesWithCompany = result.addresses.map(address => ({
+          ...address,
+          companyName: result.companyName,
+          customerId: contactAddressId
+        }));
+        this.addresses = addressesWithCompany;
       },
       error: (error) => {
         console.error('Error loading addresses:', error);
@@ -148,23 +201,30 @@ export class MembersComponent implements OnInit, OnDestroy {
    * Cargar customers desde el servicio
    * @param idType ID del tipo de customer
    */
-  private loadCustomers(idType: number): void {
-    this.customerService.getCustomersByTypeAndAddress(idType).subscribe({
-      next: (customers) => {
-        // Extraer customerIds y customerInfos
-        this.customerIds = customers.map(customer => customer.customerId);
-        this.customerInfos = customers.map(customer => ({
+  private loadCustomers(idTypes: number[]): void {
+    if (!idTypes || idTypes.length === 0) {
+      this.customerIds = [];
+      this.customerInfos = [];
+      this.addresses = [];
+      this.companyName = '';
+      return;
+    }
+    const requests = idTypes.map(idType => this.customerService.getCustomersByTypeAndAddress(idType));
+    forkJoin(requests).subscribe({
+      next: (results) => {
+        // results es un array de arrays de customers
+        const allCustomers = results.flat();
+        this.customerIds = allCustomers.map(customer => customer.customerId);
+        this.customerInfos = allCustomers.map(customer => ({
           customerId: customer.customerId,
           name1: customer.name1
         }));
-        
         // Cargar automáticamente el primer customer si hay datos
         if (this.customerIds.length > 0) {
           const firstCustomerId = this.customerIds[0];
           this.selectedCustomerId = firstCustomerId;
           this.loadDataForCustomer(firstCustomerId);
         } else {
-          // Si no hay customers, limpiar datos
           this.selectedCustomerId = null;
           this.addresses = [];
           this.companyName = '';
@@ -191,6 +251,9 @@ export class MembersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.customerIdsSubscription) {
+      this.customerIdsSubscription.unsubscribe();
     }
   }
 }

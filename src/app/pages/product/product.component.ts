@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProductsByType(1456).subscribe({
+    this.productService.getProductsByType(1582).subscribe({
       next: (data) => {
         this.products = data;
         this.loading = false;

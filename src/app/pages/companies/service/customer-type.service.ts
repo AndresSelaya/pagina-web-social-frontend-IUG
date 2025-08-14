@@ -22,6 +22,10 @@ export interface CustomerTypeResponse {
 export class CustomerTypeService {
   private selectedTypeSubject = new BehaviorSubject<number>(3);
   selectedType$ = this.selectedTypeSubject.asObservable();
+  private selectedTypeIdsSubject = new BehaviorSubject<number[]>([]);
+  selectedTypeIds$ = this.selectedTypeIdsSubject.asObservable();
+  private customerIdsSubject = new BehaviorSubject<number[]>([]);
+  customerIds$ = this.customerIdsSubject.asObservable();
   private apiUrl = `${environment.BACK_END_HOST_IUG}/customertypes`;
 
   constructor(private http: HttpClient) {}
@@ -35,8 +39,25 @@ export class CustomerTypeService {
     );
   }
 
+
   setSelectedType(id: number): void {
     this.selectedTypeSubject.next(id);
+  }
+
+  setSelectedTypeIds(ids: number[]): void {
+    this.selectedTypeIdsSubject.next(ids);
+  }
+
+  getSelectedTypeIds(): number[] {
+    return this.selectedTypeIdsSubject.value;
+  }
+
+  setCustomerIds(ids: number[]): void {
+    this.customerIdsSubject.next(ids);
+  }
+
+  getCustomerIds(): number[] {
+    return this.customerIdsSubject.value;
   }
 
   getCurrentType(): number {
