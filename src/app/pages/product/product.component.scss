@@ -38,6 +38,67 @@
   margin-bottom: 0;
   margin-right: 0.2rem;
 }
+
+.open-event-form-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  display: block;
+  margin: 1rem auto 2rem auto;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.open-event-form-btn:hover {
+  background-color: #125ea2;
+}
+
+.event-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.event-form-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 1001;
+}
+.event-form-dialog {
+  position: relative;
+  background: #fff;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  z-index: 1002;
+  min-width: 350px;
+  max-width: 95vw;
+}
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  z-index: 1003;
+}
+.close-btn:hover {
+  color: #1976d2;
+}
 .participants-btn {
   margin-top: 0;
   align-self: center;

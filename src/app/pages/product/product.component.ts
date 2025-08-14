@@ -18,6 +18,8 @@ export class ProductComponent implements OnInit {
   participantsLoading = false;
   participantsError: string | null = null;
 
+  showEventForm = false;
+
   constructor(
     private productService: ProductService,
     private participantsService: ParticipantsService
@@ -64,5 +66,33 @@ export class ProductComponent implements OnInit {
     this.participants = [];
     this.participantsError = null;
     this.participantsLoading = false;
+  }
+
+  openEventForm() {
+    this.showEventForm = true;
+  }
+
+  closeEventForm() {
+    this.showEventForm = false;
+  }
+
+  onEventCreated() {
+    this.closeEventForm();
+    this.refreshProducts();
+  }
+
+  refreshProducts() {
+    this.loading = true;
+    this.error = null;
+    this.productService.getProductsByType(1582).subscribe({
+      next: (data) => {
+        this.products = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Error al cargar los eventos';
+        this.loading = false;
+      }
+    });
   }
 }

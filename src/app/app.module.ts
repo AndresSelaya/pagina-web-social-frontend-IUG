@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './authentication/http-interceptors/auth-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductModule } from './pages/product/product.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -91,8 +92,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     BmSocialModule,
     SharedModule,
     FormsModule,
-    ListboxModule
-],
+    ListboxModule,
+    ProductModule
+  ],
   providers: [
     // {
     //   provide: HTTP_INTERCEPTORS,

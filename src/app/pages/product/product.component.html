@@ -2,6 +2,8 @@
 <div *ngIf="loading" class="loading">Cargando eventos...</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
+<button class="open-event-form-btn" (click)="openEventForm()">Crear nuevo evento</button>
+
 <div class="flash-cards-container" *ngIf="!loading && !error">
   <div *ngFor="let product of products" class="flash-card">
     <div class="card-header">
@@ -41,3 +43,11 @@
   [error]="participantsError"
   (close)="closeParticipantsModal()"
 ></app-participants-modal>
+
+<div *ngIf="showEventForm" class="event-form-modal">
+  <div class="event-form-backdrop" (click)="closeEventForm()"></div>
+  <div class="event-form-dialog">
+    <button class="close-btn" (click)="closeEventForm()">&times;</button>
+    <app-event-form (eventCreated)="onEventCreated()"></app-event-form>
+  </div>
+</div>
