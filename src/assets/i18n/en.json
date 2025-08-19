@@ -183,7 +183,8 @@
     "TITLE": "Title",
     "SALUTATION": "Salutation",
     "COUNTRIES": "Countries",
-    "PERSON":"Person types"
+    "PERSON":"Person types",
+    "CUSTOMER": "Customer"
   },
   "TITLE": {
     "TABLE_TITLE": {

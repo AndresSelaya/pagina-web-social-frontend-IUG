@@ -70,6 +70,8 @@
         }">
         <td>
           <div class="flex justify-content-center gap-2">
+            <!-- Ojo solo para tabla de customers -->
+            <button *ngIf="tableId === 'Customers'" pButton icon="bi bi-eye" class="p-button-secondary button-option" (click)="onRowClickEvent.emit(row)"></button>
             <button pButton icon="bi bi-pencil" class="p-button-info button-option"
               (click)="editRegister(row)"></button>
             <button pButton icon="bi bi-trash" class="p-button-danger button-option"

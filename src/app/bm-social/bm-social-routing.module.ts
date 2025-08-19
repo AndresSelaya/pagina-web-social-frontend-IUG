@@ -5,6 +5,7 @@ import { TitleComponent } from "./components/title/title.component";
 import { SalutationComponent } from "./components/salutation/salutation.component";
 import { CountriesComponent } from "./components/countries/countries.component";
 import { PersonTypesComponent } from "./components/person-types/person-types.component";
+import { CustomerComponent } from './components/customer/customer.component';
 
 const routes: Routes = [
     {
@@ -15,7 +16,8 @@ const routes: Routes = [
             { path: 'title', component: TitleComponent },
             { path: 'salutation', component: SalutationComponent },
             { path: 'countries', component: CountriesComponent },
-            { path: 'person-types', component: PersonTypesComponent }
+            { path: 'person-types', component: PersonTypesComponent },
+            { path: 'customer', component: CustomerComponent }
         ]
     }   
 ];

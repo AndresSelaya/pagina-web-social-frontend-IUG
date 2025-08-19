@@ -183,7 +183,8 @@
     "TITLE": "Titel",
     "SALUTATION": "Anreden",
     "COUNTRIES": "Länder",
-    "PERSON":"Personentypen"
+    "PERSON":"Personentypen",
+    "CUSTOMER": "Kunden"
   },
   "TITLE": {
     "TABLE_TITLE": {
