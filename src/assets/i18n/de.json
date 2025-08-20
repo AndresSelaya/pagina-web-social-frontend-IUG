@@ -184,7 +184,8 @@
     "SALUTATION": "Anreden",
     "COUNTRIES": "Länder",
     "PERSON":"Personentypen",
-    "CUSTOMER": "Kunden"
+    "CUSTOMER": "Kunden",
+    "CONTACT_PERSON": "Ansprechpartner"
   },
   "TITLE": {
     "TABLE_TITLE": {

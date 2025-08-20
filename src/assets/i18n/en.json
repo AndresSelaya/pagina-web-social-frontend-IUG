@@ -184,7 +184,8 @@
     "SALUTATION": "Salutation",
     "COUNTRIES": "Countries",
     "PERSON":"Person types",
-    "CUSTOMER": "Customer"
+    "CUSTOMER": "Customer",
+    "CONTACT_PERSON": "Contact Person"
   },
   "TITLE": {
     "TABLE_TITLE": {

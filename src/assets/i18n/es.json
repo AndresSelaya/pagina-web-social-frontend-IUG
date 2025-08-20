@@ -180,7 +180,8 @@
     "SALUTATION": "Saludo",
     "COUNTRIES": "Países",
     "PERSON":"Tipos de personas",
-    "CUSTOMER": "Cliente"
+    "CUSTOMER": "Cliente",
+    "CONTACT_PERSON": "Persona de contacto"
   },
   "TITLE": {
     "TABLE_TITLE": {
