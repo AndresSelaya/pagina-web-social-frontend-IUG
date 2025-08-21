@@ -37,7 +37,11 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
 
   onViewCustomer(customer: any) {
     this.selectedCustomer = customer;
-  this.confirmMessage = `Do you want to make this customer visible: <b>${customer.name1}</b>?`;
+    if (customer.visibleweb === 1) {
+      this.confirmMessage = `Do you want to make this customer <b>not visible</b>: <b>${customer.name1}</b>?`;
+    } else {
+      this.confirmMessage = `Do you want to make this customer <b>visible</b>: <b>${customer.name1}</b>?`;
+    }
     this.visibleConfirmModal = true;
   }
 

@@ -31,7 +31,7 @@ export class MainLayoutComponent {
     { label: 'SIDEBAR.COUNTRIES', icon: 'bi bi-flag-fill', command: 'customers', absoluteRoute: 'countries' },
     { label: 'SIDEBAR.PERSON', icon: 'bi bi-person-fill', command: 'customers', absoluteRoute: 'person-types' },
     { label: 'SIDEBAR.CUSTOMER', icon: 'bi bi-people-fill', command: 'customers', absoluteRoute: 'customer' },
-    { label: 'SIDEBAR.CONTACT_PERSON', icon: '', command: 'contact-person', absoluteRoute: 'contact-person' }
+    { label: 'SIDEBAR.CONTACT_PERSON', icon: 'bi bi-plus-circle', command: 'contact-person', absoluteRoute: 'contact-person' }
   ];
   
   private readonly sidebarItemsConfig: Record<
