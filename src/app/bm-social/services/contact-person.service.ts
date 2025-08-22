@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
 	providedIn: 'root'
 })
-export class ContactPersonService {
-	private baseUrl = 'http://localhost:8081/api';
 
-	constructor(private http: HttpClient) {}
+export class ContactPersonService {
+
+	private readonly http = inject(HttpClient);
+	private readonly baseUrl = `${environment.BACK_END_HOST_IUG}`;
+
 
 	/**
 	 * Get contact person by addressId and contactPersonId

@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
+
+@Injectable({
+  providedIn: 'root'
+})
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
-  private readonly baseUrl = 'http://localhost:8081/api/customers';
+  private readonly http = inject(HttpClient);
+  private readonly baseUrl = `${environment.BACK_END_HOST_IUG}/customers`;
 
-  constructor(private http: HttpClient) {}
 
   getAddressDetails(page: number = 0, size: number = 20): Observable<any> {
     return this.http.get(`${this.baseUrl}/address-details`, {
