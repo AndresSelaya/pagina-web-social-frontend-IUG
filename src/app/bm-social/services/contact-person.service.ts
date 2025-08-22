@@ -25,6 +25,12 @@ export class ContactPersonService {
 	}
 
 	/**
+	 * Get all contact persons 
+	 */
+	getAllContactPerson(): Observable<any> {
+		return this.http.get(`${this.baseUrl}/contactpersons/all`);
+	}
+	/**
 	 * Toggle visibleWeb for a contact person (PATCH)
 	 */
 	toggleVisibleWeb(addressId: number, contactPersonId: number): Observable<any> {

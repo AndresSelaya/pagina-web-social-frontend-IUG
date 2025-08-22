@@ -21,9 +21,9 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadColumnsContactPersons();
-    this.subscription = this.contactPersonUtils.getAllContactPersons().subscribe({
+    this.subscription = this.contactPersonUtils.getAllContactPerson().subscribe({
       next: (result) => {
-        this.contactPersons = Array.isArray(result?.content) ? result.content : [];
+        this.contactPersons = result;
       },
       error: () => {
         this.contactPersons = [];

@@ -29,6 +29,15 @@ export class ContactPersonUtils {
     }
 
     /**
+     * Get all contact persons 
+     */
+    getAllContactPerson(): Observable<any> {
+        return this.contactPersonService.getAllContactPerson().pipe(
+            catchError(err => throwError(() => new Error('Failed to load all contact persons')))
+        );
+    }
+
+    /**
      * Toggle visibleWeb for a contact person (PATCH)
      */
     toggleVisibleWeb(addressId: number, contactPersonId: number): Observable<any> {

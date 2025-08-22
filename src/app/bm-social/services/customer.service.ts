@@ -14,6 +14,10 @@ export class CustomerService {
     });
   }
 
+  getAddressDetailsAll(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/address-details/all`);
+  }
+
   toggleVisibleWeb(customerId: number): Observable<any> {
     return this.http.patch(`${this.baseUrl}/${customerId}/toggle-visibleweb`, {});
   }

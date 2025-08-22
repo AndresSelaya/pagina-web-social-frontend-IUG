@@ -22,6 +22,13 @@ export class CustomerUtils {
 		);
 	}
 
+
+	getAddressDetailsAll(): Observable<any> {
+		return this.customerService.getAddressDetailsAll().pipe(
+			catchError(err => throwError(() => new Error('Failed to load all customer address details')))
+		);
+	}
+
 	/**
 	 * Toggle the visibleWeb property for a customer
 	 * @param customerId - ID of the customer

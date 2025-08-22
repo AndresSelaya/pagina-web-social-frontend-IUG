@@ -25,9 +25,9 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
     this.langSubscription = this.translate.onLangChange.subscribe(() => {
       this.loadColumnsCustomers();
     });
-    this.customerUtils.getAddressDetails().subscribe({
+    this.customerUtils.getAddressDetailsAll().subscribe({
       next: (result) => {
-        this.customers = Array.isArray(result?.content) ? result.content : [];
+        this.customers = result;
       },
       error: () => {
         this.customers = [];
