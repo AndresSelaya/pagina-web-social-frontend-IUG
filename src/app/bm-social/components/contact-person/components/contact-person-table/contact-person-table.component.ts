@@ -23,7 +23,10 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
     this.loadColumnsContactPersons();
     this.subscription = this.contactPersonUtils.getAllContactPerson().subscribe({
       next: (result) => {
-        this.contactPersons = result;
+        this.contactPersons = (result || []).map((item: any) => ({
+          ...item,
+          visibleWeb: Number(item.visibleWeb) === 1 // true solo si es 1
+        }));
       },
       error: () => {
         this.contactPersons = [];
@@ -85,11 +88,11 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
         name1: contactPerson.name1,
         name2: contactPerson.name2
       };
-        if (contactPerson.visibleWeb === 1) {
-          this.confirmMessage = `Do you want to make this contact person <b>not visible</b>: <b>${contactPerson.name1} ${contactPerson.name2}</b>?`;
-        } else {
-          this.confirmMessage = `Do you want to make this contact person <b>visible</b>: <b>${contactPerson.name1} ${contactPerson.name2}</b>?`;
-        }
+      if (contactPerson.visibleWeb === 1) {
+        this.confirmMessage = `Do you want to make this contact person <b>not visible</b>: <b>${contactPerson.name1} ${contactPerson.name2}</b>?`;
+      } else {
+        this.confirmMessage = `Do you want to make this contact person <b>visible</b>: <b>${contactPerson.name1} ${contactPerson.name2}</b>?`;
+      }
       this.visibleConfirmModal = true;
     }
   }
@@ -99,9 +102,12 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
       this.contactPersonUtils.toggleVisibleWeb(this.selectedContactPerson.addressId, this.selectedContactPerson.contactPersonId).subscribe({
         next: () => {
           // recargar datos o mostrar mensaje de éxito
-          this.contactPersonUtils.getAllContactPersons().subscribe({
+          this.contactPersonUtils.getAllContactPerson().subscribe({
             next: (result) => {
-              this.contactPersons = Array.isArray(result?.content) ? result.content : [];
+              this.contactPersons = (result || []).map((item: any) => ({
+                ...item,
+                visibleWeb: Number(item.visibleWeb) === 1 // true solo si es 1
+              }));
             },
             error: () => {
               this.contactPersons = [];

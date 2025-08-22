@@ -27,7 +27,10 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
     });
     this.customerUtils.getAddressDetailsAll().subscribe({
       next: (result) => {
-        this.customers = result;
+        this.customers = (result || []).map((item: any) => ({
+          ...item,
+          visibleWeb: Number(item.visibleweb) === 1
+        }));
       },
       error: () => {
         this.customers = [];
@@ -68,7 +71,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
         styles: { width: '100px' },
       },
       {
-        field: "visibleweb",
+        field: "visibleWeb",
         header: 'is visible?',
         styles: { width: '100px' },
       }
@@ -88,7 +91,11 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
           // recargar datos o mostrar mensaje de éxito
           this.customerUtils.getAddressDetails().subscribe({
             next: (result) => {
-              this.customers = Array.isArray(result?.content) ? result.content : [];
+              const data = Array.isArray(result?.content) ? result.content : [];
+              this.customers = data.map((item: any) => ({
+                ...item,
+                visibleWeb: Number(item.visibleweb) === 1
+              }));
             },
             error: () => {
               this.customers = [];
