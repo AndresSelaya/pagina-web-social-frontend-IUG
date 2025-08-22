@@ -179,7 +179,9 @@
     "TITLE": "Título",
     "SALUTATION": "Saludo",
     "COUNTRIES": "Países",
-    "PERSON":"Tipos de personas"
+    "PERSON":"Tipos de personas",
+    "CUSTOMER": "Cliente",
+    "CONTACT_PERSON": "Persona de contacto"
   },
   "TITLE": {
     "TABLE_TITLE": {

@@ -30,6 +30,14 @@ import { CountryModalComponent } from './components/countries/components/country
 import { PersonFormComponent } from './components/person-types/components/person-form/person-form.component';
 import { PersonModalComponent } from './components/person-types/components/person-modal/person-modal.component';
 import { PersonTableComponent } from './components/person-types/components/person-table/person-table.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { CustomerFormComponent } from './components/customer/components/customer-form/customer-form.component';
+import { CustomerModalComponent } from './components/customer/components/customer-modal/customer-modal.component';
+import { CustomerTableComponent } from './components/customer/components/customer-table/customer-table.component';
+import { ContactPersonComponent } from './components/contact-person/contact-person.component';
+import { ContactPersonFormComponent } from './components/contact-person/components/contact-person-form/contact-person-form.component';
+import { ContactPersonModalComponent } from './components/contact-person/components/contact-person-modal/contact-person-modal.component';
+import { ContactPersonTableComponent } from './components/contact-person/components/contact-person-table/contact-person-table.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +59,14 @@ import { PersonTableComponent } from './components/person-types/components/perso
     PersonFormComponent,
     PersonModalComponent,
     PersonTableComponent,
+    CustomerComponent,
+    CustomerFormComponent,
+    CustomerModalComponent,
+    CustomerTableComponent,
+    ContactPersonComponent,
+    ContactPersonFormComponent,
+    ContactPersonModalComponent,
+    ContactPersonTableComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,59 @@
+<h2 class="event-form-title">Create Event</h2>
+<div *ngIf="successMsg" class="event-form-success">{{ successMsg }}</div>
+<div *ngIf="errorMsg" class="event-form-error">{{ errorMsg }}</div>
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form-grid">
+  <div class="form-row">
+    <label for="productName">Event Name</label>
+    <input id="productName" formControlName="productName" type="text" required />
+  </div>
+  <div class="form-row">
+    <label for="productNumber">Product Number</label>
+    <input id="productNumber" formControlName="productNumber" type="text" required />
+  </div>
+  <div class="form-row">
+    <label for="currentVersion">Version</label>
+    <input id="currentVersion" formControlName="currentVersion" type="text" required />
+  </div>
+  <div class="form-row">
+    <label for="initDateTime">Start Date</label>
+    <input id="initDateTime" formControlName="initDateTime" type="datetime-local" required />
+  </div>
+  <div class="form-row">
+    <label for="endDateTime">End Date</label>
+    <input id="endDateTime" formControlName="endDateTime" type="datetime-local" required />
+  </div>
+  <div class="form-row">
+    <label for="closingDateTime">Closing Date</label>
+    <input id="closingDateTime" formControlName="closingDateTime" type="datetime-local" required />
+  </div>
+  <div class="form-row">
+    <label for="eventAddress">Address</label>
+    <input id="eventAddress" formControlName="eventAddress" type="text" required />
+  </div>
+  <div class="form-row">
+    <label for="maxParticipant">Max Participants</label>
+    <input id="maxParticipant" formControlName="maxParticipant" type="number" min="1" required />
+  </div>
+  <div class="form-row">
+    <label for="price">Net Price</label>
+    <input id="price" formControlName="price" type="number" step="0.01" required />
+  </div>
+  <div class="form-row">
+    <label for="priceGross">Gross Price</label>
+    <input id="priceGross" formControlName="priceGross" type="number" step="0.01" required />
+  </div>
+  <div class="form-row">
+    <label for="websiteLink">Website Link</label>
+    <input id="websiteLink" formControlName="websiteLink" type="url" />
+  </div>
+  <div class="form-row">
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+  <div class="form-actions">
+    <button type="submit" [disabled]="!eventForm.valid || submitting">
+      <span *ngIf="!submitting">Create Event</span>
+      <span *ngIf="submitting">Creating...</span>
+    </button>
+  </div>
+</form>

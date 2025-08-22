@@ -1,0 +1,23 @@
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal">
+    <button class="close-btn" (click)="onClose()">&times;</button>
+    <h2>Participants</h2>
+    <div *ngIf="product">
+      <p><b>Event:</b> {{ product.productName }}</p>
+      <div *ngIf="loading" class="participants-placeholder">Loading participants...</div>
+      <div *ngIf="error" class="participants-placeholder">{{ error }}</div>
+      <ul *ngIf="!loading && !error && participants.length > 0" class="participants-list">
+        <li *ngFor="let p of participants">
+          <div class="participant-row">
+            <img src="assets/user-icon.png" alt="Usuario" class="participant-avatar" />
+            <div class="participant-info">
+              <span class="participant-name">{{ p.customerName1 }}</span>
+              <span class="participant-contact">{{ p.contactPersonName1 }}<span *ngIf="p.contactPersonName2"> {{ p.contactPersonName2 }}</span></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div *ngIf="!loading && !error && participants.length === 0" class="participants-placeholder">No hay participantes registrados.</div>
+    </div>
+  </div>
+</div>

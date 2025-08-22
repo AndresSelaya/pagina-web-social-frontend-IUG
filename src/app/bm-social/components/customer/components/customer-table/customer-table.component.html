@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+		<app-general-table
+			[tableId]="tableKey"
+			[tableValues]="customers"
+			[columns]="columnsHeaderFieldCustomers"
+			[dataKeys]="dataKeys"
+			[removeKey]="'customerId'"
+			(onRowClickEvent)="onViewCustomer($event)"
+		></app-general-table>
+	</div>
+
+  <p-dialog header="Confirmation" [(visible)]="visibleConfirmModal" [modal]="true" [closable]="false" contentStyle="padding: 2rem 2.5rem; border-radius: 1rem; min-width: 320px;">
+    <div class="modal-confirm-content mb-2">
+  <p class="modal-confirm-message mb-2" [innerHTML]="confirmMessage"></p>
+      <div class="modal-confirm-actions mb-2">
+        <button
+          type="submit"
+          class="bttn btn-save"
+          (click)="onConfirmVisible()">
+            <i class="bi bi-check-lg"></i>
+            Confirm
+        </button>
+        <button 
+            type="button" 
+            class="bttn btn-cancel"
+            (click)="onCancelVisible()">
+            <i class="bi bi-x-lg"></i>
+            {{ 'BUTTONS.CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

@@ -1,3 +1,125 @@
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
+}
+
+.loading-spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.customer-type-dropdown-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.dropdown-label {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: background 0.2s, border 0.2s;
+}
+.dropdown-label:hover {
+  background: #e6eaf2;
+  border-color: #007bff;
+}
+.dropdown-arrow {
+  font-size: 18px;
+  margin-left: 6px;
+}
+.customer-type-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  padding: 18px 24px 14px 24px;
+  z-index: 10;
+  min-width: 320px;
+  max-width: 90vw;
+}
+.checkboxes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.customer-type-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 30px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  gap: 6px;
+  margin-bottom: 4px;
+  background: #f4f6fa;
+  border-radius: 5px;
+  padding: 4px 10px;
+  transition: background 0.2s;
+}
+.checkbox-label:hover {
+  background: #e6eaf2;
+}
+
+.customer-type-checkboxes input[type="checkbox"] {
+  accent-color: #007bff;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.apply-filter-btn {
+  margin-left: 18px;
+  padding: 7px 18px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.apply-filter-btn:hover {
+  background: #0056b3;
+}
 /* filepath: c:\Users\Iamfab\Desktop\pagina-web-social-frontend-IUG\src\app\pages\companies\companies.component.scss */
 .flash-cards-container {
   display: flex;

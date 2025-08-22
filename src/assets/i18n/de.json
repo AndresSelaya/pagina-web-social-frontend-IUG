@@ -128,7 +128,8 @@
     "SERVICES": "Dienstleistungen ",
     "MEMBERS": "Personen",
     "MEMBER": "Mitglieder",
-    "FIRMAS": "Firmen"
+    "FIRMAS": "Firmen",
+    "PRODUCT": "Veranstaltungen"
   },
   "PRESENTATION": {
     "ABOUT_US": "Über Uns",
@@ -182,7 +183,9 @@
     "TITLE": "Titel",
     "SALUTATION": "Anreden",
     "COUNTRIES": "Länder",
-    "PERSON":"Personentypen"
+    "PERSON":"Personentypen",
+    "CUSTOMER": "Kunden",
+    "CONTACT_PERSON": "Ansprechpartner"
   },
   "TITLE": {
     "TABLE_TITLE": {

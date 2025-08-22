@@ -1,12 +1,27 @@
 <h1 class="companies-title">{{ 'NAVBAR_PAGES.FIRMAS'| translate }}</h1>
-<!-- Controles para cambiar el idType (opcional) -->
+<!--
 <div class="controls-container">
-  <label for="idType">Customer Type:</label>
-  <select id="idType" (change)="changeIdType($event)" [(ngModel)]="idType">
-    <option *ngFor="let type of customerTypes" [value]="type.id">{{ type.name }}</option>
-  </select>
+  <div class="customer-type-dropdown-container" (document:click)="onDocumentClick($event)">
+    <div class="dropdown-label" (click)="toggleTypeDropdown($event)">
+      <span>Customer Type:</span>
+      <span class="dropdown-arrow">&#9662;</span>
+    </div>
+    <div class="customer-type-dropdown" *ngIf="showTypeDropdown">
+      <div class="checkboxes-list">
+        <label *ngFor="let type of customerTypes" class="checkbox-label">
+          <input type="checkbox" [value]="type.id" [(ngModel)]="type.checked" (change)="onTypeCheckChange()" />
+          {{ type.name }}
+        </label>
+      </div>
+      <button (click)="applyTypeFilter(); showTypeDropdown = false" class="apply-filter-btn">Aplicar filtro</button>
+    </div>
+  </div>
 </div>
-<div class="companies-container">
+-->
+<div *ngIf="loading" class="loading-spinner-container">
+  <div class="loading-spinner"></div>
+</div>
+<div class="companies-container" *ngIf="!loading">
   <div class="company-card" *ngFor="let customer of customers">
     <div class="company-photo">
       <img *ngIf="customer.address?.imageBase64" [src]="'data:image/jpeg;base64,' + customer.address.imageBase64" alt="Imagen del cliente" class="company-image company-image-rect">
@@ -14,11 +29,11 @@
     </div>
     <div class="customer-branch"><strong>Industria:</strong> {{ customer.branch?.name }}</div>
     <h3 *ngIf="customer.address?.name1">{{ customer.address.name1 }}</h3>
-    <div class="customer-city" *ngIf="customer.address?.city?.name"><strong>Ciudad:</strong> {{ customer.address.city.name }}<span *ngIf="customer.address.city.zip"> ({{ customer.address.city.zip }})</span></div>
+    <div class="customer-city" *ngIf="customer.address?.city?.name"><strong>Ciudad:</strong> {{ customer.address.city.name }}</div>
     <div class="customer-contact" *ngIf="customer.contact">
-      <div *ngIf="customer.contact.phone"><strong>Tel:</strong> {{ customer.contact.phone }}</div>
-      <div *ngIf="customer.contact.email"><strong>Email:</strong> <a [href]="'mailto:' + customer.contact.email">{{ customer.contact.email }}</a></div>
-      <div *ngIf="customer.contact.website"><strong>Web:</strong> <a [href]="'http://' + customer.contact.website" target="_blank">{{ customer.contact.website }}</a></div>
+      <div *ngIf="customer.contact.phone"><strong>Tel: </strong> {{ customer.contact.phone }}</div>
+      <div *ngIf="customer.contact.email"><strong>Email: </strong> <a [href]="'mailto:' + customer.contact.email">{{ customer.contact.email }}</a></div>
+      <div *ngIf="customer.contact.website"><strong>Web: </strong> <a [href]="'http://' + customer.contact.website" target="_blank">{{ customer.contact.website }}</a></div>
     </div>
   </div>
 </div>

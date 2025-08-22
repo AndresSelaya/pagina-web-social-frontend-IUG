@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+
+// ...existing code...
 
 export interface Customer {
   customerId: number;
@@ -61,8 +63,28 @@ export interface CustomerIU {
 })
 export class CustomerService {
   private apiUrl = `${environment.BACK_END_HOST_IUG}`;
+  private customersByTypeCache = new Map<number, CustomerIU[]>();
 
   constructor(private http: HttpClient) {}
+
+  /**
+   * Obtiene customers por tipo con cache local para evitar llamadas repetidas.
+   */
+  getCustomersByCustomertypeCached(idType: number): Observable<CustomerIU[]> {
+    if (this.customersByTypeCache.has(idType)) {
+      return of(this.customersByTypeCache.get(idType)!);
+    }
+    return new Observable<CustomerIU[]>(observer => {
+      this.getCustomersByCustomertype(idType).subscribe({
+        next: (data) => {
+          this.customersByTypeCache.set(idType, data);
+          observer.next(data);
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
+  }
 
   /**
    * Fetches customers by customer type and address ID.

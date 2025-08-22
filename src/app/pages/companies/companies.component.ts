@@ -1,4 +1,6 @@
+// ...existing code...
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { CustomerService, CustomerIU } from './service/customer.service';
 import { CustomerType, CustomerTypeService } from './service/customer-type.service';
 
@@ -8,22 +10,52 @@ import { CustomerType, CustomerTypeService } from './service/customer-type.servi
   styleUrls: ['companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
+  dropdownRef: HTMLElement | null = null;
+  toggleTypeDropdown(event: MouseEvent): void {
+    event.stopPropagation();
+    this.showTypeDropdown = !this.showTypeDropdown;
+    if (this.showTypeDropdown) {
+      setTimeout(() => {
+        this.dropdownRef = (event.target as HTMLElement).closest('.customer-type-dropdown-container') as HTMLElement;
+      });
+    }
+  }
+
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.showTypeDropdown) return;
+    const target = event.target as HTMLElement;
+    if (this.dropdownRef && !this.dropdownRef.contains(target)) {
+      this.showTypeDropdown = false;
+    }
+  }
   customers: CustomerIU[] = [];
-  idType: number;
-  customerTypes: CustomerType[] = [];
+  loading = false;
+  idType: number[] = [];
+  customerTypes: (CustomerType & { checked?: boolean })[] = [];
+  showTypeDropdown = false;
 
   constructor(
     private customerService: CustomerService,
     private customerTypeService: CustomerTypeService
   ) {
-    this.idType = this.customerTypeService.getCurrentType();
+    // Restaurar los tipos seleccionados si existen
+    const selectedIds = this.customerTypeService.getSelectedTypeIds();
+    if (selectedIds && selectedIds.length > 0) {
+      this.idType = [...selectedIds];
+    } else {
+      const current = this.customerTypeService.getCurrentType();
+      this.idType = current ? [current] : [];
+    }
   }
 
   ngOnInit(): void {
     this.customerTypeService.getCustomerTypes().subscribe({
       next: (types) => {
-        this.customerTypes = types;
-        this.loadCustomersByTypeAndAddress(this.idType);
+        // Añadir propiedad checked a cada tipo
+        this.customerTypes = types.map(type => ({ ...type, checked: this.idType.includes(type.id) }));
+        if (this.idType.length > 0) {
+          this.loadCustomersByTypeAndAddress(this.idType);
+        }
       },
       error: (error) => {
         console.error('Error fetching customer types:', error);
@@ -32,30 +64,46 @@ export class CompaniesComponent implements OnInit {
   }
 
   /**
-   * Método para cargar customers usando el nuevo endpoint CustomerIU
-   * @param idType ID del tipo de customer
+   * Carga customers para uno o varios tipos seleccionados
+   * @param idTypes Array de IDs de tipo de customer
    */
-  loadCustomersByTypeAndAddress(idType: number): void {
-    this.customerService.getCustomersByCustomertype(idType).subscribe({
-      next: (customers) => {
-        console.log('CustomerIU:', customers);
-        this.customers = customers;
+  loadCustomersByTypeAndAddress(idTypes: number[]): void {
+    this.customers = [];
+    if (!idTypes || idTypes.length === 0) {
+      this.customerTypeService.setCustomerIds([]);
+      return;
+    }
+    this.loading = true;
+    const requests = idTypes.map(idType => this.customerService.getCustomersByCustomertypeCached(idType));
+    forkJoin(requests).subscribe({
+      next: (results) => {
+        this.customers = results.flat();
+        // Guardar los customerIds en el servicio compartido
+        const customerIds = this.customers.map(c => c.customerId);
+        this.customerTypeService.setCustomerIds(customerIds);
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching CustomerIU:', error);
+        this.customerTypeService.setCustomerIds([]);
+        this.loading = false;
       }
     });
   }
 
   /**
-   * Método para cambiar entre diferentes consultas
-   * @param event Evento del select
+   * Cambia los tipos seleccionados y recarga los customers
    */
-  changeIdType(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const idType = Number(target.value);
-    this.idType = idType;
-    this.customerTypeService.setSelectedType(idType);
-    this.loadCustomersByTypeAndAddress(idType);
+  // No hace nada pero puede usarse para lógica reactiva si se requiere
+  onTypeCheckChange(): void {}
+
+  applyTypeFilter(): void {
+    this.idType = this.customerTypes.filter(t => t.checked).map(t => t.id);
+    // Guardar todos los tipos seleccionados en el servicio
+    this.customerTypeService.setSelectedTypeIds(this.idType);
+    if (this.idType.length > 0) {
+      this.customerTypeService.setSelectedType(this.idType[0]);
+    }
+    this.loadCustomersByTypeAndAddress(this.idType);
   }
 }
