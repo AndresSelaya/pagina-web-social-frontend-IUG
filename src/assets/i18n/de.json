@@ -128,7 +128,7 @@
     "SERVICES": "Dienstleistungen ",
     "MEMBERS": "Personen",
     "MEMBER": "Mitglieder",
-    "FIRMAS": "Firmen",
+    "FIRMAS": "Firmens",
     "PRODUCT": "Veranstaltungen"
   },
   "PRESENTATION": {
@@ -184,7 +184,7 @@
     "SALUTATION": "Anreden",
     "COUNTRIES": "Länder",
     "PERSON":"Personentypen",
-    "CUSTOMER": "Kunden",
+    "CUSTOMER": "Organisation",
     "CONTACT_PERSON": "Ansprechpartner"
   },
   "TITLE": {

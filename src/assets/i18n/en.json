@@ -128,7 +128,7 @@
     "SERVICES": "Services",
     "MEMBERS": "Persons",
     "MEMBER": "Members",
-    "FIRMAS": "Companies",
+    "FIRMAS": "Organizations",
     "PRODUCT": "Events"
   },
   "PRESENTATION": {
@@ -184,7 +184,7 @@
     "SALUTATION": "Salutation",
     "COUNTRIES": "Countries",
     "PERSON":"Person types",
-    "CUSTOMER": "Customer",
+    "CUSTOMER": "Organization",
     "CONTACT_PERSON": "Contact Person"
   },
   "TITLE": {
