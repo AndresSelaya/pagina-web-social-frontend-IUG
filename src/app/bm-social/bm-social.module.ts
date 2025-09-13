@@ -34,6 +34,10 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { CustomerFormComponent } from './components/customer/components/customer-form/customer-form.component';
 import { CustomerModalComponent } from './components/customer/components/customer-modal/customer-modal.component';
 import { CustomerTableComponent } from './components/customer/components/customer-table/customer-table.component';
+import { EventComponent } from './components/event/event.component';
+import { EventFormComponent } from './components/event/components/event-form/event-form.component';
+import { EventModalComponent } from './components/event/components/event-modal/event-modal.component';
+import { EventTableComponent } from './components/event/components/event-table/event-table.component';
 import { ContactPersonComponent } from './components/contact-person/contact-person.component';
 import { ContactPersonFormComponent } from './components/contact-person/components/contact-person-form/contact-person-form.component';
 import { ContactPersonModalComponent } from './components/contact-person/components/contact-person-modal/contact-person-modal.component';
@@ -59,10 +63,14 @@ import { ContactPersonTableComponent } from './components/contact-person/compone
     PersonFormComponent,
     PersonModalComponent,
     PersonTableComponent,
-    CustomerComponent,
-    CustomerFormComponent,
-    CustomerModalComponent,
-    CustomerTableComponent,
+  CustomerComponent,
+  CustomerFormComponent,
+  CustomerModalComponent,
+  CustomerTableComponent,
+  EventComponent,
+  EventFormComponent,
+  EventModalComponent,
+  EventTableComponent,
     ContactPersonComponent,
     ContactPersonFormComponent,
     ContactPersonModalComponent,

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <app-general-table
+      [tableId]="tableKey"
+      [tableValues]="events"
+      [columns]="columnsHeaderFieldEvents"
+      [dataKeys]="dataKeys"
+      [removeKey]="'uuid'"
+      (onRowClickEvent)="onViewEvent($event)"
+      (onCreateRegister)="onNewEventFromTable()"
+    ></app-general-table>
+    <app-event-modal></app-event-modal>
+  </div>
+</div>
