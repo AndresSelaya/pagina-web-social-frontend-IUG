@@ -29,7 +29,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
       next: (result) => {
         this.customers = (result || []).map((item: any) => ({
           ...item,
-          visibleWeb: Number(item.visibleweb) === 1
+          visibleWeb: Number(item.visibleweb) === 1 ? 'Yes' : 'Not'
         }));
       },
       error: () => {
@@ -52,7 +52,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
     this.columnsHeaderFieldCustomers = [
       {
         field: 'name1',
-        header: 'Customer',
+        header: 'Organization',
         styles: { width: '200px' },
       },
       {
@@ -67,7 +67,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
       },
       {
         field: 'areaCode',
-        header: 'Area Code',
+        header: 'Country Code',
         styles: { width: '100px' },
       },
       {
@@ -94,7 +94,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
               const data = Array.isArray(result?.content) ? result.content : [];
               this.customers = data.map((item: any) => ({
                 ...item,
-                visibleWeb: Number(item.visibleweb) === 1
+                visibleWeb: Number(item.visibleweb) === 1 ? 'Yes' : 'Not'
               }));
             },
             error: () => {

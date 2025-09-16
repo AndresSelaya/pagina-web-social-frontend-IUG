@@ -6,6 +6,7 @@ import { SalutationComponent } from "./components/salutation/salutation.componen
 import { CountriesComponent } from "./components/countries/countries.component";
 import { PersonTypesComponent } from "./components/person-types/person-types.component";
 import { CustomerComponent } from './components/customer/customer.component';
+import { EventComponent } from './components/event/event.component';
 import { ContactPersonComponent } from './components/contact-person/contact-person.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
             { path: 'countries', component: CountriesComponent },
             { path: 'person-types', component: PersonTypesComponent },
             { path: 'customer', component: CustomerComponent },
+            { path: 'event', component: EventComponent },
             { path: 'contact-person', component: ContactPersonComponent }
         ]
     }   

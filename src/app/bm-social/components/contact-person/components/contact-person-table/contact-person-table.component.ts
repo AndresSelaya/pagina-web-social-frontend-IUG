@@ -21,11 +21,11 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadColumnsContactPersons();
-    this.subscription = this.contactPersonUtils.getAllContactPerson().subscribe({
+    this.subscription = this.contactPersonUtils.getAllVisibleWebContactPersons().subscribe({
       next: (result) => {
         this.contactPersons = (result || []).map((item: any) => ({
           ...item,
-          visibleWeb: Number(item.visibleWeb) === 1 // true solo si es 1
+          visibleWeb: Number(item.visibleWeb) === 1 ? 'Yes' : 'Not'
         }));
       },
       error: () => {
@@ -38,17 +38,17 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
     this.columnsHeaderFieldContactPersons = [
       {
         field: 'name1',
-        header: 'First Name',
-        styles: { width: '150px' },
-      },
-      {
-        field: 'name2',
         header: 'Last Name',
         styles: { width: '150px' },
       },
       {
+        field: 'name2',
+        header: 'First Name',
+        styles: { width: '150px' },
+      },
+      {
         field: 'customerName1',
-        header: 'Customer',
+        header: 'Organization',
         styles: { width: '150px' },
       },
       {
@@ -63,7 +63,7 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
       },
       {
         field: 'areaCode',
-        header: 'Area Code',
+        header: 'Country Code',
         styles: { width: '100px' },
       },
       {
@@ -106,7 +106,7 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
             next: (result) => {
               this.contactPersons = (result || []).map((item: any) => ({
                 ...item,
-                visibleWeb: Number(item.visibleWeb) === 1 // true solo si es 1
+                visibleWeb: Number(item.visibleWeb) === 1 ? 'Yes' : 'Not'
               }));
             },
             error: () => {
