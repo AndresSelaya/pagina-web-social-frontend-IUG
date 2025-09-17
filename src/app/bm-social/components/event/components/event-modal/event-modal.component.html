@@ -1,118 +1,152 @@
-<p-dialog header="Create Event" [(visible)]="visible" [modal]="true" [closable]="true" >
-  <div class="cover-upload mb-3">
-    <label for="coverImage" class="cover-label">
-      <div class="cover-preview" *ngIf="coverPreview; else emptyCover">
-        <img [src]="coverPreview" alt="Cover" class="cover-img" />
-      </div>
-      <ng-template #emptyCover>
-        <div class="cover-empty">
-          <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
-        </div>
-      </ng-template>
-      <input id="coverImage" type="file" accept="image/*" (change)="onCoverChange($event)" hidden />
-      <button type="button" class="btn btn-light btn-upload">Add</button>
-    </label>
-  </div>
-  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <div class="modal-header mb-3">
-      <div class="organizer-info">
-        <img src="assets/user-icon.png" alt="Organizer" class="organizer-avatar" />
-        <span class="organizer-name">{{ organizerName }}</span>
-        <span class="organizer-role">Organizador</span>
-      </div>
 
+<p-dialog 
+  [header]="isCreateMode ? 'Create Event' : 'Delete Event'" 
+  [visible]="visible" 
+  [(visible)]="visible"
+  [modal]="true" 
+  [closable]="true"
+  (onHide)="handleClose()">
+  <ng-container *ngIf="isCreateMode; else deleteMode">
+    <div class="cover-upload mb-3">
+      <label for="coverImage" class="cover-label">
+        <div class="cover-preview" *ngIf="coverPreview; else emptyCover">
+          <img [src]="coverPreview" alt="Cover" class="cover-img" />
+        </div>
+        <ng-template #emptyCover>
+          <div class="cover-empty">
+            <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
+          </div>
+        </ng-template>
+        <input id="coverImage" type="file" accept="image/*" (change)="onCoverChange($event)" hidden />
+        <button type="button" class="btn btn-light btn-upload">Add</button>
+      </label>
     </div>
-    <div class="form-group mb-2">
-      <label for="title">Name of the event</label>
-      <input id="title" formControlName="title" maxlength="100" class="form-control" />
-      <small>{{ eventForm.get('title')?.value?.length || 0 }}/100</small>
-      <div *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched" class="text-danger">
-        Title is required.
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col">
-        <label for="startDate">Start date</label>
-        <input id="startDate" type="date" formControlName="startDate" class="form-control" />
-        <div *ngIf="eventForm.get('startDate')?.invalid && eventForm.get('startDate')?.touched" class="text-danger">
-          Start date is required.
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <div class="modal-header mb-3">
+        <div class="organizer-info">
+          <img src="assets/user-icon.png" alt="Organizer" class="organizer-avatar" />
+          <span class="organizer-name">{{ organizerName }}</span>
+          <span class="organizer-role">Organizador</span>
         </div>
       </div>
-      <div class="col">
-        <label for="startTime">Start hr</label>
-        <input id="startTime" type="time" formControlName="startTime" class="form-control" />
-        <div *ngIf="eventForm.get('startTime')?.invalid && eventForm.get('startTime')?.touched" class="text-danger">
-          Start time is required.
+      <div *ngIf="errorMessage" class="alert alert-danger mb-2">{{ errorMessage }}</div>
+      <div class="form-group mb-2">
+        <label for="title">Name of the event</label>
+        <input id="title" formControlName="title" maxlength="100" class="form-control" />
+        <small>{{ eventForm.get('title')?.value?.length || 0 }}/100</small>
+        <div *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched" class="text-danger">
+          Title is required.
         </div>
       </div>
-      <div class="col">
-        <label for="timezone">Time zone</label>
-        <select id="timezone" formControlName="timezone" class="form-control">
-          <option value="UTC-04">GMT-4</option>
-          <option value="UTC-05">GMT-5</option>
-          <option value="UTC-06">GMT-6</option>
+      <div class="row mb-2">
+        <div class="col">
+          <label for="startDate">Start date</label>
+          <input id="startDate" type="date" formControlName="startDate" class="form-control" />
+          <div *ngIf="eventForm.get('startDate')?.invalid && eventForm.get('startDate')?.touched" class="text-danger">
+            Start date is required.
+          </div>
+        </div>
+        <div class="col">
+          <label for="startTime">Start hr</label>
+          <input id="startTime" type="time" formControlName="startTime" class="form-control" />
+          <div *ngIf="eventForm.get('startTime')?.invalid && eventForm.get('startTime')?.touched" class="text-danger">
+            Start time is required.
+          </div>
+        </div>
+        <div class="col">
+          <label for="timezone">Time zone</label>
+          <select id="timezone" formControlName="timezone" class="form-control">
+            <option value="UTC-04">GMT-4</option>
+            <option value="UTC-05">GMT-5</option>
+            <option value="UTC-06">GMT-6</option>
+          </select>
+          <div *ngIf="eventForm.get('timezone')?.invalid && eventForm.get('timezone')?.touched" class="text-danger">
+            Timezone is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <a href="#" (click)="$event.preventDefault(); showEndDate = !showEndDate">+ End date and time</a>
+        <div *ngIf="showEndDate" class="row mt-2">
+          <div class="col">
+            <label for="endDate">End date</label>
+            <input id="endDate" type="date" formControlName="endDate" class="form-control" />
+          </div>
+          <div class="col">
+            <label for="endTime">End hr</label>
+            <input id="endTime" type="time" formControlName="endTime" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="isPublic">Who can see this event?</label>
+        <select id="isPublic" formControlName="isPublic" class="form-control">
+          <option [value]="true">public</option>
+          <option [value]="false">private</option>
         </select>
-        <div *ngIf="eventForm.get('timezone')?.invalid && eventForm.get('timezone')?.touched" class="text-danger">
-          Timezone is required.
+        <div *ngIf="eventForm.get('isPublic')?.invalid && eventForm.get('isPublic')?.touched" class="text-danger">
+          Visibility is required.
         </div>
       </div>
-    </div>
-    <div class="form-group mb-2">
-      <a href="#" (click)="$event.preventDefault(); showEndDate = !showEndDate">+ End date and time</a>
-      <div *ngIf="showEndDate" class="row mt-2">
-        <div class="col">
-          <label for="endDate">End date</label>
-          <input id="endDate" type="date" formControlName="endDate" class="form-control" />
-        </div>
-        <div class="col">
-          <label for="endTime">End hr</label>
-          <input id="endTime" type="time" formControlName="endTime" class="form-control" />
+      <div class="form-group mb-2">
+        <label for="virtual">Is virtual or in-person?</label>
+        <select id="virtual" formControlName="virtual" class="form-control">
+          <option value="in-person">in-person</option>
+          <option value="virtual">virtual</option>
+        </select>
+        <div *ngIf="eventForm.get('virtual')?.invalid && eventForm.get('virtual')?.touched" class="text-danger">
+          Event type is required.
         </div>
       </div>
-    </div>
-    <div class="form-group mb-2">
-      <label for="isPublic">Who can see this event?</label>
-      <select id="isPublic" formControlName="isPublic" class="form-control">
-        <option [value]="true">public</option>
-        <option [value]="false">private</option>
-      </select>
-      <div *ngIf="eventForm.get('isPublic')?.invalid && eventForm.get('isPublic')?.touched" class="text-danger">
-        Visibility is required.
+      <div class="form-group mb-2">
+        <label for="location">Add location</label>
+        <input id="location" formControlName="location" class="form-control" />
+        <button type="button" class="btn btn-light"><i class="bi bi-geo-alt"></i></button>
+        <div *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched" class="text-danger">
+          Location is required.
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="maxCapacity">Max capacity</label>
+        <input id="maxCapacity" type="number" formControlName="maxCapacity" class="form-control" />
+        <div *ngIf="eventForm.get('maxCapacity')?.invalid && eventForm.get('maxCapacity')?.touched" class="text-danger">
+          Capacity is required.
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="description">What are the details?</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div class="form-group mb-2">
+        <label for="coverImagePath">Cover image path</label>
+        <input id="coverImagePath" formControlName="coverImagePath" class="form-control" />
+      </div>
+      <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">{{ isLoading ? 'Creating...' :
+          'Create event' }}</button>
+        <button type="button" class="btn btn-secondary w-100 mt-2" (click)="onCancel()"
+          [disabled]="isLoading">Cancel</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-template #deleteMode>
+    <div class="confirmation-content mb-2 mt-4">
+      <p class="mb-4">
+        Are you sure you want to delete the event
+        <strong class="stronglock mt-1">"{{ eventName }}"</strong>?
+      </p>
+
+      <div class="form-actions">
+        <button type="button" class="bttn btn-delete" [disabled]="isLoading" (click)="onDeleteConfirm()">
+          <i class="bi bi-trash"></i>
+          {{ 'BUTTONS.DELETE' | translate }}
+        </button>
+
+        <button type="button" class="bttn btn-cancel" [disabled]="isLoading" (click)="onCancel()">
+          <i class="bi bi-x-lg"></i>
+          {{ 'BUTTONS.CANCEL' | translate }}
+        </button>
       </div>
     </div>
-    <div class="form-group mb-2">
-      <label for="virtual">Is virtual or in-person?</label>
-      <select id="virtual" formControlName="virtual" class="form-control">
-        <option value="in-person">in-person</option>
-        <option value="virtual">virtual</option>
-      </select>
-      <div *ngIf="eventForm.get('virtual')?.invalid && eventForm.get('virtual')?.touched" class="text-danger">
-        Event type is required.
-      </div>
-    </div>
-    <div class="form-group mb-2">
-      <label for="location">Add location</label>
-      <input id="location" formControlName="location" class="form-control" />
-      <button type="button" class="btn btn-light"><i class="bi bi-geo-alt"></i></button>
-      <div *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched" class="text-danger">
-        Location is required.
-      </div>
-    </div>
-    <div class="form-group mb-2">
-      <label for="maxCapacity">Max capacity</label>
-      <input id="maxCapacity" type="number" formControlName="maxCapacity" class="form-control" />
-      <div *ngIf="eventForm.get('maxCapacity')?.invalid && eventForm.get('maxCapacity')?.touched" class="text-danger">
-        Capacity is required.
-      </div>
-    </div>
-    <div class="form-group mb-2">
-      <label for="description">What are the details?</label>
-      <textarea id="description" formControlName="description" class="form-control"></textarea>
-    </div>
-    <div class="form-group mb-2">
-      <label for="coverImagePath">Cover image path</label>
-      <input id="coverImagePath" formControlName="coverImagePath" class="form-control" />
-    </div>
-    <div class="form-group mt-3">
-      <button type="submit" class="btn btn-primary w-100">Create event</button>
-    </div>
+  </ng-template>

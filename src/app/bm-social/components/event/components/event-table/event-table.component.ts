@@ -3,12 +3,14 @@
   import { EventService, Event } from '../../../../services/event.service';
   import { Subscription } from 'rxjs';
   import { EventModalComponent } from '../event-modal/event-modal.component';
+  import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-event-table',
   templateUrl: './event-table.component.html',
-  styleUrls: ['./event-table.component.scss']
+  styleUrls: ['./event-table.component.scss'],
+  providers: [MessageService]
 })
 export class EventTableComponent implements OnInit {
   @ViewChild(EventModalComponent) eventModal!: EventModalComponent;
@@ -26,11 +28,27 @@ export class EventTableComponent implements OnInit {
     { field: 'status', header: 'State' }
   ];
   dataKeys: string[] = ['title', 'location', 'startDate', 'endDate', 'maxCapacity', 'status'];
-  selectedEvent: Event | null = null;
 
-  constructor(private eventService: EventService) {}
+  // Modal control
+  modalType: 'create' | 'delete' = 'create';
+  isModalVisible: boolean = false;
+  selectedEvent: Event | null = null;
+  eventName: string = '';
+
+  constructor(private eventService: EventService, private messageService: MessageService) {}
+  onEventDeleted(message: {severity: string, summary: string, detail: string}): void {
+    this.messageService.add({
+      severity: message.severity,
+      summary: message.summary,
+      detail: message.detail,
+    });
+  }
 
   ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
     this.loading = true;
     this.eventSub = this.eventService.getEvents(0, 12).subscribe({
       next: (result: any) => {
@@ -52,16 +70,56 @@ export class EventTableComponent implements OnInit {
     this.eventSub?.unsubscribe();
   }
 
-  onViewEvent(event: Event) {
-    this.selectedEvent = event;
-    // Aquí puedes abrir un modal o mostrar detalles
+  // Maneja eventos de la tabla (delete/create)
+  handleTableEvents(event: { type: 'create' | 'delete', data?: any }): void {
+    this.modalType = event.type;
+    if (event.type === 'delete' && event.data) {
+      // Si event.data es el objeto completo del evento
+      if (event.data.uuid) {
+        this.selectedEvent = event.data;
+        this.eventName = event.data.title ?? '';
+      } else {
+        // Si event.data es solo el uuid, buscar el objeto completo
+        const uuid = event.data;
+        this.eventService.getEvent(uuid).subscribe({
+          next: (ev) => {
+            if (ev) {
+              this.selectedEvent = ev;
+              this.eventName = ev.title ?? '';
+            }
+          },
+          error: (err) => {
+            console.error('No se pudo obtener el evento:', err);
+            this.eventName = '';
+            this.selectedEvent = null;
+          }
+        });
+      }
+    } else if (event.type === 'create') {
+      this.selectedEvent = null;
+      this.eventName = '';
+    }
+    this.isModalVisible = true;
   }
 
-  // Este método será llamado desde general-table
-  onNewEventFromTable() {
-    if (this.eventModal) {
-      this.eventModal.visible = true;
-      this.eventModal.eventForm.reset();
+  onModalVisibilityChange(visible: boolean) {
+    this.isModalVisible = visible;
+    if (!visible) {
+      this.selectedEvent = null;
+      this.eventName = '';
     }
+  }
+
+  refreshEvents() {
+    this.loadEvents();
+  }
+
+  // Para compatibilidad con el general-table
+  onViewEvent(event: Event) {
+    this.handleTableEvents({ type: 'delete', data: event });
+  }
+
+  onNewEventFromTable() {
+    this.handleTableEvents({ type: 'create' });
   }
 }
