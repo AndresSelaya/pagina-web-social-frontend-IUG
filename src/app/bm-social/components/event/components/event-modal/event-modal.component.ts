@@ -127,8 +127,8 @@ export class EventModalComponent implements OnInit, OnChanges {
         this.isLoading = false;
         this.eventDeleted.emit({
           severity: 'success',
-          summary: 'EVENT.DELETE_SUCCESS',
-          detail: 'EVENT.DELETE_SUCCESS'
+          summary: 'Successfully deleted',
+          detail: 'Event successfully deleted'
         });
         this.handleClose();
       },
