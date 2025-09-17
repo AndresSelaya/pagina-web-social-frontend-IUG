@@ -6,9 +6,10 @@
       [columns]="columnsHeaderFieldEvents"
       [dataKeys]="dataKeys"
       [removeKey]="'uuid'"
-      (onRowClickEvent)="onViewEvent($event)"
-      (onCreateRegister)="onNewEventFromTable()"
-      (onDeleteRegister)="handleTableEvents({ type: 'delete', data: $event })"
+  (onRowClickEvent)="onViewEvent($event)"
+  (onCreateRegister)="onNewEventFromTable()"
+  (onDeleteRegister)="handleTableEvents({ type: 'delete', data: $event })"
+  (onEditRegister)="onEditEventFromTable($event)"
     ></app-general-table>
     <app-event-modal
       [modalType]="modalType"

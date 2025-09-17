@@ -15,7 +15,7 @@ type EventEntity = {
   styleUrls: ['./event-modal.component.scss']
 })
 export class EventModalComponent implements OnInit, OnChanges {
-  @Input() modalType: 'create' | 'delete' = 'create';
+  @Input() modalType: 'create' | 'edit' | 'delete' = 'create';
   @Input() selectedEvent: EventEntity | null = null;
   @Input() visible: boolean = false;
   @Input() eventName: string = '';
@@ -56,22 +56,39 @@ export class EventModalComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['visible'] && !changes['visible'].firstChange) {
       if (this.visible) {
-        // Si el modal se abre, resetea el formulario si es create
         if (this.modalType === 'create') {
           this.resetForm();
+        } else if (this.modalType === 'edit' && this.selectedEvent) {
+          this.eventForm.patchValue({
+            ...this.selectedEvent,
+            startDate: this.selectedEvent['startDate'] ? this.selectedEvent['startDate'].split('T')[0] : '',
+            startTime: this.selectedEvent['startDate'] ? this.selectedEvent['startDate'].split('T')[1]?.substring(0,5) : '',
+            endDate: this.selectedEvent['endDate'] ? this.selectedEvent['endDate'].split('T')[0] : '',
+            endTime: this.selectedEvent['endDate'] ? this.selectedEvent['endDate'].split('T')[1]?.substring(0,5) : ''
+          });
         }
       }
     }
     if (changes['modalType'] && !changes['modalType'].firstChange) {
       if (this.modalType === 'create') {
         this.resetForm();
+      } else if (this.modalType === 'edit' && this.selectedEvent) {
+        this.eventForm.patchValue({
+          ...this.selectedEvent,
+          startDate: this.selectedEvent['startDate'] ? this.selectedEvent['startDate'].split('T')[0] : '',
+          startTime: this.selectedEvent['startDate'] ? this.selectedEvent['startDate'].split('T')[1]?.substring(0,5) : '',
+          endDate: this.selectedEvent['endDate'] ? this.selectedEvent['endDate'].split('T')[0] : '',
+          endTime: this.selectedEvent['endDate'] ? this.selectedEvent['endDate'].split('T')[1]?.substring(0,5) : ''
+        });
       }
     }
-    // Si quieres lógica extra para delete, agrégala aquí
   }
 
   get isCreateMode(): boolean {
     return this.modalType === 'create';
+  }
+  get isEditMode(): boolean {
+    return this.modalType === 'edit';
   }
   get isDeleteMode(): boolean {
     return this.modalType === 'delete';
@@ -91,7 +108,12 @@ export class EventModalComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    if (this.shouldPreventSubmission()) return;
+    // Forzar validación visual
+    this.eventForm.markAllAsTouched();
+    if (this.shouldPreventSubmission()) {
+      this.errorMessage = 'Please fill all required fields.';
+      return;
+    }
     this.prepareForSubmission();
     const formValue = this.eventForm.value;
     const eventBody = {
@@ -106,17 +128,34 @@ export class EventModalComponent implements OnInit, OnChanges {
       status: 'DRAFT',
       coverImagePath: formValue.coverImagePath
     };
-    this.eventService.createEvent(eventBody).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.eventCreated.emit();
-        this.handleClose();
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.errorMessage = error.message ?? 'Failed to create event';
-      }
-    });
+    if (this.isCreateMode) {
+      this.eventService.createEvent(eventBody).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.eventCreated.emit();
+          this.handleClose();
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage = error.message ?? 'Failed to create event';
+        }
+      });
+    } else if (this.isEditMode && this.selectedEvent && this.selectedEvent.uuid) {
+      this.eventService.updateEvent(this.selectedEvent.uuid, eventBody).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.eventCreated.emit();
+          this.handleClose();
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage = error.message ?? 'Failed to update event';
+        }
+      });
+    } else {
+      this.isLoading = false;
+      this.errorMessage = 'No event selected for editing.';
+    }
   }
 
   onDeleteConfirm(): void {

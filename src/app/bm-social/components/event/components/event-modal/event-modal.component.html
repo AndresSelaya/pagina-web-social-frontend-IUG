@@ -1,12 +1,12 @@
 
 <p-dialog 
-  [header]="isCreateMode ? 'Create Event' : 'Delete Event'" 
+  [header]="isCreateMode ? 'Create Event' : (isEditMode ? 'Edit Event' : 'Delete Event')" 
   [visible]="visible" 
   [(visible)]="visible"
   [modal]="true" 
   [closable]="true"
   (onHide)="handleClose()">
-  <ng-container *ngIf="isCreateMode; else deleteMode">
+  <ng-container *ngIf="isCreateMode || isEditMode; else deleteMode">
     <div class="cover-upload mb-3">
       <label for="coverImage" class="cover-label">
         <div class="cover-preview" *ngIf="coverPreview; else emptyCover">
@@ -122,8 +122,10 @@
         <input id="coverImagePath" formControlName="coverImagePath" class="form-control" />
       </div>
       <div class="form-group mt-3">
-        <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">{{ isLoading ? 'Creating...' :
-          'Create event' }}</button>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+          <ng-container *ngIf="isCreateMode">{{ isLoading ? 'Creating...' : 'Create event' }}</ng-container>
+          <ng-container *ngIf="isEditMode">{{ isLoading ? 'Saving...' : 'Save changes' }}</ng-container>
+        </button>
         <button type="button" class="btn btn-secondary w-100 mt-2" (click)="onCancel()"
           [disabled]="isLoading">Cancel</button>
       </div>

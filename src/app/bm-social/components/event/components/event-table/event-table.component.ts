@@ -30,7 +30,7 @@ export class EventTableComponent implements OnInit {
   dataKeys: string[] = ['title', 'location', 'startDate', 'endDate', 'maxCapacity', 'status'];
 
   // Modal control
-  modalType: 'create' | 'delete' = 'create';
+  modalType: 'create' | 'edit' | 'delete' = 'create';
   isModalVisible: boolean = false;
   selectedEvent: Event | null = null;
   eventName: string = '';
@@ -71,15 +71,13 @@ export class EventTableComponent implements OnInit {
   }
 
   // Maneja eventos de la tabla (delete/create)
-  handleTableEvents(event: { type: 'create' | 'delete', data?: any }): void {
+  handleTableEvents(event: { type: 'create' | 'edit' | 'delete', data?: any }): void {
     this.modalType = event.type;
-    if (event.type === 'delete' && event.data) {
-      // Si event.data es el objeto completo del evento
+    if ((event.type === 'delete' || event.type === 'edit') && event.data) {
       if (event.data.uuid) {
         this.selectedEvent = event.data;
         this.eventName = event.data.title ?? '';
       } else {
-        // Si event.data es solo el uuid, buscar el objeto completo
         const uuid = event.data;
         this.eventService.getEvent(uuid).subscribe({
           next: (ev) => {
@@ -100,6 +98,9 @@ export class EventTableComponent implements OnInit {
       this.eventName = '';
     }
     this.isModalVisible = true;
+  }
+  onEditEventFromTable(event: Event | string) {
+    this.handleTableEvents({ type: 'edit', data: event });
   }
 
   onModalVisibilityChange(visible: boolean) {
