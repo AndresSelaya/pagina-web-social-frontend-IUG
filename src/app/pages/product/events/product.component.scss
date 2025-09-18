@@ -1,235 +1,163 @@
-.products {
-  text-align: center;
-  margin: 2rem 0 1.5rem 0;
-  font-size: 2.2rem;
-  font-weight: 700;
+.participants-fab {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background: #fff;
+	border: 1.5px solid #1976d2;
+	border-radius: 50%;
+	width: 38px;
+	height: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+	cursor: pointer;
+	transition: background 0.18s, border 0.18s;
+	z-index: 2;
 }
-.participants-list {
-  list-style: none;
-  padding: 0;
-  margin: 1.2rem 0 0 0;
+.participants-fab:hover {
+	background: #1976d2;
+	border-color: #125ea2;
 }
-.participants-list li {
-  padding: 0.5rem 0.2rem;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
+.participants-fab:hover svg {
+	filter: brightness(0) invert(1);
 }
-.participant-name {
-  font-weight: 600;
-  color: #1976d2;
+.register-btn {
+	padding: 0.45rem 1.2rem;
+	font-size: 1rem;
+	background-color: #43a047;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.18s;
 }
-.participant-contact {
-  font-size: 0.98rem;
-  color: #333;
+.register-btn:hover {
+	background-color: #2e7031;
 }
-.card-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-.event-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0;
-  margin-right: 0.2rem;
-}
-
-.open-event-form-btn {
-  padding: 0.4rem 1rem;
-  font-size: 0.95rem;
-  display: block;
-  margin: 1rem auto 2rem auto;
-  background-color: #1976d2;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.open-event-form-btn:hover {
-  background-color: #125ea2;
-}
-
-.event-form-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.event-form-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.4);
-  z-index: 1001;
-}
-.event-form-dialog {
-  position: relative;
-  background: #fff;
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
-  z-index: 1002;
-  min-width: 350px;
-  max-width: 95vw;
-}
-.close-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #888;
-  cursor: pointer;
-  z-index: 1003;
-}
-.close-btn:hover {
-  color: #1976d2;
-}
-.participants-btn {
-  margin-top: 0;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.2rem;
-}
-.card-header > .event-icon,
-.card-header > .participants-btn {
-  height: 38px;
-}
-.participants-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-top: 0.7rem;
-  align-self: flex-end;
-  transition: transform 0.15s;
-  padding: 0.2rem;
-}
-.participants-btn:hover svg {
-  transform: scale(1.18);
-  filter: drop-shadow(0 2px 6px #1976d2aa);
-}
-
-.modal-backdrop {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.35);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-  min-width: 320px;
-  max-width: 95vw;
-  position: relative;
-}
-.close-btn {
-  position: absolute;
-  top: 0.7rem;
-  right: 1.1rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #1976d2;
-  cursor: pointer;
-  line-height: 1;
-}
-.participants-placeholder {
-  color: #888;
-  font-style: italic;
-  margin-top: 1.2rem;
-}
-.event-icon {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 0.7rem;
-}
-
+// Estilos cards tipo grid para eventos
 .flash-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: flex-start;
-  margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
 }
 
 .flash-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06);
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-  min-width: 320px;
-  max-width: 370px;
-  flex: 1 1 320px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.18s, box-shadow 0.18s;
-  cursor: pointer;
-  border: 1px solid #e0e0e0;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.18s, box-shadow 0.18s;
+	border: 1px solid #e0e0e0;
+	min-width: 320px;
+	max-width: 370px;
+	margin: 0 auto;
 }
 .flash-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.09);
-  border-color: #1976d2;
+	transform: translateY(-6px) scale(1.03);
+	box-shadow: 0 8px 24px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.09);
+	border-color: #1976d2;
 }
-.flash-card h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-  color: #222;
+.event-cover {
+	position: relative;
+	width: 100%;
+	height: 160px;
+	overflow: hidden;
 }
-.event-dates {
-  font-size: 0.98rem;
-  color: #555;
-  margin-bottom: 0.5rem;
+.event-cover img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	background: #fff;
+	display: block;
 }
-.event-type {
-  font-size: 0.95rem;
-  color: #1976d2;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
+.event-type-label {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	background: #1976d2;
+	color: #fff;
+	font-size: 0.95rem;
+	padding: 0.2rem 0.7rem;
+	border-radius: 6px;
+	font-weight: 600;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
-.event-price {
-  font-size: 1.05rem;
-  color: #388e3c;
-  font-weight: 600;
+.event-content {
+	padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
-.loading, .error {
-  font-size: 1.2rem;
-  margin: 2rem 0;
-  color: #888;
-  text-align: center;
+.event-title {
+	font-size: 1.18rem;
+	font-weight: 700;
+	margin-bottom: 0.2rem;
+	color: #222;
+}
+.event-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+	font-size: 0.98rem;
+	color: #555;
+}
+.event-location {
+	color: #1976d2;
+	font-weight: 500;
+}
+.event-description {
+	font-size: 0.97rem;
+	color: #444;
+	margin-bottom: 0.2rem;
+	min-height: 2.2em;
+}
+.event-extra {
+	display: flex;
+	gap: 1.2rem;
+	font-size: 0.95rem;
+	color: #888;
+}
+.event-actions {
+	display: flex;
+	gap: 0.7rem;
+	margin-top: 0.7rem;
+}
+.participants-btn, .details-btn {
+	padding: 0.4rem 1rem;
+	font-size: 0.95rem;
+	background-color: #f5f5f5;
+	color: #1976d2;
+	border: 1px solid #1976d2;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+.participants-btn:hover {
+	background-color: #1976d2;
+	color: #fff;
+}
+.details-btn[disabled] {
+	background: #e0e0e0;
+	color: #888;
+	border: 1px solid #ccc;
+	cursor: not-allowed;
 }
 @media (max-width: 700px) {
-  .flash-cards-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-  }
-  .flash-card {
-    min-width: 90vw;
-    max-width: 98vw;
-    padding: 1.2rem 0.7rem;
-  }
+	.flash-cards-container {
+		grid-template-columns: 1fr;
+		gap: 1.2rem;
+	}
+	.flash-card {
+		min-width: 90vw;
+		max-width: 98vw;
+		padding: 0;
+	}
 }
