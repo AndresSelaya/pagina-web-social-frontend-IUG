@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService, Product } from './product.service';
-import { ParticipantsService, Participant } from './participants.service';
+import { EventService, Event, EventRegistration } from '../../../bm-social/services/event.service';
 
 @Component({
   selector: 'app-product',
@@ -8,27 +7,24 @@ import { ParticipantsService, Participant } from './participants.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  products: Product[] = [];
+  events: Event[] = [];
   loading = true;
   error: string | null = null;
 
   showParticipantsModal = false;
-  selectedProduct: Product | null = null;
-  participants: Participant[] = [];
+  selectedEvent: Event | null = null;
+  participants: EventRegistration[] = [];
   participantsLoading = false;
   participantsError: string | null = null;
 
   showEventForm = false;
 
-  constructor(
-    private productService: ProductService,
-    private participantsService: ParticipantsService
-  ) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.productService.getProductsByType(1582).subscribe({
+    this.eventService.getEvents(0, 12).subscribe({
       next: (data) => {
-        this.products = data;
+        this.events = data.content;
         this.loading = false;
       },
       error: (err) => {
@@ -38,31 +34,27 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  openParticipantsModal(product: Product) {
-    console.log('Abriendo modal para producto:', product);
-    this.selectedProduct = product;
+  openParticipantsModal(event: Event) {
+    this.selectedEvent = event;
     this.showParticipantsModal = true;
     this.participants = [];
     this.participantsLoading = true;
     this.participantsError = null;
-    this.participantsService.getParticipantsByProduct(product.productId).subscribe({
+    this.eventService.getEventRegistrations(event.uuid).subscribe({
       next: (data) => {
         this.participants = data;
         this.participantsLoading = false;
-        console.log('Participantes cargados:', data);
       },
       error: (err) => {
         this.participantsError = 'Error al cargar los participantes';
         this.participantsLoading = false;
-        console.error('Error al cargar participantes:', err);
       }
     });
   }
 
   closeParticipantsModal() {
-    console.log('Cerrando modal');
     this.showParticipantsModal = false;
-    this.selectedProduct = null;
+    this.selectedEvent = null;
     this.participants = [];
     this.participantsError = null;
     this.participantsLoading = false;
@@ -78,15 +70,15 @@ export class ProductComponent implements OnInit {
 
   onEventCreated() {
     this.closeEventForm();
-    this.refreshProducts();
+    this.refreshEvents();
   }
 
-  refreshProducts() {
+  refreshEvents() {
     this.loading = true;
     this.error = null;
-    this.productService.getProductsByType(1582).subscribe({
+    this.eventService.getEvents(0, 12).subscribe({
       next: (data) => {
-        this.products = data;
+        this.events = data.content;
         this.loading = false;
       },
       error: (err) => {

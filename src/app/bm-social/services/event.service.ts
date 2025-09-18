@@ -1,4 +1,5 @@
 
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,6 +11,16 @@ export interface EventCreator {
   name: string;
   lastName: string;
   email: string;
+}
+export interface EventRegistration {
+  registrationUuid: string;
+  registrationDate: string;
+  status: string;
+  userUuid: string;
+  userName: string;
+  userEmail: string;
+  userLastname: string;
+  photoProfilePath: string | null;
 }
 
 export interface Event {
@@ -71,5 +82,13 @@ export class EventService {
 
   deleteEvent(uuid: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${uuid}`, this.reqHeader);
+  }
+
+  /**
+   * Obtiene los registros de un evento por su UUID (sin autenticación)
+   */
+  getEventRegistrations(uuid: string): Observable<EventRegistration[]> {
+    const url = `${environment.BACK_END_HOST_DEV}/events/${uuid}/registrations`;
+    return this.http.get<EventRegistration[]>(url);
   }
 }

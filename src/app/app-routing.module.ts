@@ -14,7 +14,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { authGuard } from './authentication/services/auth.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
-import { ProductComponent } from './pages/product/product.component';
+import { ProductComponent } from './pages/product/events/product.component';
 import { SidebarComponent } from './bm-social/components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './bm-social/main-layout/main-layout.component';
 

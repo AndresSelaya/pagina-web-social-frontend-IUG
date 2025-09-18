@@ -2,10 +2,10 @@
 <div *ngIf="loading" class="loading">Cargando eventos...</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
-<button class="open-event-form-btn" (click)="openEventForm()">Crear nuevo evento</button>
+<!--<button class="open-event-form-btn" (click)="openEventForm()">Crear nuevo evento</button>-->
 
 <div class="flash-cards-container" *ngIf="!loading && !error">
-  <div *ngFor="let product of products" class="flash-card">
+  <div *ngFor="let event of events" class="flash-card">
     <div class="card-header">
       <div class="event-icon">
         <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
           <rect x="6" y="1" width="2" height="6" rx="1" fill="#fff"/>
         </svg>
       </div>
-      <button class="participants-btn" (click)="openParticipantsModal(product)" title="Ver participantes">
+      <button class="participants-btn" (click)="openParticipantsModal(event)" title="Ver participantes">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="7" cy="8" r="3" fill="#1976d2"/>
           <circle cx="17" cy="8" r="3" fill="#1976d2"/>
@@ -26,28 +26,30 @@
         </svg>
       </button>
     </div>
-    <h3>{{ product.productName }}</h3>
+    <h3>{{ event.title }}</h3>
     <div class="event-dates">
-      <span *ngIf="product.initDateTime">Inicio: {{ product.initDateTime | date:'medium' }}</span>
-      <span *ngIf="product.endDateTime">Fin: {{ product.endDateTime | date:'medium' }}</span>
+      <span *ngIf="event.startDate">Inicio: {{ event.startDate | date:'medium' }}</span>
+      <span *ngIf="event.endDate">Fin: {{ event.endDate | date:'medium' }}</span>
     </div>
-    <div class="event-type">Tipo: {{ product.productType.typeName }}</div>
-    <div class="event-price">Precio: {{ product.price | currency:'EUR':'symbol':'1.2-2' }}</div>
+    <div class="event-type">Ubicación: {{ event.location }}</div>
+    <div class="event-type">Estado: {{ event.status }}</div>
+    <div class="event-type">Capacidad máxima: {{ event.maxCapacity }}</div>
+    <div class="event-type">Público: {{ event.isPublic ? 'Sí' : 'No' }}</div>
   </div>
 
 <app-participants-modal
   [show]="showParticipantsModal"
-  [product]="selectedProduct"
+  [event]="selectedEvent"
   [participants]="participants"
   [loading]="participantsLoading"
   [error]="participantsError"
   (close)="closeParticipantsModal()"
 ></app-participants-modal>
 
-<div *ngIf="showEventForm" class="event-form-modal">
+<!--<div *ngIf="showEventForm" class="event-form-modal">
   <div class="event-form-backdrop" (click)="closeEventForm()"></div>
   <div class="event-form-dialog">
     <button class="close-btn" (click)="closeEventForm()">&times;</button>
     <app-event-form (eventCreated)="onEventCreated()"></app-event-form>
   </div>
-</div>
+</div>!-->
