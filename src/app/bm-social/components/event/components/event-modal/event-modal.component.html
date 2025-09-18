@@ -80,28 +80,36 @@
       </div>
       <div class="form-group mb-2">
         <label for="isPublic">Who can see this event?</label>
-        <select id="isPublic" formControlName="isPublic" class="form-control">
-          <option [value]="true">public</option>
-          <option [value]="false">private</option>
-        </select>
+        <div class="select-wrapper">
+          <select id="isPublic" formControlName="isPublic" class="form-control">
+            <option [value]="true">public</option>
+            <option [value]="false">internal</option>
+          </select>
+          <span class="select-icon"><i class="bi bi-caret-down-fill"></i></span>
+        </div>
         <div *ngIf="eventForm.get('isPublic')?.invalid && eventForm.get('isPublic')?.touched" class="text-danger">
           Visibility is required.
         </div>
       </div>
       <div class="form-group mb-2">
         <label for="virtual">Is virtual or in-person?</label>
-        <select id="virtual" formControlName="virtual" class="form-control">
-          <option value="in-person">in-person</option>
-          <option value="virtual">virtual</option>
-        </select>
+        <div class="select-wrapper">
+          <select id="virtual" formControlName="virtual" class="form-control">
+            <option value="in-person">in-person</option>
+            <option value="virtual">virtual</option>
+          </select>
+          <span class="select-icon"><i class="bi bi-caret-down-fill"></i></span>
+        </div>
         <div *ngIf="eventForm.get('virtual')?.invalid && eventForm.get('virtual')?.touched" class="text-danger">
           Event type is required.
         </div>
       </div>
       <div class="form-group mb-2">
         <label for="location">Add location</label>
-        <input id="location" formControlName="location" class="form-control" />
-        <button type="button" class="btn btn-light"><i class="bi bi-geo-alt"></i></button>
+        <div class="input-group">
+          <input id="location" formControlName="location" class="form-control" />
+          <span class="input-group-text bg-white"><i class="bi bi-geo-alt"></i></span>
+        </div>
         <div *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched" class="text-danger">
           Location is required.
         </div>
