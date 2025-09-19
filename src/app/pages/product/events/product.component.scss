@@ -1,3 +1,22 @@
+.already-registered {
+	color: #1976d2;
+	font-size: 1rem;
+	font-weight: 600;
+	margin-left: 0.5rem;
+	align-self: center;
+}
+.register-success {
+	color: #388e3c;
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	font-weight: 600;
+}
+.register-error {
+	color: #d32f2f;
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	font-weight: 600;
+}
 .participants-fab {
 	position: absolute;
 	top: 12px;

@@ -91,4 +91,10 @@ export class EventService {
     const url = `${environment.BACK_END_HOST_DEV}/events/${uuid}/registrations`;
     return this.http.get<EventRegistration[]>(url);
   }
+
+  /** Registra al usuario autenticado en un evento */
+  registerForEvent(eventUuid: string): Observable<EventRegistration> {
+    const url = `${environment.BACK_END_HOST_DEV}/events/${eventUuid}/registrations`;
+    return this.http.post<EventRegistration>(url, {}, this.reqHeader);
+  }
 }

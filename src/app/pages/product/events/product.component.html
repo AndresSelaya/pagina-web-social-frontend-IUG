@@ -11,43 +11,48 @@
       <span class="event-type-label">{{ event.status }}</span>
       <button class="participants-fab" (click)="openParticipantsModal(event)" title="Ver participantes">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="7" cy="8" r="3" fill="#1976d2"/>
-          <circle cx="17" cy="8" r="3" fill="#1976d2"/>
-          <ellipse cx="7" cy="17" rx="5" ry="3" fill="#1976d2"/>
-          <ellipse cx="17" cy="17" rx="5" ry="3" fill="#1976d2"/>
+          <circle cx="7" cy="8" r="3" fill="#1976d2" />
+          <circle cx="17" cy="8" r="3" fill="#1976d2" />
+          <ellipse cx="7" cy="17" rx="5" ry="3" fill="#1976d2" />
+          <ellipse cx="17" cy="17" rx="5" ry="3" fill="#1976d2" />
         </svg>
       </button>
     </div>
     <div class="event-content">
       <h3 class="event-title">{{ event.title }}</h3>
       <div class="event-meta">
-        <span class="event-date">{{ event.startDate | date:'fullDate' }}<span *ngIf="event.startDate">, {{ event.startDate | date:'shortTime' }}</span></span>
+        <span class="event-date">{{ event.startDate | date:'fullDate' }}<span *ngIf="event.startDate">, {{
+            event.startDate | date:'shortTime' }}</span></span>
         <span class="event-location">{{ event.location }}</span>
       </div>
       <div class="event-extra">
-        <span class="event-capacity">{{ event.maxCapacity }} capacidad</span>
-        <span class="event-public">{{ event.isPublic ? 'Públic' : 'Internal' }}</span>
+        <span class="event-capacity">{{ event.maxCapacity }} capacity</span>
+        <span class="event-public">{{ event.isPublic ? 'Public' : 'Internal' }}</span>
       </div>
       <div class="event-actions">
-        <button class="register-btn">Registrarse</button>
+        <button class="register-btn" [disabled]="registeringEventUuid === event.uuid || isRegistered(event)"
+          (click)="registerToEvent(event)" *ngIf="!isRegistered(event)">
+          <span *ngIf="registeringEventUuid !== event.uuid">Register</span>
+          <span *ngIf="registeringEventUuid === event.uuid">Registering...</span>
+        </button>
+        <span *ngIf="isRegistered(event)" class="already-registered">registered</span>
         <button class="details-btn" disabled>See details</button>
+      </div>
+      <div *ngIf="registrationSuccessEventUuid === event.uuid" class="register-success">You have successfully
+        registered!</div>
+      <div *ngIf="registrationError && registeringEventUuid === null" class="register-error">{{ registrationError }}
       </div>
     </div>
   </div>
 
-<app-participants-modal
-  [show]="showParticipantsModal"
-  [event]="selectedEvent"
-  [participants]="participants"
-  [loading]="participantsLoading"
-  [error]="participantsError"
-  (close)="closeParticipantsModal()"
-></app-participants-modal>
+  <app-participants-modal [show]="showParticipantsModal" [event]="selectedEvent" [participants]="participants"
+    [loading]="participantsLoading" [error]="participantsError"
+    (close)="closeParticipantsModal()"></app-participants-modal>
 
-<div *ngIf="showEventForm" class="event-form-modal">
-  <div class="event-form-backdrop" (click)="closeEventForm()"></div>
-  <div class="event-form-dialog">
-    <button class="close-btn" (click)="closeEventForm()">&times;</button>
-    <app-event-form (eventCreated)="onEventCreated()"></app-event-form>
+  <div *ngIf="showEventForm" class="event-form-modal">
+    <div class="event-form-backdrop" (click)="closeEventForm()"></div>
+    <div class="event-form-dialog">
+      <button class="close-btn" (click)="closeEventForm()">&times;</button>
+      <app-event-form (eventCreated)="onEventCreated()"></app-event-form>
+    </div>
   </div>
-</div>

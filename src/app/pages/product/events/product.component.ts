@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+// ...existing code...
+  import { Component, OnInit } from '@angular/core';
 import { EventService, Event, EventRegistration } from '../../../bm-social/services/event.service';
+import { AuthService } from '../../../authentication/services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -7,6 +9,33 @@ import { EventService, Event, EventRegistration } from '../../../bm-social/servi
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  registeringEventUuid: string | null = null;
+  registrationError: string | null = null;
+  registeredEvents = new Set<string>();
+  registrationSuccessEventUuid: string | null = null;
+
+  registerToEvent(event: Event) {
+    this.registeringEventUuid = event.uuid;
+    this.registrationError = null;
+    this.eventService.registerForEvent(event.uuid).subscribe({
+      next: (registration) => {
+        this.registeredEvents.add(event.uuid);
+        this.registrationSuccessEventUuid = event.uuid;
+        this.registeringEventUuid = null;
+        setTimeout(() => {
+          this.registrationSuccessEventUuid = null;
+        }, 2500);
+      },
+      error: (err) => {
+        this.registrationError = 'No se pudo registrar en el evento.';
+        this.registeringEventUuid = null;
+      }
+    });
+  }
+
+  isRegistered(event: Event): boolean {
+    return this.registeredEvents.has(event.uuid);
+  }
   events: Event[] = [];
   loading = true;
   error: string | null = null;
@@ -19,18 +48,37 @@ export class ProductComponent implements OnInit {
 
   showEventForm = false;
 
-  constructor(private eventService: EventService) {}
+  private userUuid: string | null = null;
+
+  constructor(private eventService: EventService, private authService: AuthService) {
+    this.userUuid = this.authService.getUserId();
+  }
 
   ngOnInit(): void {
     this.eventService.getEvents(0, 12).subscribe({
       next: (data) => {
         this.events = data.content;
         this.loading = false;
+        // Opcional: cargar registros del usuario para todos los eventos
+        this.loadUserRegistrations();
       },
       error: (err) => {
         this.error = 'Error al cargar los eventos';
         this.loading = false;
       }
+    });
+  }
+
+  loadUserRegistrations() {
+    if (!this.userUuid) return;
+    this.events.forEach(ev => {
+      this.eventService.getEventRegistrations(ev.uuid).subscribe({
+        next: (regs) => {
+          if (regs && regs.some(r => r.userUuid === this.userUuid)) {
+            this.registeredEvents.add(ev.uuid);
+          }
+        }
+      });
     });
   }
 
