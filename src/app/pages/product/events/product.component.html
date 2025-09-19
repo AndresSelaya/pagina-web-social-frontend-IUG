@@ -24,10 +24,9 @@
         <span class="event-date">{{ event.startDate | date:'fullDate' }}<span *ngIf="event.startDate">, {{ event.startDate | date:'shortTime' }}</span></span>
         <span class="event-location">{{ event.location }}</span>
       </div>
-      <div class="event-description">{{ event.description }}</div>
       <div class="event-extra">
         <span class="event-capacity">{{ event.maxCapacity }} capacidad</span>
-        <span class="event-public">{{ event.isPublic ? 'Público' : 'Privado' }}</span>
+        <span class="event-public">{{ event.isPublic ? 'Públic' : 'Internal' }}</span>
       </div>
       <div class="event-actions">
         <button class="register-btn">Registrarse</button>

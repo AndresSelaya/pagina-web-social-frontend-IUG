@@ -25,7 +25,7 @@ export class ContactPersonTableComponent implements OnInit, OnDestroy {
       next: (result) => {
         this.contactPersons = (result || []).map((item: any) => ({
           ...item,
-          visibleWeb: Number(item.visibleWeb) === 1 ? 'Yes' : 'Not'
+          visibleWeb: Number(item.visibleWeb) === 1 ? 'Yes' : 'No'
         }));
       },
       error: () => {

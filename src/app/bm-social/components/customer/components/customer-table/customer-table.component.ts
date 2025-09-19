@@ -29,7 +29,7 @@ export class CustomerTableComponent implements OnInit, OnDestroy {
       next: (result) => {
         this.customers = (result || []).map((item: any) => ({
           ...item,
-          visibleWeb: Number(item.visibleweb) === 1 ? 'Yes' : 'Not'
+          visibleWeb: Number(item.visibleweb) === 1 ? 'Yes' : 'No'
         }));
       },
       error: () => {
