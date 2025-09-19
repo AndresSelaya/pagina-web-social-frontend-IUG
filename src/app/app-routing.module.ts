@@ -64,7 +64,8 @@ const routes: Routes = [
       },
       { path: 'videos', 
         component: VideosGalleryComponent
-      }
+      },
+      { path: 'events', component: ProductComponent }
     ]
   },
   {

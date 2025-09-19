@@ -26,6 +26,7 @@
         <li><a routerLink="/videos" routerLinkActive="active">{{ 'OPTIONS.VIDEOS'| translate }}</a></li>
         @if(isAuthenticated && currentUser.role === 'ADMIN'){
         }
+        <li><a routerLink="/events" routerLinkActive="active">Events</a></li>
         <li><a routerLink="/bm" routerLinkActive="active">BM</a></li>
     </ul>
 </nav>
