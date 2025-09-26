@@ -7,7 +7,7 @@
 <div class="flash-cards-container" *ngIf="!loading && !error">
   <div *ngFor="let event of events" class="flash-card">
     <div class="event-cover">
-      <img [src]="'assets/iug.jpg'" alt="Portada evento" />
+      <img [src]="event.coverImagePath"  alt="Portada evento" />
       <span class="event-type-label">{{ event.status }}</span>
       <button class="participants-fab" (click)="openParticipantsModal(event)" title="Ver participantes">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@
           <span *ngIf="registeringEventUuid === event.uuid">Registering...</span>
         </button>
         <span *ngIf="isRegistered(event)" class="already-registered">registered</span>
-        <button class="details-btn" disabled>See details</button>
+        <button class="details-btn" (click)="navigateToEventDetail(event.uuid)">See details</button>
       </div>
       <div *ngIf="registrationSuccessEventUuid === event.uuid" class="register-success">You have successfully
         registered!</div>

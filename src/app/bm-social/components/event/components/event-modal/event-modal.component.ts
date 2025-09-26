@@ -26,6 +26,7 @@ export class EventModalComponent implements OnInit, OnChanges {
   organizerName: string = 'Julio Aspiazu'; // Puedes obtenerlo dinámicamente
   showEndDate: boolean = false;
   coverPreview: string | null = null;
+  selectedCoverFile: File | null = null;
   isLoading = false;
   errorMessage: string | null = null;
 
@@ -98,10 +99,11 @@ export class EventModalComponent implements OnInit, OnChanges {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+      this.selectedCoverFile = file;
+      
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.coverPreview = e.target.result;
-        this.eventForm.patchValue({ coverImagePath: file.name });
       };
       reader.readAsDataURL(file);
     }
@@ -115,6 +117,32 @@ export class EventModalComponent implements OnInit, OnChanges {
       return;
     }
     this.prepareForSubmission();
+
+    // Si hay una imagen seleccionada, subirla primero
+    if (this.selectedCoverFile && this.isCreateMode) {
+      this.uploadImageAndCreateEvent();
+    } else {
+      // Si no hay imagen o es modo edición, crear/actualizar directamente
+      this.createOrUpdateEvent();
+    }
+  }
+
+  private uploadImageAndCreateEvent(): void {
+    if (!this.selectedCoverFile) return;
+
+    this.eventService.uploadCoverImage(this.selectedCoverFile).subscribe({
+      next: (uploadResponse) => {
+        // Usar la URL de la respuesta como coverImagePath
+        this.createOrUpdateEvent(uploadResponse.urlResource);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message ?? 'Failed to upload cover image';
+      }
+    });
+  }
+
+  private createOrUpdateEvent(coverImagePath?: string): void {
     const formValue = this.eventForm.value;
     const eventBody = {
       title: formValue.title,
@@ -126,8 +154,9 @@ export class EventModalComponent implements OnInit, OnChanges {
       isPublic: formValue.isPublic,
       requiresRegistration: true,
       status: 'DRAFT',
-      coverImagePath: formValue.coverImagePath
+      coverImagePath: coverImagePath || formValue.coverImagePath || ''
     };
+
     if (this.isCreateMode) {
       this.eventService.createEvent(eventBody).subscribe({
         next: () => {
@@ -219,6 +248,7 @@ export class EventModalComponent implements OnInit, OnChanges {
       coverImagePath: ''
     });
     this.coverPreview = null;
+    this.selectedCoverFile = null;
     this.errorMessage = null;
   }
 }

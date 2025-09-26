@@ -52,6 +52,14 @@ export interface PaginatedEvents {
   empty: boolean;
 }
 
+export interface ImageUploadResponse {
+  uuid: string;
+  name: string;
+  urlResource: string;
+  type: string;
+  status: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class EventService {
 
@@ -96,5 +104,14 @@ export class EventService {
   registerForEvent(eventUuid: string): Observable<EventRegistration> {
     const url = `${environment.BACK_END_HOST_DEV}/events/${eventUuid}/registrations`;
     return this.http.post<EventRegistration>(url, {}, this.reqHeader);
+  }
+
+  /** Sube una imagen de portada para un evento */
+  uploadCoverImage(file: File): Observable<ImageUploadResponse> {
+    const formData = new FormData();
+    formData.append('image', file);
+    
+    const url = `${environment.BACK_END_HOST_DEV}/images/events-cover`;
+    return this.http.post<ImageUploadResponse>(url, formData, this.reqHeader);
   }
 }

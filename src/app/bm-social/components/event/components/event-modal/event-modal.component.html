@@ -125,10 +125,6 @@
         <label for="description">What are the details?</label>
         <textarea id="description" formControlName="description" class="form-control"></textarea>
       </div>
-      <div class="form-group mb-2">
-        <label for="coverImagePath">Cover image path</label>
-        <input id="coverImagePath" formControlName="coverImagePath" class="form-control" />
-      </div>
       <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
           <ng-container *ngIf="isCreateMode">{{ isLoading ? 'Creating...' : 'Create event' }}</ng-container>

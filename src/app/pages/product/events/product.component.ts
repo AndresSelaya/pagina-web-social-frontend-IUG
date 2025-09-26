@@ -1,5 +1,6 @@
 // ...existing code...
   import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventService, Event, EventRegistration } from '../../../bm-social/services/event.service';
 import { AuthService } from '../../../authentication/services/auth.service';
 
@@ -50,7 +51,11 @@ export class ProductComponent implements OnInit {
 
   private userUuid: string | null = null;
 
-  constructor(private eventService: EventService, private authService: AuthService) {
+  constructor(
+    private eventService: EventService, 
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.userUuid = this.authService.getUserId();
   }
 
@@ -134,5 +139,9 @@ export class ProductComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  navigateToEventDetail(eventUuid: string): void {
+    this.router.navigate(['/events/detail', eventUuid]);
   }
 }

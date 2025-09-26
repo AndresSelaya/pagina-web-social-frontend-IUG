@@ -15,6 +15,7 @@ import { authGuard } from './authentication/services/auth.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { ProductComponent } from './pages/product/events/product.component';
+import { EventDetailComponent } from './pages/product/event-detail/event-detail.component';
 import { SidebarComponent } from './bm-social/components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './bm-social/main-layout/main-layout.component';
 
@@ -65,7 +66,8 @@ const routes: Routes = [
       { path: 'videos', 
         component: VideosGalleryComponent
       },
-      { path: 'events', component: ProductComponent }
+      { path: 'events', component: ProductComponent },
+      { path: 'events/detail/:uuid', component: EventDetailComponent }
     ]
   },
   {
