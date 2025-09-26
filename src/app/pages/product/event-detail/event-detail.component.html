@@ -30,24 +30,23 @@
         </div>
         <div class="organizer-details">
           <span class="organizer-name">{{ event.creator.name }} {{ event.creator.lastName }}</span>
-          <span class="organizer-role">Organizador</span>
+          <span class="organizer-role">Organizer</span>
         </div>
       </div>
 
       <!-- Resumen de detalles -->
       <div class="event-summary">
-        <h3>Acerca del evento</h3>
+        <h3>About this event</h3>
        
         <div class="summary-item">
-                 
-           <p class="event-description">{{ event.description }}</p>
+          <p class="event-description">{{ event.description }}</p>
         </div>
 
       </div>
 
       <!-- Sección para añadir contenido -->
       <div class="content-section">
-        <h3>Contenido del evento</h3>
+        <h3>Event content</h3>
         <button class="add-content-button">
           <i class="bi bi-plus-circle"></i>
           Add content images or videos
@@ -58,12 +57,11 @@
     <!-- Columna derecha -->
     <div class="event-right-column">
     
-
       <!-- Fecha y hora -->
       <div class="detail-item">
         <i class="bi bi-calendar3"></i>
         <div class="detail-content">
-          <div class="detail-label">Fecha y hora</div>
+          <div class="detail-label">Date and time</div>
           <div class="detail-value">
             {{ formatDate(event.startDate) }}
             <span *ngIf="event.startDate">, {{ formatTime(event.startDate) }}</span>
@@ -76,17 +74,17 @@
       <div class="detail-item">
         <i class="bi bi-geo-alt"></i>
         <div class="detail-content">
-          <div class="detail-label">Ubicación</div>
+          <div class="detail-label">Location</div>
           <div class="detail-value">{{ event.location }}</div>
         </div>
       </div>
 
       <!-- Mapa estático -->
       <div class="map-section">
-        <h3>Ubicación en el mapa</h3>
+        <h3>Location on map</h3>
         <div class="static-map">
           <img src="assets/maps.png" 
-               alt="Mapa de {{ event.location }}" 
+               alt="Map of {{ event.location }}" 
                class="map-image" />
           <div class="map-overlay">
             <i class="bi bi-geo-alt-fill"></i>
@@ -99,8 +97,8 @@
       <div class="detail-item">
         <i class="bi bi-people"></i>
         <div class="detail-content">
-          <div class="detail-label">Capacidad</div>
-          <div class="detail-value">{{ event.maxCapacity }} personas</div>
+          <div class="detail-label">Capacity</div>
+          <div class="detail-value">{{ event.maxCapacity }} people</div>
         </div>
       </div>
 
@@ -108,8 +106,8 @@
       <div class="detail-item">
         <i class="bi bi-eye"></i>
         <div class="detail-content">
-          <div class="detail-label">Visibilidad</div>
-          <div class="detail-value">{{ event.isPublic ? 'Público' : 'Privado' }}</div>
+          <div class="detail-label">Visibility</div>
+          <div class="detail-value">{{ event.isPublic ? 'Public' : 'Private' }}</div>
         </div>
       </div>
     </div>
@@ -119,7 +117,7 @@
 <!-- Loading state -->
 <div class="loading-container" *ngIf="loading">
   <div class="loading-spinner"></div>
-  <p>Cargando detalles del evento...</p>
+  <p>Loading event details...</p>
 </div>
 
 <!-- Error state -->
@@ -127,6 +125,6 @@
   <div class="error-message">
     <i class="bi bi-exclamation-triangle"></i>
     <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadEventDetail()">Reintentar</button>
+    <button class="retry-btn" (click)="loadEventDetail()">Retry</button>
   </div>
 </div>

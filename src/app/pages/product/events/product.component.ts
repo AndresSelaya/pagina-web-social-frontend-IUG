@@ -144,4 +144,15 @@ export class ProductComponent implements OnInit {
   navigateToEventDetail(eventUuid: string): void {
     this.router.navigate(['/events/detail', eventUuid]);
   }
+
+  getTruncatedDescription(description: string): string {
+    if (!description) return '';
+    
+    const words = description.trim().split(' ');
+    if (words.length <= 10) {
+      return description;
+    }
+    
+    return words.slice(0, 10).join(' ') + '...';
+  }
 }

@@ -21,22 +21,46 @@
     <div class="event-content">
       <h3 class="event-title">{{ event.title }}</h3>
       <div class="event-meta">
-        <span class="event-date">{{ event.startDate | date:'fullDate' }}<span *ngIf="event.startDate">, {{
-            event.startDate | date:'shortTime' }}</span></span>
-        <span class="event-location">{{ event.location }}</span>
+        <span class="event-date">
+          <i class="bi bi-calendar3"></i>
+          {{ event.startDate | date:'MMM d, y' }}<span *ngIf="event.startDate">, {{
+            event.startDate | date:'shortTime' }}</span>
+        </span>
+        <span class="event-location">
+          <i class="bi bi-geo-alt"></i>
+          {{ event.location }}
+        </span>
+      </div>
+      <div class="event-description" *ngIf="event.description">
+        <i class="bi bi-card-text"></i>
+        {{ getTruncatedDescription(event.description) }}
       </div>
       <div class="event-extra">
-        <span class="event-capacity">{{ event.maxCapacity }} capacity</span>
-        <span class="event-public">{{ event.isPublic ? 'Public' : 'Internal' }}</span>
+        <span class="event-capacity">
+          <i class="bi bi-people"></i>
+          {{ event.maxCapacity }} capacity
+        </span>
+        <span class="event-public">
+          <i class="bi bi-{{ event.isPublic ? 'globe' : 'lock' }}"></i>
+          {{ event.isPublic ? 'Public' : 'Internal' }}
+        </span>
       </div>
       <div class="event-actions">
         <button class="register-btn" [disabled]="registeringEventUuid === event.uuid || isRegistered(event)"
           (click)="registerToEvent(event)" *ngIf="!isRegistered(event)">
+          <i class="bi bi-person-plus" *ngIf="registeringEventUuid !== event.uuid"></i>
+          <i class="bi bi-hourglass-split" *ngIf="registeringEventUuid === event.uuid"></i>
           <span *ngIf="registeringEventUuid !== event.uuid">Register</span>
           <span *ngIf="registeringEventUuid === event.uuid">Registering...</span>
         </button>
-        <span *ngIf="isRegistered(event)" class="already-registered">registered</span>
-        <button class="details-btn" (click)="navigateToEventDetail(event.uuid)">See details</button>
+        <span *ngIf="isRegistered(event)" class="already-registered">
+          <i class="bi bi-check-circle"></i>
+          registered
+        </span>
+        <button class="details-btn" (click)="navigateToEventDetail(event.uuid)">
+          <i class="bi bi-eye"></i>
+          See details
+        </button>
       </div>
       <div *ngIf="registrationSuccessEventUuid === event.uuid" class="register-success">You have successfully
         registered!</div>
